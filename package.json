@@ -1,0 +1,12 @@
+{
+  "name": "lilypad",
+  "version": "1.0.0",
+  "description": "a rental matching app",
+  "main": "index.js",
+  "repository": "git@github.com:jade-worldwide/lilypad-rentals.git",
+  "author": "andrewhemans <andrewhemans@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "react": "^16.4.1"
+  }
+}
