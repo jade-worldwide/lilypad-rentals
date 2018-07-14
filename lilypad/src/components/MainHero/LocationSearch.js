@@ -1,5 +1,6 @@
 import React from 'react';
 import 'bulma/css/bulma.css';
+import "./MainHero.css";
 import { Input } from 'bloomer';
 import PlacesAutocomplete, {
   geocodeByAddress,
@@ -34,7 +35,7 @@ export class LocationSearchInput extends React.Component {
           <div>
             <Input
               {...getInputProps({
-                placeholder: 'Search Places ...',
+                placeholder: 'Try "Berkeley"',
                 className: 'location-search-input',
               })}
             />

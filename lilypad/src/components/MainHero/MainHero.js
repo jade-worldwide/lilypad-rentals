@@ -5,10 +5,12 @@ import "./MainHero.css";
 
 export const MainHero = props => (
 
-  <Hero isColor='info' isSize='medium' isFullHeight>
+  <Hero isSize='medium' isFullHeight>
 
     <HeroBody>
-        <Container hasTextAlign='centered'>
+
+        <Container>
+          <Title>Let the perfect home find you!</Title>
             {props.children}
         </Container>
     </HeroBody>
