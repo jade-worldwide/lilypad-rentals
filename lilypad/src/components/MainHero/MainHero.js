@@ -9,7 +9,7 @@ export const MainHero = props => (
 
     <HeroBody>
 
-        <Container>
+        <Container className="hero-container">
           <Title>Let the perfect home find you!</Title>
             {props.children}
         </Container>
