@@ -32,7 +32,7 @@ export class LocationSearchInput extends React.Component {
         onSelect={this.handleSelect}
       >
         {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
-          <div>
+          <div className="location-input-div">
             <Input
               {...getInputProps({
                 placeholder: 'Try "Berkeley"',
