@@ -38,3 +38,15 @@ input.input.location-search-input {
   flex-direction: column;
   align-items: center;
 }
+
+.clear-button, .clear-button:active, .clear-button:focus {
+    position: absolute;
+    margin-left: -34px;
+    margin-top: 18px;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    color: #ccc;
+    cursor: pointer;
+  }
