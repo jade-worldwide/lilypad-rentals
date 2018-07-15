@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import Nav from "../../components/Nav";
 import { MainHero, MainSearch, LocationSearchInput } from "../../components/MainHero";
 
 class Main extends Component {
@@ -13,7 +12,6 @@ class Main extends Component {
   render() {
     return (
       <div className="Main">
-        <Nav />
         <MainHero>
           <LocationSearchInput />
         </MainHero>
