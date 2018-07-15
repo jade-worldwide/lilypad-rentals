@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import Nav from "../../components/Nav";
 import LightBox from "../../components/LightBox";
 import { Container, Title, Image, Box, Button, Subtitle } from 'bloomer';
 import house from './house.jpg';
@@ -18,7 +17,6 @@ class Property extends Component {
   render() {
     return (
       <div className="Property">
-        <Nav />
         <div className="main-image" style={ mainImage }>
           <Container className="property-container image-buttons">
             <div className="buttons-left">
