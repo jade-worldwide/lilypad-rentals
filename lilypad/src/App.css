@@ -3,6 +3,11 @@
   font-family: 'Quicksand', sans-serif;
 }
 
+.button {
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 400;
+}
+
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 80px;
