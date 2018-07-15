@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import Nav from "../../components/Nav";
 
 
 class Manager extends Component {
@@ -13,7 +12,6 @@ class Manager extends Component {
   render() {
     return (
       <div className="Manager">
-        <Nav />
 
       </div>
     );
