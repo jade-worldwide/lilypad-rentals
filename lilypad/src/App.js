@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Nav from "./components/Nav";
+import { Nav, SignUpModal } from "./components/Nav";
 import Main from "./pages/Main";
 import Renter from "./pages/Renter";
 import Manager from "./pages/Manager";

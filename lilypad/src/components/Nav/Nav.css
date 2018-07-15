@@ -8,3 +8,26 @@ a {
     cursor: pointer;
     text-decoration: none;
 }
+
+.modal-card, input {
+  font-family: 'Quicksand', sans-serif;
+}
+
+.field:not(:last-child) {
+    margin-bottom: 20px;
+}
+
+.sign-up-button {
+  width: 100%
+}
+
+.modal-card-foot > p{
+  width: 100%;
+}
+
+@media screen and (min-width: 769px) {
+  .modal-content, .modal-card {
+
+      width: 460px;
+  }
+}
