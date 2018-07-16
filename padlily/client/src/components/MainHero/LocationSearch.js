@@ -14,31 +14,80 @@ export class LocationSearchInput extends React.Component {
   }
 
   handleChange = address => {
-    this.setState({ address });
+    this.setState({
+      address,
+      latitude: null,
+      longitude: null,
+      errorMessage: '',
+     });
   };
 
-  handleSelect = address => {
-    geocodeByAddress(address)
-      .then(results => getLatLng(results[0]))
-      .then(latLng => console.log('Success', latLng))
-      .catch(error => console.error('Error', error));
+  handleSelect = selected => {
+  this.setState({ isGeocoding: true, address: selected });
+  geocodeByAddress(selected)
+    .then(res => getLatLng(res[0]))
+    .then(({ lat, lng }) => {
+      this.setState({
+        latitude: lat,
+        longitude: lng,
+        isGeocoding: false,
+      });
+    })
+    .catch(error => {
+      this.setState({ isGeocoding: false });
+      console.log('error', error); // eslint-disable-line no-console
+    });
+  };
+
+  handleCloseClick = () => {
+    this.setState({
+      address: '',
+      latitude: null,
+      longitude: null,
+    });
+  };
+
+  handleError = (status, clearSuggestions) => {
+    console.log('Error from Google Maps API', status); // eslint-disable-line no-console
+    this.setState({ errorMessage: status }, () => {
+      clearSuggestions();
+    });
   };
 
   render() {
+
+    const {
+      address,
+      errorMessage,
+      latitude,
+      longitude,
+      isGeocoding,
+    } = this.state;
+
     return (
       <PlacesAutocomplete
-        value={this.state.address}
         onChange={this.handleChange}
+        value={address}
         onSelect={this.handleSelect}
+        onError={this.handleError}
+        shouldFetchSuggestions={address.length > 2}
       >
         {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
-          <div>
+          <div className="location-input-div">
             <Input
               {...getInputProps({
                 placeholder: 'Try "Berkeley"',
                 className: 'location-search-input',
               })}
             />
+            {this.state.address.length > 0 && (
+              <button
+                className="clear-button"
+                onClick={this.handleCloseClick}
+              >
+                <i class="fas fa-times"></i>
+              </button>
+            )}
             <div className="autocomplete-dropdown-container">
               {loading && <div>Loading...</div>}
               {suggestions.map(suggestion => {
