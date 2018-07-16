@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Nav from "../../components/Nav";
+
 
 
 class Renter extends Component {
@@ -13,7 +13,7 @@ class Renter extends Component {
   render() {
     return (
       <div className="Renter">
-        <Nav />
+    
 
       </div>
     );
