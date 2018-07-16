@@ -50,8 +50,7 @@ let PropertySchema = new Schema({
     require: true
   },
   photos: [{
-    type: String,
-    required: true
+    type: String
   }],
 });
 

@@ -40,7 +40,7 @@ let ApplicationSchema = new Schema({
 });
 
 
-let Property = mongoose.model("Application", ApplicationSchema);
+let Application = mongoose.model("Application", ApplicationSchema);
 
 
 module.exports = Application;

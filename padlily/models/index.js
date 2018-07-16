@@ -3,6 +3,6 @@
 module.exports = {
   Renter: require("./Renter"),
   Application: require("./Application"),
-  PropertyManager: require("/PropertyManager"),
+  PropertyManager: require("./PropertyManager"),
   Property: require("./Property")
 };
