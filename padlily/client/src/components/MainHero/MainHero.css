@@ -1,0 +1,29 @@
+.hero.is-fullheight {
+    min-height: calc(100vh - 3.25rem);
+}
+
+.hero.is-fullheight .hero-body {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+h1.title {
+  font-family: 'Frank Ruhl Libre', serif;
+}
+
+.autocomplete-dropdown-container {
+  text-align: left;
+  border: 1px solid #eee;
+}
+
+
+.suggestion-item, .suggestion-item--active {
+  padding: 10px;
+  font-weight: 500;
+}
+
+input.input.location-search-input {
+    font-size: 1.5em;
+    font-family: 'Quicksand', sans-serif;
+}
