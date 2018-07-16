@@ -8,8 +8,14 @@
     flex-direction: column;
 }
 
+.main-hero {
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 h1.title {
   font-family: 'Frank Ruhl Libre', serif;
+  color: #343947;
 }
 
 .autocomplete-dropdown-container {
@@ -27,6 +33,7 @@ h1.title {
 input.input.location-search-input {
     font-size: 1.5em;
     font-family: 'Quicksand', sans-serif;
+    border-color: #343947;
 }
 
 .location-input-div {
@@ -37,6 +44,7 @@ input.input.location-search-input {
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-top: 40px;
 }
 
 .clear-button, .clear-button:active, .clear-button:focus {
