@@ -10,16 +10,20 @@ class Results extends Component {
     title: "",
   };
 
+  // When the component mounts, load all books and save them to this.state.books
   componentDidMount() {
-    API.getProperties()
-      .then(res =>
-        this.setState({ properties: res.data, title: "" })
-      )
-      .catch(err => console.log(err));
+    this.loadProperties();
   }
 
-
-
+  // Loads all books  and sets them to this.state.books
+  loadProperties = () => {
+    API.getProperties()
+      .then(res =>
+        this.setState({ properties: res.data, title: ""})
+      )
+      .catch(err => console.log(err));
+  };
+  
   render() {
     return (
       <div className="Results">

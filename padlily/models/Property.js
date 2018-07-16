@@ -1,9 +1,9 @@
 const mongoose = require("mongoose");
 
 
-let Schema = mongoose.Schema;
+const Schema = mongoose.Schema;
 
-let PropertySchema = new Schema({
+const PropertySchema = new Schema({
 
   title: {
     type: String,
@@ -35,7 +35,7 @@ let PropertySchema = new Schema({
   },
   pets: {
     type: Boolean,
-    default: false 
+    default: false
   },
   parking: {
     type: Boolean,
@@ -52,10 +52,14 @@ let PropertySchema = new Schema({
   photos: [{
     type: String
   }],
+  date: {
+    type: Date,
+    default: Date.now
+  }
 });
 
 
-let Property = mongoose.model("Property", PropertySchema);
+const Property = mongoose.model("Property", PropertySchema);
 
 
 module.exports = Property;
