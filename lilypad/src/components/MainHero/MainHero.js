@@ -2,10 +2,13 @@ import React from "react";
 import { Hero, HeroBody, Container, Title } from 'bloomer';
 import 'bulma/css/bulma.css';
 import "./MainHero.css";
+import background2 from './background2.svg';
+
+const bgImage = { backgroundImage: `url(${background2})` }
 
 export const MainHero = props => (
 
-  <Hero isSize='medium' isFullHeight>
+  <Hero isSize='medium' isFullHeight style={ bgImage } className="main-hero">
 
     <HeroBody>
 
