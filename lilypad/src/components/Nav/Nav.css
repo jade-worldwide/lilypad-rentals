@@ -1,12 +1,23 @@
 
 .navbar {
   border-bottom: 1px solid #f5f5f5;
+  font-family: 'Quicksand', sans-serif;
+  padding: 0 10px;
+}
+
+.nav-title {
+  color: #343947;
+  font-weight: 600;
 }
 
 a {
     color: #375c4f;
     cursor: pointer;
     text-decoration: none;
+}
+
+.nav-logo-item {
+  padding-right: 0;
 }
 
 .modal-card, input {

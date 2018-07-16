@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import LightBox from "../../components/LightBox";
-import { Container, Title, Image, Box, Button, Subtitle } from 'bloomer';
+import { Container, Title, Box, Button, Subtitle } from 'bloomer';
 import house from './house.jpg';
 import "./Property.css";
 
@@ -16,7 +16,7 @@ class Property extends Component {
 
   render() {
     return (
-      <div className="Property">
+      <div className="property">
         <div className="main-image" style={ mainImage }>
           <Container className="property-container image-buttons">
             <div className="buttons-left">
@@ -33,9 +33,9 @@ class Property extends Component {
             <div className="title-info">
               <Title className="property-title">Sunny Cottage by the Lake</Title>
               <div className="property-overview">
-                <span className="property-attribute"><p><i className="fas fa-dollar-sign"></i> 2000 Month</p></span>
-                <span className="property-attribute"><p><i className="fas fa-bed"></i> 2 Bedrooms</p></span>
-                <span className="property-attribute"><p><i className="fas fa-bath"></i> 1 Bathroom</p></span>
+                <span className="property-attribute"><p><i className="far fa-dollar-sign"></i> 2000 Month</p></span>
+                <span className="property-attribute"><p><i className="far fa-bed"></i> 2 Bedrooms</p></span>
+                <span className="property-attribute"><p><i className="far fa-bath"></i> 1 Bathroom</p></span>
               </div>
             </div>
             <div className="apply-button">
@@ -54,7 +54,7 @@ class Property extends Component {
             <div className="columns is-multiline">
               <div className="column is-3 property-feature">
                 <div className="feature-icon">
-                  <i className="fas fa-home"></i>
+                  <i className="far fa-home"></i>
                 </div>
                 <div className="feature-text">
                   <Subtitle isSize={6} className="description-subtitle">Type</Subtitle>
@@ -63,7 +63,7 @@ class Property extends Component {
               </div>
               <div className="column is-3 property-feature">
                 <div className="feature-icon">
-                  <i className="fas fa-tshirt"></i>
+                  <i className="far fa-tshirt"></i>
                 </div>
                 <div className="feature-text">
                   <Subtitle isSize={6} className="description-subtitle">Laundry</Subtitle>
@@ -72,7 +72,7 @@ class Property extends Component {
               </div>
               <div className="column is-3 property-feature">
                 <div className="feature-icon">
-                  <i className="fas fa-thermometer-half"></i>
+                  <i className="far fa-thermometer-half"></i>
                 </div>
                 <div className="feature-text">
                   <Subtitle isSize={6} className="description-subtitle">Heating</Subtitle>
@@ -81,7 +81,7 @@ class Property extends Component {
               </div>
               <div className="column is-3 property-feature">
                 <div className="feature-icon">
-                  <i className="fas fa-snowflake"></i>
+                  <i className="far fa-snowflake"></i>
                 </div>
                 <div className="feature-text">
                   <Subtitle isSize={6} className="description-subtitle">Cooling</Subtitle>
@@ -90,7 +90,7 @@ class Property extends Component {
               </div>
               <div className="column is-3 property-feature">
                 <div className="feature-icon">
-                  <i className="fas fa-paw"></i>
+                  <i className="far fa-paw"></i>
                 </div>
                 <div className="feature-text">
                   <Subtitle isSize={6} className="description-subtitle">Pets</Subtitle>
@@ -99,7 +99,7 @@ class Property extends Component {
               </div>
               <div className="column is-3 property-feature">
                 <div className="feature-icon">
-                  <i className="fas fa-car"></i>
+                  <i className="far fa-car"></i>
                 </div>
                 <div className="feature-text">
                   <Subtitle isSize={6} className="description-subtitle">Parking</Subtitle>
