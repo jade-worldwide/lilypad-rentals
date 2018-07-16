@@ -2,9 +2,9 @@ import React from "react";
 import { Hero, HeroBody, Container, Title } from 'bloomer';
 import 'bulma/css/bulma.css';
 import "./MainHero.css";
-import background2 from './background2.svg';
+import background from './background.svg';
 
-const bgImage = { backgroundImage: `url(${background2})` }
+const bgImage = { backgroundImage: `url(${background})` }
 
 export const MainHero = props => (
 

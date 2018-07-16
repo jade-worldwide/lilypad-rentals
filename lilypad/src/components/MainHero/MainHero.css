@@ -34,6 +34,7 @@ input.input.location-search-input {
     font-size: 1.5em;
     font-family: 'Quicksand', sans-serif;
     border-color: #343947;
+    padding-left: calc(2em - 1px);
 }
 
 .location-input-div {
@@ -49,12 +50,27 @@ input.input.location-search-input {
 
 .clear-button, .clear-button:active, .clear-button:focus {
     position: absolute;
-    margin-left: -34px;
-    margin-top: 18px;
+    margin-left: 564px;
+    /* margin-top: 15px; */
     background: transparent;
     border: none;
     outline: none;
-    font-size: 16px;
+    font-size: 20px;
     color: #ccc;
     cursor: pointer;
   }
+
+  .search-input {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+i.fal.fa-search.search-input-icon {
+    position: absolute;
+    z-index: 1000;
+    font-size: 24px;
+    color: #666;
+    margin-left: 15px;
+    /* margin-top: 2px; */
+}
