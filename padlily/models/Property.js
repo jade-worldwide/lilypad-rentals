@@ -13,6 +13,10 @@ const PropertySchema = new Schema({
     type: String,
     required: true
   },
+  city: {
+    type: String,
+    required: true
+  },
   phoneNumber: {
     type: Number,
     required: true
@@ -34,16 +38,19 @@ const PropertySchema = new Schema({
     required: true
   },
   pets: {
-    type: Boolean,
-    default: false
+    type: String
   },
   parking: {
-    type: Boolean,
-    default: false
+    type: String
   },
   laundry: {
-    type: Boolean,
-    default: false
+    type: String
+  },
+  heating: {
+    type: String
+  },
+  cooling: {
+    type: String
   },
   description: {
     type: String,
