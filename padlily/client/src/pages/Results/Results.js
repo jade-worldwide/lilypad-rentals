@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import ResultsList from "../../components/ResultsList";
 import API from "../../utils/API";
+import { Link } from "react-router-dom";
 
 
 class Results extends Component {
@@ -8,14 +9,17 @@ class Results extends Component {
   state = {
     properties: [],
     title: "",
+    price: 0,
+    numOfBeds: 0,
+    propertySize: ""
   };
 
-  // When the component mounts, load all books and save them to this.state.books
+  // When the component mounts, load all properties and save them to this.state.properties
   componentDidMount() {
     this.loadProperties();
   }
 
-  // Loads all books  and sets them to this.state.books
+  // Loads all properties  and sets them to this.state.properties
   loadProperties = () => {
     API.getProperties()
       .then(res =>
@@ -27,17 +31,18 @@ class Results extends Component {
   render() {
     return (
       <div className="Results">
-        <ResultsList />
-        <h1>
-          Hello
-          {this.state.properties.title}
-        </h1>
+      
         {this.state.properties.map(property => (
+        <Link to={"/property/" + property._id}>
+        <ResultsList 
+            title={property.title}
+            price={property.price}
+            numOfBeds={property.numOfBeds}
+            propertySize={property.propertySize}
+        />
+        </Link>
+      ))}
 
-                      <strong>
-                        {property.title}
-                      </strong>
-                ))}
       </div>
     );
   }
