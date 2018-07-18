@@ -41,6 +41,9 @@ export class Nav extends Component {
           <NavbarItem>
               <Link to={"/results"}><p>Results</p></Link>
           </NavbarItem>
+          <NavbarItem>
+              <Link to={"/manager"}><p>Property Form</p></Link>
+          </NavbarItem>
           <NavbarItem href="#">
               <p>Create Listing</p>
           </NavbarItem>
