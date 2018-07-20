@@ -16,3 +16,11 @@ h2.subtitle.is-4 {
 td.list-image {
     padding: 0;
 }
+
+.filters {
+  padding: 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}

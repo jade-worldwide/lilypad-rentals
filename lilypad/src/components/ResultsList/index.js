@@ -1,1 +1,2 @@
-export { default } from "./ResultsList";
+export * from "./ResultsList";
+export * from "./Filters";
