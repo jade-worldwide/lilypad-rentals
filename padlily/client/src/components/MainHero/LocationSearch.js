@@ -70,24 +70,28 @@ export class LocationSearchInput extends React.Component {
         value={address}
         onSelect={this.handleSelect}
         onError={this.handleError}
-        shouldFetchSuggestions={address.length > 2}
+
       >
         {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
           <div className="location-input-div">
-            <Input
-              {...getInputProps({
-                placeholder: 'Try "Berkeley"',
-                className: 'location-search-input',
-              })}
-            />
-            {this.state.address.length > 0 && (
-              <button
-                className="clear-button"
-                onClick={this.handleCloseClick}
-              >
-                <i class="fas fa-times"></i>
-              </button>
-            )}
+
+            <div className="search-input">
+              <i class="fal fa-search search-input-icon"></i>
+              <Input
+                {...getInputProps({
+                  placeholder: 'Try "Berkeley"',
+                  className: 'location-search-input',
+                })}
+              />
+              {this.state.address.length > 0 && (
+                <button
+                  className="clear-button"
+                  onClick={this.handleCloseClick}
+                >
+                  <i class="far fa-times"></i>
+                </button>
+              )}
+            </div>
             <div className="autocomplete-dropdown-container">
               {loading && <div>Loading...</div>}
               {suggestions.map(suggestion => {

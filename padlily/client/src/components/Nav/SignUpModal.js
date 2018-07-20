@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Modal, ModalCard, ModalCardBody, ModalCardTitle, ModalBackground, ModalCardFooter, ModalCardHeader, Delete, Button, Field, Control, Input } from 'bloomer';
+import { ModalCardBody, Button, Field, Control, Input } from 'bloomer';
 import { Link } from "react-router-dom";
 
 
@@ -32,7 +32,7 @@ export class SignUpModal extends Component {
                           <Input type="password" placeholder='Password' isSize="medium" />
                       </Control>
                     </Field>
-                    <Button isColor='primary' isLarge className="sign-up-button"><p>Sign Up</p></Button>
+                    <Button isColor='primary' className="sign-up-button is-medium"><p>Sign Up</p></Button>
                   </ModalCardBody>
 
             </div>

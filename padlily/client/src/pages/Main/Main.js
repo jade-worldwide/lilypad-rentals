@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { MainHero, MainSearch, LocationSearchInput } from "../../components/MainHero";
+import { MainHero, LocationSearchInput } from "../../components/MainHero";
 
 class Main extends Component {
   // Setting our component's initial state

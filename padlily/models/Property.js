@@ -17,6 +17,10 @@ const PropertySchema = new Schema({
     type: String,
     required: true
   },
+  state: {
+    type: String,
+    require: true
+  },
   phoneNumber: {
     type: Number,
     required: true
@@ -24,6 +28,10 @@ const PropertySchema = new Schema({
   propertySize: {
     type: String,
     required: true
+  },
+  propertyType: {
+    type: String,
+    require: true
   },
   numOfBeds: {
     type: Number,
