@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import ResultsList from "../../components/ResultsList";
+import { ResultsList, Filters } from "../../components/ResultsList";
 
 
 class Results extends Component {
@@ -13,6 +13,7 @@ class Results extends Component {
   render() {
     return (
       <div className="Results">
+        <Filters />
         <ResultsList />
       </div>
     );

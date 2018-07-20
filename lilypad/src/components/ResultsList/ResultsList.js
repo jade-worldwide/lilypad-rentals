@@ -3,7 +3,7 @@ import { Table, Image, Subtitle } from 'bloomer';
 import 'bulma/css/bulma.css';
 import "./ResultsList.css";
 
-const ResultsList = () => (
+export const ResultsList = () => (
 
     <Table>
       <tbody>
@@ -33,5 +33,3 @@ const ResultsList = () => (
     </Table>
 
 );
-
-export default ResultsList;
