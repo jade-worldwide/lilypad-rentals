@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { ResultsList, Filters } from "../../components/ResultsList";
+import "./Results.css";
 
 
 class Results extends Component {
@@ -12,7 +13,7 @@ class Results extends Component {
 
   render() {
     return (
-      <div className="Results">
+      <div className="results">
         <Filters />
         <ResultsList />
       </div>
