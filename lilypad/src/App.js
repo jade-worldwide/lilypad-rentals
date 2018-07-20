@@ -6,6 +6,7 @@ import Renter from "./pages/Renter";
 import Manager from "./pages/Manager";
 import Property from "./pages/Property";
 import Map from "./pages/Map";
+// import icon from './favicon.ico';
 
 
 class App extends Component {
@@ -13,6 +14,7 @@ class App extends Component {
     return (
       <div className="App">
         <Map />
+        
       </div>
     );
   }

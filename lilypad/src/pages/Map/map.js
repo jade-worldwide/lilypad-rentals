@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import SimpleMap from "../../components/GoogleMap/map";
+import SimpleMap from "../../components/GoogleMap/Map";
 
 class Map extends Component {
     // Setting our component's initial state
