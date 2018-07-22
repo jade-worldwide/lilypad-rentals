@@ -2,9 +2,11 @@ const db = require("../models");
 
 // Defining methods for the booksController
 module.exports = {
-  findAll: function(req, res) {
+  findAll: function (req, res) {
+    console.log("City: " + req.query.city)
+    console.log("State: " + req.query.state)
     db.Property
-      .find(req.query)
+      .find({city : req.query.city})
       .sort({ date: -1 })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
