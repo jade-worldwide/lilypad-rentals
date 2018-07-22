@@ -10,6 +10,7 @@ let LocalStrategy = require('passport-local').Strategy;
 let mongo = require('mongodb');
 let path = require('path');
 let cookieParser = require('cookie-parser');
+let auth = require('./routes/api/auth');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -66,6 +67,7 @@ if (process.env.NODE_ENV === "production") {
 }
 // Add routes, both API and view
 app.use(routes);
+// app.use('/api/users', auth);
 
 
 // Connect to the Mongo DB

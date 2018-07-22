@@ -43,13 +43,6 @@ export class SignUpModal extends Component {
   handleFormSubmit = event => {
     event.preventDefault();
     if (this.state.name) {
-      // let newUser = {
-      //   name: this.state.name,
-      //   email: this.state.email,
-      //   phonenumber: this.state.phonenumber,
-      //   username: this.state.username,
-      //   password: this.state.password
-      // };
       API.saveUser({
         name: this.state.name,
         email: this.state.email,

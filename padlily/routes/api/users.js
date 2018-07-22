@@ -1,11 +1,11 @@
 const router = require("express").Router();
 const usersController = require("../../controllers/usersController");
-let passport = require('passport');
-let LocalStrategy = require('passport-local').Strategy;
 
 // Matches with "/api/properties"
 router.route("/")
-  .post(usersController.create);
+  .post(usersController.create)
+  .post(usersController.login)
 
-
+// router.route("/:id")
+//   .post(usersController.login);
 module.exports = router;
