@@ -21,27 +21,29 @@ class Results extends Component {
 
   // Loads all properties  and sets them to this.state.properties
   loadProperties = () => {
-    API.getProperties()
+    let queryString = (window.location.search)
+    console.log(queryString)
+    API.getProperties(queryString)
       .then(res =>
-        this.setState({ properties: res.data, title: ""})
+        this.setState({ properties: res.data, title: "" })
       )
       .catch(err => console.log(err));
   };
-  
+
   render() {
     return (
       <div className="Results">
-      
+
         {this.state.properties.map(property => (
-        <Link to={"/property/" + property._id}>
-        <ResultsList 
-            title={property.title}
-            price={property.price}
-            numOfBeds={property.numOfBeds}
-            propertySize={property.propertySize}
-        />
-        </Link>
-      ))}
+          <Link to={"/property/" + property._id}>
+            <ResultsList
+              title={property.title}
+              price={property.price}
+              numOfBeds={property.numOfBeds}
+              propertySize={property.propertySize}
+            />
+          </Link>
+        ))}
 
       </div>
     );
