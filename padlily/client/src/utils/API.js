@@ -1,5 +1,6 @@
 import axios from "axios";
 
+
 export default {
   // Gets all properties
   getProperties: function() {
@@ -15,6 +16,12 @@ export default {
   },
   // Saves a book to the database
   saveProperty: function(propertyData) {
-    return axios.post("/api/properties", propertyData);
+    return axios.post("/api/properties", propertyData) 
+  },  
+  getUser: function() {
+    return axios.get("/api/users");
+  },
+  saveUser: function(userData) {
+    return axios.post("/api/users", userData);
   }
 };
