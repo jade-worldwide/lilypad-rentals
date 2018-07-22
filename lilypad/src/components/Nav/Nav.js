@@ -5,22 +5,31 @@ import 'bulma/css/bulma.css';
 import "./Nav.css";
 import pad from "./pad.png";
 import { SignUpModal } from "./SignUpModal";
+import { LoginModal } from "./LoginModal";
 
 const padLogo = { image: `url(${pad})` }
 
 export class Nav extends Component {
 
   state = {
-    modal: ""
+    modal: "",
+    login: "",
   };
 
   modalOpen = () => {
     this.setState({ modal: "is-active" })
   }
 
+  loginOpen = () => {
+    this.setState({ login: "is-active" })
+  }
+
 
   modalClose = () => {
-    this.setState({ modal: "" })
+    this.setState({
+      modal: "",
+      login: "",
+     })
   }
 
   render() {
@@ -47,13 +56,14 @@ export class Nav extends Component {
           <NavbarItem href="#">
               <p>Create Listing</p>
           </NavbarItem>
-          <NavbarItem href="#">
+          <NavbarItem href="#" onClick={this.loginOpen}>
               <p>Log in</p>
           </NavbarItem>
           <NavbarItem href="#" onClick={this.modalOpen}>
               <p>Sign Up</p>
           </NavbarItem>
         </NavbarEnd>
+
         <div className="new-modal">
           <Modal className={this.state.modal}>
             <ModalBackground />
@@ -69,6 +79,23 @@ export class Nav extends Component {
           </ModalCard>
           </Modal>
         </div>
+
+        <div className="login-modal">
+          <Modal className={this.state.login}>
+            <ModalBackground />
+            <ModalCard>
+                <ModalCardHeader>
+                    <ModalCardTitle></ModalCardTitle>
+                    <Delete onClick={this.modalClose} />
+                </ModalCardHeader>
+            <LoginModal />
+              <ModalCardFooter hasTextAlign="centered">
+                <p>Already have an account? <Link to={""}>Log In</Link></p>
+              </ModalCardFooter>
+          </ModalCard>
+          </Modal>
+        </div>
+
       </Navbar>
     );
   }
