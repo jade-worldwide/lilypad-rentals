@@ -3,11 +3,11 @@ import { Navbar, NavbarBrand, NavbarItem,  NavbarEnd, Modal, ModalCard, ModalCar
 import { Link } from "react-router-dom";
 import 'bulma/css/bulma.css';
 import "./Nav.css";
-import pad from "./pad.png";
+// import pad from "./pad.png";
 import { SignUpModal } from "./SignUpModal";
 import { LoginModal } from "./LoginModal";
 
-const padLogo = { image: `url(${pad})` }
+// const padLogo = { image: `url(${pad})` }
 
 export class Nav extends Component {
 
@@ -37,7 +37,7 @@ export class Nav extends Component {
       <Navbar className="navbar">
         <NavbarBrand>
           <NavbarItem className="nav-logo-item">
-            <img src={pad} />
+            {/* <img src={pad} /> */}
           </NavbarItem>
           <NavbarItem>
               <Link to={"/"}><p className="nav-title">Lilypad Rentals</p></Link>

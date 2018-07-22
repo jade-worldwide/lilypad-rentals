@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import LightBox from "../../components/LightBox";
 import API from "../../utils/API";
-import { Container, Title, Image, Box, Button, Subtitle } from 'bloomer';
+import { Container, Title, /*Image,*/ Box, Button, Subtitle } from 'bloomer';
 import house from './house.jpg';
 import "./Property.css";
 

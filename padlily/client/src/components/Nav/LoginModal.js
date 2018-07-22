@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { ModalCardBody, Button, Field, Control, Input } from 'bloomer';
+import { Alert } from 'react-bootstrap';
 import API from "../../utils/API";
-import axios from "axios";
+// import axios from "axios";
 
 export class LoginModal extends Component {
   // Setting our component's initial state
@@ -51,6 +52,9 @@ export class LoginModal extends Component {
             <div className="sign-up-modal">
 
                   <ModalCardBody>
+                  <Alert bsStyle="warning" hasTextAlign="centered">
+                      <strong>Ge Wilikers Batman! Something went wrong!</strong>
+                  </Alert>
                     <Field>
                       <Control>
                           <Input

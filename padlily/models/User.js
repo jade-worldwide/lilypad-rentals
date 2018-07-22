@@ -86,7 +86,7 @@ passport.use(new LocalStrategy(
 	});
 	
 	module.exports.loginUser = function (req, res) {
-		passport.authenticate('local', { successRedirect: console.log('Success'), failureRedirect: console.log('Failed'), failureFlash: true }),
+			passport.authenticate('local', { successRedirect: '/', failureRedirect: '/results', failureFlash: true }),
 		function (req, res) {
 			res.redirect('/');
 		}

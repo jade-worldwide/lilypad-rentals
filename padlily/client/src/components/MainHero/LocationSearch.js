@@ -16,9 +16,9 @@ export class LocationSearchInput extends React.Component {
   handleChange = address => {
     this.setState({
       address,
-      latitude: null,
-      longitude: null,
-      errorMessage: '',
+      // latitude: null,
+      // longitude: null,
+      // errorMessage: '',
     });
   };
 
@@ -27,12 +27,12 @@ export class LocationSearchInput extends React.Component {
     geocodeByAddress(selected)
       .then(res => getLatLng(res[0]))
       .then(({ lat, lng }) => {
-        this.setState({
-          latitude: lat,
-          longitude: lng,
-          isGeocoding: false,
-        });
-        let urlParams = selected.split("\,")
+        // this.setState({
+        //   latitude: lat,
+        //   longitude: lng,
+        //   isGeocoding: false,
+        // });
+        let urlParams = selected.split(",")
         let city = urlParams[0]
         let state = urlParams[1].replace(/ /g, '')
         console.log(city)
@@ -64,10 +64,10 @@ export class LocationSearchInput extends React.Component {
 
     const {
       address,
-      errorMessage,
-      latitude,
-      longitude,
-      isGeocoding,
+      // errorMessage,
+      // latitude,
+      // longitude,
+      // isGeocoding,
     } = this.state;
 
     return (

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { ModalCardBody, Button, Field, Control, Input } from 'bloomer';
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import API from "../../utils/API";
 
 
@@ -104,7 +104,7 @@ export class SignUpModal extends Component {
                           name="phonenumber"
                           type="number" 
                           placeholder='Phone Number' 
-                          type="number" isSize="medium" />
+                          isSize="medium" />
                       </Control>
                     </Field>
                     <Field>
