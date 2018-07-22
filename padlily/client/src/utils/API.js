@@ -3,8 +3,8 @@ import axios from "axios";
 
 export default {
   // Gets all properties
-  getProperties: function() {
-    return axios.get("/api/properties");
+  getProperties: function(queryString) {
+    return axios.get("/api/properties" + queryString);
   },
   // Gets the book with the given id
   getProperty: function(id) {

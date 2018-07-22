@@ -21,9 +21,11 @@ class Results extends Component {
 
   // Loads all properties  and sets them to this.state.properties
   loadProperties = () => {
-    API.getProperties()
+    let queryString = (window.location.search)
+    console.log(queryString)
+    API.getProperties(queryString)
       .then(res =>
-        this.setState({ properties: res.data, title: ""})
+        this.setState({ properties: res.data, title: "" })
       )
       .catch(err => console.log(err));
   };
