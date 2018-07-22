@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 let bcrypt = require('bcryptjs');
-let express = require('express');
 let passport = require('passport');
 let LocalStrategy = require('passport-local').Strategy;
 
@@ -76,13 +75,18 @@ passport.use(new LocalStrategy(
 		});
 	}));
 
+	passport.deserializeUser(function (id, done) {
+		User.getUserById(id, function (err, user) {
+			done(err, user);
+		});
+	});
 
 	passport.serializeUser(function (user, done) {
 		done(null, user.id);
 	});
 	
 	module.exports.loginUser = function (req, res) {
-		passport.authenticate('local', { successRedirect: '/', failureRedirect: '/', failureFlash: true }),
+		passport.authenticate('local', { successRedirect: console.log('Success'), failureRedirect: console.log('Failed'), failureFlash: true }),
 		function (req, res) {
 			res.redirect('/');
 		}

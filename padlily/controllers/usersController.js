@@ -1,4 +1,7 @@
 const db = require("../models/User");
+let express = require('express');
+let passport = require('passport');
+let LocalStrategy = require('passport-local').Strategy;
 
 // Defining methods for the booksController
 module.exports = {
