@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import NewPropertyForm from "../../components/NewPropertyForm";
+import { NewPropertyForm } from "../../components/NewPropertyForm";
 
 
 class Manager extends Component {

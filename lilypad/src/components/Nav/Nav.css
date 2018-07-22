@@ -28,7 +28,7 @@ a {
     margin-bottom: 20px;
 }
 
-.sign-up-button {
+.sign-up-button, .login-button {
   width: 100%
 }
 
