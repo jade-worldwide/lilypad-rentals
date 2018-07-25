@@ -1,13 +1,23 @@
 import React, { Component } from "react";
-import { Navbar, NavbarBrand, NavbarItem,  NavbarEnd, Modal, ModalCard, ModalCardTitle, ModalBackground, ModalCardFooter, ModalCardHeader, Delete } from 'bloomer';
+import { Navbar, NavbarBrand, NavbarItem,  NavbarEnd, Modal, ModalCard, ModalCardTitle, ModalBackground, ModalCardFooter, ModalCardHeader, Delete, ModalCardBody } from 'bloomer';
 import { Link } from "react-router-dom";
+import StepZilla from "react-stepzilla";
 import 'bulma/css/bulma.css';
 import "./Nav.css";
-// import pad from "./pad.png";
+import pad from "./pad.png";
+import modal from "./modal.svg";
 import { SignUpModal } from "./SignUpModal";
 import { LoginModal } from "./LoginModal";
+import { MemberType } from "./MemberType";
 
-// const padLogo = { image: `url(${pad})` }
+const padLogo = { image: `url(${pad})` }
+const steps =
+    [
+      {name: 'Step 1', component: <MemberType />},
+      {name: 'Step 2', component: <SignUpModal />}
+    ]
+
+const modalBG = { backgroundImage: `url(${modal})` }
 
 export class Nav extends Component {
 
@@ -37,7 +47,7 @@ export class Nav extends Component {
       <Navbar className="navbar">
         <NavbarBrand>
           <NavbarItem className="nav-logo-item">
-            {/* <img src={pad} /> */}
+            <img src={pad} />
           </NavbarItem>
           <NavbarItem>
               <Link to={"/"}><p className="nav-title">Lilypad Rentals</p></Link>
@@ -64,18 +74,27 @@ export class Nav extends Component {
           </NavbarItem>
         </NavbarEnd>
 
-        <div className="new-modal">
+        <div className="signup-modal">
           <Modal className={this.state.modal}>
+
             <ModalBackground />
-            <ModalCard>
-                <ModalCardHeader>
-                    <ModalCardTitle></ModalCardTitle>
+            <ModalCard style={ modalBG } >
+
+                <ModalCardBody>
                     <Delete onClick={this.modalClose} />
-                </ModalCardHeader>
-            <SignUpModal />
-              <ModalCardFooter hasTextAlign="centered">
-                <p>Already have an account? <Link to={""}>Log In</Link></p>
-              </ModalCardFooter>
+
+                    <div className='step-progress'>
+                        <StepZilla
+                          steps={steps}
+                          showSteps={false}
+                          nextButtonCls="button is-medium is-primary"
+                          backButtonCls="button is-medium is-primary"
+                          />
+                    </div>
+
+              </ModalCardBody>
+
+
           </ModalCard>
           </Modal>
         </div>
