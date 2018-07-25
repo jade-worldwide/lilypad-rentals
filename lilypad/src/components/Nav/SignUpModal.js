@@ -9,31 +9,36 @@ export class SignUpModal extends Component {
 
   render() {
     return (
-            <div className="sign-up-modal">
+            <div className="sign-up-modal columns">
+              <div className="column">
+              </div>
 
-                  <ModalCardBody>
-                    <Field>
-                      <Control>
-                          <Input type="email" placeholder='Email Address' isSize="medium" />
-                      </Control>
-                    </Field>
-                    <Field>
-                      <Control>
-                          <Input type="text" placeholder='First Name' isSize="medium" />
-                      </Control>
-                    </Field>
-                    <Field>
-                      <Control>
-                          <Input type="text" placeholder='Last Name' isSize="medium" />
-                      </Control>
-                    </Field>
-                    <Field>
-                      <Control>
-                          <Input type="password" placeholder='Password' isSize="medium" />
-                      </Control>
-                    </Field>
-                    <Button isColor='primary' className="sign-up-button is-medium"><p>Sign Up</p></Button>
-                  </ModalCardBody>
+              <div className="column">
+                <h1 className="title user-title">Almost Home!</h1>
+                <Field>
+                  <Control>
+                      <Input type="email" placeholder='Email Address' isSize="medium" />
+                  </Control>
+                </Field>
+                <Field>
+                  <Control>
+                      <Input type="text" placeholder='Name' isSize="medium" />
+                  </Control>
+                </Field>
+                <Field>
+                  <Control>
+                      <Input type="text" placeholder='Phone Number' isSize="medium" />
+                  </Control>
+                </Field>
+                <Field>
+                  <Control>
+                      <Input type="password" placeholder='Password' isSize="medium" />
+                  </Control>
+                </Field>
+                <Button isColor='primary' className="sign-up-button is-medium"><p>Sign Up</p></Button>
+
+              </div>
+
 
             </div>
 
