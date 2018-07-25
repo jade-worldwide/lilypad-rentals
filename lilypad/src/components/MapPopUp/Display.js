@@ -10,7 +10,7 @@ class Dispbox extends Component {
 return (
     <div className="card">
     <p className="card-header-title">{this.props.text}</p>
-    <img width="25px" src={this.props.image}/>
+    <img src={this.props.image}/>
     </div>
 )
     }

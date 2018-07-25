@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react';
 import lilypad from '../../favicon.ico';
-import Marker from '../Lilypads/Lilypad.js';
+import Marker from '../Marker/Marker.js';
 import 'bulma/css/bulma.css';
 
 
@@ -45,7 +45,6 @@ class Map extends Component {
   };
 
   markerGotClicked = (link) => {
-    console.log("getting cliked");
 
     if (link === this.state.openMarker) {
       // this is already open
@@ -62,8 +61,6 @@ class Map extends Component {
 
   render() {
     const markers = [];
-    // this.props.locationData
-    //console.log(this.state);
     for (const datum of TEST_DATA) {
       markers.push(
         <Marker
