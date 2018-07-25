@@ -1,33 +1,45 @@
 import React, { Component } from 'react';
-import lilypad from '../../favicon.ico';
 import 'bulma/css/bulma.css';
 import "./Lilypad.css";
-
-const Dispbox = (props) => (
-    <div class="pad">{props.text}
-    <img width="15px" src={props.image}/>
-    </div>
-);
-
-class Toog extends Component {
-
-    state = { isBoxVisible: false };
-    handleClick = () => {
-        this.setState({
-            isBoxVisible: !this.state.isBoxVisible,
-        });
-    };
+import Dispbox from '../MapPopUp/Display.js'
 
 
-      render() {
-          console.log(this.state)
-          console.log(this.props)
-          return (
-            <div>
-                <img onClick={this.handleClick} width="10px" src={lilypad} /> 
-                {this.state.isBoxVisible ? <Dispbox text={this.props.text} image={this.props.image} /> : ''}               
+class Marker extends Component {
+    // constructor(){
+    //     super()
+    //     this.state = {isBoxVisible: false},
+    //     this.handleClick = this.handleClick.bind(this)
+
+    // }
+    // state = { 
+    //     isBoxVisible: false
+    //  };
+     
+    // handleClick = () => {
+    //     this.setState({
+    //         isBoxVisible: !this.state.isBoxVisible,
+    //     });
+    // };
+
+
+    render() {
+    //   console.log(this.state)
+        return (
+            <div className="lily" onClick={this.props.onClick}>
+                {/* Replace src={lilypad} with whatever icon that you want */}
+                <img width="20px" src={this.props.image} /> 
+                {
+                    this.props.isBoxVisible ? (
+                        <Dispbox 
+                            text={this.props.text}
+                            image={this.props.image}
+                            className="card"
+                            link={this.props.link}
+                        ></Dispbox>
+                    ) : 'lol'
+                }
             </div>
-          )
-      }
-    };
-    export default Toog;
+        );
+    }
+};
+export default Marker;

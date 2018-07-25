@@ -1,0 +1,13 @@
+/* .cardy {
+    text-align: center;
+    background-color: white;
+    position: relative;
+    bottom: 100px;
+    cursor: pointer;
+} */
+.card  {
+    cursor: pointer;
+    min-width: 100px;
+    min-height: 100px;
+    background-color: white;
+}
