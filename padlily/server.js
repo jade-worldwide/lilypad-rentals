@@ -1,24 +1,27 @@
 const express = require("express");
+let path = require('path');
+let cookieParser = require('cookie-parser');
 const bodyParser = require("body-parser");
-const mongoose = require("mongoose");
-const routes = require("./routes");
 let expressValidator = require('express-validator');
 let flash = require('connect-flash');
 let session = require('express-session');
 let passport = require('passport');
 let LocalStrategy = require('passport-local').Strategy;
-let mongo = require('mongodb');
-let path = require('path');
-let cookieParser = require('cookie-parser');
-let auth = require('./routes/api/auth');
+const mongoose = require("mongoose");
+let morgan = require('morgan');
 
+// Routers
+let users = require('./routes/api/users');
 const app = express();
+
 const PORT = process.env.PORT || 3001;
 
 // Define middleware here
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cookieParser());
+app.use(morgan('tiny'));
+
 
 // Express Session
 app.use(session({
@@ -66,9 +69,12 @@ if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
 // Add routes, both API and view
-app.use(routes);
-// app.use('/api/users', auth);
+app.use('/api/users', users);
 
+
+// app.get('/', function(req, res) {
+//   res.send('hello');
+// });
 
 // Connect to the Mongo DB
 mongoose.connect(

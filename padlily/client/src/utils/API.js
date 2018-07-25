@@ -17,14 +17,13 @@ export default {
   // Saves a book to the database
   saveProperty: function(propertyData) {
     return axios.post("/api/properties", propertyData) 
-  },  
-  getUser: function() {
-    return axios.get("/api/users");
   },
-  loginUser: function() {
-    return axios.get("/api/users");
+  loginUser: function(userData) {
+    console.log('we are sssending a POST request to users/login')
+    return axios.post("/api/users/login", userData);
   },
   saveUser: function(userData) {
-    return axios.post("/api/users", userData);
+    console.log("Registering Account")
+    return axios.post("/api/users/register", userData);
   }
 };

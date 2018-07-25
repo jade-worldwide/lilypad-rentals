@@ -7,7 +7,7 @@ import Renter from "./pages/Renter";
 import Manager from "./pages/Manager";
 import Property from "./pages/Property";
 import Results from "./pages/Results";
-// import { LoginModal } from "./components/Nav/LoginModal.js";
+
 
 const App = () => (
   <Router>
@@ -18,9 +18,7 @@ const App = () => (
         <Route exact path="/renter" component={Renter} />
         <Route exact path="/manager" component={Manager} />
         <Route exact path="/property" component={Property} />
-        <Route exact path="/property/:id" component={Property} />
         <Route exact path="/results" component={Results} />
-        {/* <Route exact path="/api/users" component={LoginModal} /> */}
 
       </Switch>
     </div>
