@@ -12,22 +12,17 @@ router.post('/register', function (req, res) {
 	let name = req.body.name;
 	let phonenumber = req.body.phonenumber;
 	let password = req.body.password;
-	let password2 = req.body.password2;
 
 	if (!name) {
 		console.log("Errors");
 	}
 	else {
 		//checking for email and username are already taken
-		User.findOne({ username: { 
-			"$regex": "^" + username + "\\b", "$options": "i"
-	}}, function (err, user) {
 			User.findOne({ email: { 
 				"$regex": "^" + email + "\\b", "$options": "i"
 		}}, function (err, mail) {
-				if (user || mail) {
+				if ( mail ) {
 					res.render('register', {
-						user: user,
 						mail: mail
 					});
 				}
@@ -49,13 +44,12 @@ router.post('/register', function (req, res) {
 					res.redirect('/users/login');
 				}
 			});
-		});
 	}
 });
 
 passport.use(new LocalStrategy(
-	function (username, password, done) {
-		User.getUserByUsername(username, function (err, user) {
+	function (email, password, done) {
+		User.getUserByEmail(email, function (err, user) {
 			if (err) throw err;
 			if (!user) {
 				return done(null, false, { message: 'Unknown User' });
@@ -85,12 +79,11 @@ passport.deserializeUser(function (id, done) {
 router.post('/login',
 	passport.authenticate('local', { successRedirect: '/YOU_DID_IT_SCRUB', failureRedirect: '/YOU_FAILED_SCRUB', failureFlash: true }),
 	function (req, res) {
-		res.redirect('/');
 	});
 
-router.get('/logout', function (req, res) {
-	req.logout();
-});
+// router.get('/logout', function (req, res) {
+// 	req.logout();
+// });
 
 
 module.exports = router;

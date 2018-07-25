@@ -7,6 +7,7 @@ import Renter from "./pages/Renter";
 import Manager from "./pages/Manager";
 import Property from "./pages/Property";
 import Results from "./pages/Results";
+import { SignUpModal } from "./components/Nav/SignUpModal.js";
 
 
 const App = () => (
@@ -19,6 +20,7 @@ const App = () => (
         <Route exact path="/manager" component={Manager} />
         <Route exact path="/property" component={Property} />
         <Route exact path="/results" component={Results} />
+        <Route exact path="/api/users/register" component={SignUpModal} />
 
       </Switch>
     </div>
