@@ -19,9 +19,9 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 
 // Define middleware here
+app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(cookieParser());
 app.use(morgan('tiny'));
 
 
@@ -72,11 +72,6 @@ if (process.env.NODE_ENV === "production") {
 }
 // Add routes, both API and view
 app.use('/api/users', users);
-
-app.get('/', function(req, res) {
-  res.send('hello');
-});
-
 
 // Connect to the Mongo DB
 mongoose.connect(

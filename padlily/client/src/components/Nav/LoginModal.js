@@ -1,26 +1,15 @@
 import React, { Component } from "react";
 import { ModalCardBody, Button, Field, Control, Input } from 'bloomer';
-import API from "../../utils/API";
+import {connect} from 'react-redux';
+import { bindActionCreators } from 'redux'
+import {login} from '../../actions/authActions'
 
-export class LoginModal extends Component {
+class LoginModal extends Component {
   // Setting our component's initial state
   state = {
     email: "",
     password: ""
   }
-
-  // componentDidMount() {
-  //   this.loadUsers();
-  // }
-  // loadUsers = () => {
-  // API.getUsers()
-  // .then(res => 
-  //   this.setState({ user: res.data, 
-  //     email: "",
-  //     password: ""
-  // }))
-  // .catch(err => console.log(err));
-  // };
 
   handleInputChange = event => {
     const { name, value } = event.target;
@@ -32,19 +21,12 @@ export class LoginModal extends Component {
 
   handleFormSubmit = event => {
     event.preventDefault();
-    if (this.state.username) {
-      API.loginUser({
-        email: this.state.email,
-        password: this.state.password
+    const {email, password} = this.state;
+    if (email && password) {
+      this.props.login({email, password})
+      }
 
-      })
-        .then(res => {
-          console.log("Logged In");
-          // this.loadUsers();
-        })
-        .catch(err => console.log(err));
-    }
-      };
+    };
 
   render() {
     return (
@@ -87,3 +69,14 @@ export class LoginModal extends Component {
     );
   }
 }
+
+const mapStateToProps = ({auth}) => ({
+  user: auth.user
+});
+
+
+const mapDispatchToProps = dispatch => ({
+  login: bindActionCreators(login, dispatch)
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginModal)
