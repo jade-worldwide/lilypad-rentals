@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { ModalCardBody, Button, Field, Control, Input } from 'bloomer';
+import { FormErrors } from './FormErrors';
 import { Link } from "react-router-dom";
 import API from "../../utils/API";
 
@@ -38,9 +39,17 @@ export class SignUpModal extends Component {
     let passwordValid = this.state.passwordValid;
   
     switch(fieldName) {
+      case 'name':
+        nameValid = value.match(/^$/);
+        fieldValidationErrors.name = nameValid ? '': ' cannot be empty';
+        break;
       case 'email':
         emailValid = value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i);
         fieldValidationErrors.email = emailValid ? '' : ' is invalid';
+        break;
+      case 'phonenumber':
+        phonenumberValid = value.length >= 10;
+        fieldValidationErrors.phonenumber = phonenumberValid ? '': ' phonenumber is too short';
         break;
       case 'password':
         passwordValid = value.length >= 6;
@@ -51,15 +60,19 @@ export class SignUpModal extends Component {
     }
     this.setState({formErrors: fieldValidationErrors,
                     emailValid: emailValid,
+                    nameValid: nameValid,
+                    phonenumberValid: phonenumberValid,
                     passwordValid: passwordValid
                   }, this.validateForm);
   }
   
   validateForm() {
-    this.setState({formValid: this.state.emailValid && this.state.passwordValid});
+    this.setState({formValid: this.state.name && this.state.emailValid && this.state.phonenumber && this.state.passwordValid});
   }
 
-
+  errorClass(error) {
+    return(error.length === 0 ? '' : 'has-error');
+ }
 
   handleFormSubmit = event => {
     event.preventDefault();
@@ -86,6 +99,7 @@ export class SignUpModal extends Component {
 
               <div className="column">
                 <h1 className="title user-title">Almost Home!</h1>
+                <FormErrors formErrors={this.state.formErrors} />
                 <Field>
                   <Control>
                       <Input 
@@ -95,6 +109,7 @@ export class SignUpModal extends Component {
                           type="email" 
                           placeholder='Email Address' 
                           isSize="medium" />
+                          <p className={`help is-danger ${this.errorClass(this.state.formErrors.email)}`} > </p>
                   </Control>
                 </Field>
                 <Field>
@@ -131,6 +146,7 @@ export class SignUpModal extends Component {
                   </Control>
                 </Field>
                 <Button 
+                disabled={!this.state.formValid}
                 onClick={this.handleFormSubmit} 
                 isColor='primary' 
                 className="sign-up-button is-medium">

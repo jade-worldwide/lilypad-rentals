@@ -1,14 +1,17 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import { Navbar, NavbarBrand, NavbarItem,  NavbarEnd, Modal, ModalCard, ModalCardTitle, ModalBackground, ModalCardFooter, ModalCardHeader, Delete, ModalCardBody } from 'bloomer';
 import { Link } from "react-router-dom";
+import {connect} from 'react-redux';
+import { bindActionCreators } from 'redux'
 import StepZilla from "react-stepzilla";
 import 'bulma/css/bulma.css';
 import "./Nav.css";
 import pad from "./pad.png";
 import modal from "./modal.svg";
 import { SignUpModal } from "./SignUpModal";
-import { LoginModal } from "./LoginModal";
+import LoginModal from "./LoginModal";
 import { MemberType } from "./MemberType";
+import {getAuthenticated, logout} from '../../actions/authActions'
 
 const padLogo = { image: `url(${pad})` }
 const steps =
@@ -19,11 +22,16 @@ const steps =
 
 const modalBG = { backgroundImage: `url(${modal})` }
 
-export class Nav extends Component {
+class Nav extends Component {
+
+  componentWillMount() {
+    //move this to top level component app.js
+    this.props.getAuthenticated();
+  }
 
   state = {
     modal: "",
-    login: "",
+    login: ""
   };
 
   modalOpen = () => {
@@ -32,6 +40,10 @@ export class Nav extends Component {
 
   loginOpen = () => {
     this.setState({ login: "is-active" })
+  }
+
+  logout = () => {
+    this.props.logout()
   }
 
 
@@ -43,6 +55,8 @@ export class Nav extends Component {
   }
 
   render() {
+    const { user } = this.props;
+    console.log(user);
     return (
       <Navbar className="navbar">
         <NavbarBrand>
@@ -66,12 +80,22 @@ export class Nav extends Component {
           <NavbarItem href="#">
               <p>Create Listing</p>
           </NavbarItem>
-          <NavbarItem href="#" onClick={this.loginOpen}>
-              <p>Log in</p>
-          </NavbarItem>
-          <NavbarItem href="#" onClick={this.modalOpen}>
-              <p>Sign Up</p>
-          </NavbarItem>
+          {!user ? (
+            <Fragment>
+              <NavbarItem href="#" onClick={this.loginOpen}>
+                  <p>Log in</p>
+              </NavbarItem>
+              <NavbarItem href="#" onClick={this.modalOpen}>
+                  <p>Sign Up</p>
+              </NavbarItem>
+            </Fragment>
+          ) : (
+            <Fragment>
+              <NavbarItem href="#" onClick={this.logout}>
+                  <p>Log out</p>
+                </NavbarItem>
+              </Fragment>
+          )}
         </NavbarEnd>
 
         <div className="signup-modal">
@@ -114,8 +138,18 @@ export class Nav extends Component {
           </ModalCard>
           </Modal>
         </div>
-
       </Navbar>
     );
   }
 }
+
+const mapStateToProps = ({auth}) => ({
+  user: auth.user
+});
+
+const mapDispatchToProps = dispatch => ({
+  getAuthenticated: bindActionCreators(getAuthenticated, dispatch),
+  logout: bindActionCreators(logout, dispatch)
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Nav)

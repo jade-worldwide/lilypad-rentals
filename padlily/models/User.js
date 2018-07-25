@@ -12,7 +12,6 @@ const UserSchema = new Schema({
 	},
 	email: {
 		type: String,
-		match: [/.+@.+\..+/, "Please enter a valid e-mail address"]
 	},
 	name: {
 		type: String
@@ -36,8 +35,8 @@ module.exports.createUser = function (newUser, callback) {
 	});
 }
 
-module.exports.getUserByEmail = function (email, callback) {
-	let query = { email: email };
+module.exports.getUserByUsername = function (username, callback) {
+	let query = { email: username };
 	User.findOne(query, callback);
 }
 

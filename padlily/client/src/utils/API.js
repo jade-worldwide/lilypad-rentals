@@ -1,5 +1,5 @@
 import axios from "axios";
-
+axios.defaults.withCredentials = true;
 
 export default {
   // Gets all properties
@@ -25,5 +25,12 @@ export default {
   saveUser: function(userData) {
     console.log("Registering Account")
     return axios.post("/api/users/register", userData);
+  },
+  getAuthenticated: function(isAuthenticated) {
+    console.log('Checking if youre logged in Yo')
+    return axios.get("/api/users/authenticated", isAuthenticated);
+  },
+  logout: (cb) => {
+    return axios.post('/api/users/logout', cb);
   }
 };

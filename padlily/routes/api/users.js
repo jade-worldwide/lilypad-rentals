@@ -47,9 +47,11 @@ router.post('/register', function (req, res) {
 	}
 });
 
-passport.use(new LocalStrategy(
-	function (email, password, done) {
-		User.getUserByEmail(email, function (err, user) {
+passport.use(new LocalStrategy({
+	usernameField: 'email'
+	},
+	function (username, password, done) {
+		User.getUserByUsername(username, function (err, user) {
 			if (err) throw err;
 			if (!user) {
 				return done(null, false, { message: 'Unknown User' });
@@ -76,14 +78,35 @@ passport.deserializeUser(function (id, done) {
 	});
 });
 
-router.post('/login',
-	passport.authenticate('local', { successRedirect: '/YOU_DID_IT_SCRUB', failureRedirect: '/YOU_FAILED_SCRUB', failureFlash: true }),
-	function (req, res) {
-	});
+// router.post('/login',
+// 	passport.authenticate('local', { successRedirect: '/', failureRedirect: '/YOU_FAILED_SCRUB', failureFlash: true }),
+// 	function (req, res) {
+// 		console.log(req.user, '---should contain user token or info')
+// 		res.send(req.user);
+// 	});
 
-// router.get('/logout', function (req, res) {
-// 	req.logout();
-// });
+router.post('/login', function(req, res, next) {
+	passport.authenticate('local', function(err, {email, phonenumber, _id, name}) {
+		if(err) {
+			return res.sendStatus(401);
+		}
+		res.send({success: true, user: {email, phonenumber, _id, name} })
+		
+	})(req, res, next)
+})
 
+router.get('/authenticated', (req, res) => {
+	console.log(req.cookies, req.cookies.session, req.user)
+	if(req.cookies.session) {
+		res.send({success: true});
+	} else {
+		res.send(null)
+	}
+})
+
+router.post('/logout',  (req, res) => {
+	req.logout();
+	res.send({success: true})
+});
 
 module.exports = router;
