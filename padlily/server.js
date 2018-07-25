@@ -9,6 +9,8 @@ let passport = require('passport');
 let LocalStrategy = require('passport-local').Strategy;
 const mongoose = require("mongoose");
 let morgan = require('morgan');
+let mongo = require('mongodb');
+
 
 // Routers
 let users = require('./routes/api/users');
@@ -71,10 +73,10 @@ if (process.env.NODE_ENV === "production") {
 // Add routes, both API and view
 app.use('/api/users', users);
 
+app.get('/', function(req, res) {
+  res.send('hello');
+});
 
-// app.get('/', function(req, res) {
-//   res.send('hello');
-// });
 
 // Connect to the Mongo DB
 mongoose.connect(

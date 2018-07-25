@@ -7,10 +7,6 @@ let LocalStrategy = require('passport-local').Strategy;
 const Schema = mongoose.Schema;
 // User Schema
 const UserSchema = new Schema({
-	username: {
-		type: String,
-		index: true
-	},
 	password: {
 		type: String
 	},
@@ -40,8 +36,8 @@ module.exports.createUser = function (newUser, callback) {
 	});
 }
 
-module.exports.getUserByUsername = function (username, callback) {
-	let query = { username: username };
+module.exports.getUserByEmail = function (email, callback) {
+	let query = { email: email };
 	User.findOne(query, callback);
 }
 
