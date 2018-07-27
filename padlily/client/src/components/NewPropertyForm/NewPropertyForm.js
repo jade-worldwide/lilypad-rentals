@@ -1,16 +1,19 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import { Field, Control, Input, Button, TextArea, Select, Label, Container } from 'bloomer';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux'
 import API from "../../utils/API";
 import axios from "axios";
 import 'bulma/css/bulma.css';
 import "./NewPropertyForm.css";
+import getAuthenticated from '../../actions/authActions'
 
 // Cloudinary 
 let imageUrl;
 let CLOUDINARY_UPLOAD_PRESET = 'nre9efzy'
 let CLOUDINARY_URL = 'https://api.cloudinary.com/v1_1/dkuhmdf7w/upload'
 
-export class NewPropertyForm extends Component {
+class NewPropertyForm extends Component {
 
     // Setting our component's initial state
     state = {
@@ -34,6 +37,8 @@ export class NewPropertyForm extends Component {
         photos: []
 
     };
+
+
     componentDidMount() {
         this.loadProperties();
     }
@@ -128,6 +133,8 @@ export class NewPropertyForm extends Component {
     };
 
     render() {
+        const { user } = this.props;
+        console.log(user);
         return (
             <Container>
                 <Field>
@@ -332,14 +339,48 @@ export class NewPropertyForm extends Component {
                     </Control>
                 </Field>
 
-                <Button
-                    isColor='primary'
-                    className=""
-                    onClick={this.handleFormSubmit}
-                >
-                    <p>Submit</p>
-                </Button>
+                {!user ? (
+                    <span>
+                        <p className='help is-danger'>You must have an account to post up properties.</p>
+                        <Button
+                            isColor='primary'
+                            className=""
+                            disabled='true'
+                        >
+                            <p>Submit</p>
+                        </Button>
+                    </span>
+                ) : 
+                <span>
+                    {user.role === 'renter' ? (<span>
+                        <p className='help is-danger'>You must be a property manager to post up a property.</p>
+                        <Button
+                            isColor='primary'
+                            className=""
+                            disabled
+                        >
+                            <p>Submit</p>
+                        </Button>
+                    </span>
+                    ): (<span>
+                         <Button
+                            isColor='primary'
+                            className=""
+                            onClick={this.handleFormSubmit}
+                        >
+                            <p>Submit</p>
+                        </Button>
+                        </span> )}
+                        </span>
+                }
             </Container>
         );
     }
 }
+
+const mapStateToProps = ({auth}) => ({
+    user: auth.user
+  });
+  
+  
+  export default connect(mapStateToProps)(NewPropertyForm)

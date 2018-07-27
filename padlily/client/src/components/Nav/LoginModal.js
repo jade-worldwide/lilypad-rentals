@@ -51,7 +51,7 @@ class LoginModal extends Component {
                           value={this.state.password}
                           onChange={this.handleInputChange}
                           name="password"
-                          type="Text" 
+                          type="password" 
                           placeholder='Password' 
                           isSize="medium" />
                       </Control>

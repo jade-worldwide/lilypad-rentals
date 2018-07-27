@@ -2,6 +2,7 @@ let Property = require("../../models/Property");
 const express = require('express');
 const router = express.Router();
 
+
 // Property Controllers
 
 // View all properties
@@ -44,6 +45,7 @@ router.post("/manager/property/create", (req, res) => {
     } else {
         console.log("No request body")
     }
+
     Property
         .create(req.body)
         .then(dbModel => res.json(dbModel))
@@ -66,5 +68,6 @@ router.delete("/property/delete/:id", (req, res) => {
         .then(dbModel => res.json(dbModel))
         .catch(err => res.status(422).json(err));
 });
+
 
 module.exports = router;
