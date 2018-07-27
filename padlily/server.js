@@ -14,6 +14,7 @@ let mongo = require('mongodb');
 
 // Routers
 let users = require('./routes/api/users');
+let properties = require("./routes/api/properties");
 const app = express();
 
 const PORT = process.env.PORT || 3001;
@@ -72,6 +73,7 @@ if (process.env.NODE_ENV === "production") {
 }
 // Add routes, both API and view
 app.use('/api/users', users);
+app.use(properties);
 
 // Connect to the Mongo DB
 mongoose.connect(

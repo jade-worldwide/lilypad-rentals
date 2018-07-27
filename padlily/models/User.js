@@ -18,6 +18,11 @@ const UserSchema = new Schema({
 	},
 	phonenumber: {
 		type: Number
+	},
+	role: {
+		type: String,
+		enum: ['renter', 'propertyManager'],
+		default: 'renter'
 	}
 });
 

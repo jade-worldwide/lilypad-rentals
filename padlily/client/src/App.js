@@ -29,6 +29,7 @@ const App = () => (
         <Route exact path="/renter" component={Renter} />
         <Route exact path="/manager" component={Manager} />
         <Route exact path="/property" component={Property} />
+        <Route exact path="/property/:id" component={Property} />
         <Route exact path="/results" component={Results} />
         <Route exact path="/api/users/register" component={SignUpModal} />
 
