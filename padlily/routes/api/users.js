@@ -12,6 +12,7 @@ router.post('/register', function (req, res) {
 	let name = req.body.name;
 	let phonenumber = req.body.phonenumber;
 	let password = req.body.password;
+	let role = req.body.role
 
 	if (!name) {
 		console.log("Errors");
@@ -31,7 +32,8 @@ router.post('/register', function (req, res) {
 						name: name,
 						email: email,
 						phonenumber: phonenumber,
-						password: password
+						password: password,
+						role: role
 						
 					});
 
@@ -86,11 +88,11 @@ passport.deserializeUser(function (id, done) {
 // 	});
 
 router.post('/login', function(req, res, next) {
-	passport.authenticate('local', function(err, {email, phonenumber, _id, name}) {
+	passport.authenticate('local', function(err, {email, phonenumber, _id, name, role}) {
 		if(err) {
 			return res.sendStatus(401);
 		}
-		res.send({success: true, user: {email, phonenumber, _id, name} })
+		res.send({success: true, user: {email, phonenumber, _id, name, role} })
 		
 	})(req, res, next)
 })

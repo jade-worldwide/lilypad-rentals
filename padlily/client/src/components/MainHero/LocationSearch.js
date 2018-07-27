@@ -23,21 +23,27 @@ export class LocationSearchInput extends React.Component {
   };
 
   handleSelect = selected => {
-  this.setState({ isGeocoding: true, address: selected });
-  geocodeByAddress(selected)
-    .then(res => getLatLng(res[0]))
-    .then(({ lat, lng }) => {
-      this.setState({
-        latitude: lat,
-        longitude: lng,
-        isGeocoding: false,
+    this.setState({ isGeocoding: true, address: selected });
+    geocodeByAddress(selected)
+      .then(res => getLatLng(res[0]))
+      .then(({ lat, lng }) => {
+        // this.setState({
+        //   latitude: lat,
+        //   longitude: lng,
+        //   isGeocoding: false,
+        // });
+        let urlParams = selected.split(",")
+        let city = urlParams[0]
+        let state = urlParams[1].replace(/ /g, '')
+        console.log(city)
+        console.log(state)
+        window.location.href = "http://localhost:3000/results?city=" + city + "&state=" + state;
+      })
+      .catch(error => {
+        this.setState({ isGeocoding: false });
+        console.log('error', error); // eslint-disable-line no-console
       });
-    })
-    .catch(error => {
-      this.setState({ isGeocoding: false });
-      console.log('error', error); // eslint-disable-line no-console
-    });
-  };
+  };;
 
   handleCloseClick = () => {
     this.setState({
@@ -58,10 +64,10 @@ export class LocationSearchInput extends React.Component {
 
     const {
       address,
-      errorMessage,
-      latitude,
-      longitude,
-      isGeocoding,
+      // errorMessage,
+      // latitude,
+      // longitude,
+      // isGeocoding,
     } = this.state;
 
     return (

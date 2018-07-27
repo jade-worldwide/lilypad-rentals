@@ -4,19 +4,20 @@ axios.defaults.withCredentials = true;
 export default {
   // Gets all properties
   getProperties: function(queryString) {
-    return axios.get("/api/properties" + queryString);
+    return axios.get("/results" + queryString);
   },
   // Gets the book with the given id
   getProperty: function(id) {
-    return axios.get("/api/properties/" + id);
+    return axios.get("/property/" + id);
   },
   // Deletes the book with the given id
   deleteProperty: function(id) {
-    return axios.delete("/api/properties/" + id);
+    return axios.delete("/manager/properties/delete" + id);
   },
   // Saves a book to the database
   saveProperty: function(propertyData) {
-    return axios.post("/api/properties", propertyData) 
+    console.log("In Axios route")
+    return axios.post("/manager/property/create", propertyData) 
   },
   loginUser: function(userData) {
     console.log('we are sssending a POST request to users/login')
