@@ -4,6 +4,7 @@ let passport = require('passport');
 let LocalStrategy = require('passport-local').Strategy;
 
 let User = require('../../models/User');
+let Property = require("../../models/Property");
 
 
 // Register User
@@ -37,10 +38,12 @@ router.post('/register', function (req, res) {
 						
 					});
 
-					User.createUser(newUser, function (err, user) {
-						if (err) throw err;
+					User
+					.createUser(newUser, function (err, user) {
 						console.log(user);
-					});
+					}).populate("Property")    
+					.then(dbModel => res.json(dbModel))
+					.catch(err => res.status(422).json(err));
 
          	req.flash('success_msg', 'You are registered and can now login');
 					res.redirect('/users/login');
@@ -48,6 +51,18 @@ router.post('/register', function (req, res) {
 			});
 	}
 });
+
+// router.get('/api', function (req, res){
+
+// 	User.find({})
+//     .populate("property")
+//     .then(function (data) {
+//       res.json(data)
+//     })
+//     .catch(function (err) {
+//       res.json(err);
+//     });
+// });
 
 passport.use(new LocalStrategy({
 	usernameField: 'email'
@@ -77,6 +92,7 @@ passport.serializeUser(function (user, done) {
 passport.deserializeUser(function (id, done) {
 	User.getUserById(id, function (err, user) {
 		done(err, user);
+		console.log(user);
 	});
 });
 
@@ -87,19 +103,23 @@ passport.deserializeUser(function (id, done) {
 // 		res.send(req.user);
 // 	});
 
+
 router.post('/login', function(req, res, next) {
-	passport.authenticate('local', function(err, {email, phonenumber, _id, name, role}) {
+	passport.authenticate('local', function(err, user) {
 		if(err) {
 			return res.sendStatus(401);
 		}
-		res.send({success: true, user: {email, phonenumber, _id, name, role} })
-		
+		req.logIn(user, (err) => {
+			const  {email, phonenumber, _id, name, role}  = user;
+			if(err) return res.sendStatus(401);
+			return res.send({user:  {email, phonenumber, _id, name, role} })
+		})
+
 	})(req, res, next)
 })
 
 router.get('/authenticated', (req, res) => {
-	console.log(req.cookies, req.cookies.session, req.user)
-	if(req.cookies.session) {
+	if(req.user) {
 		res.send({success: true});
 	} else {
 		res.send(null)
@@ -107,7 +127,7 @@ router.get('/authenticated', (req, res) => {
 })
 
 router.post('/logout',  (req, res) => {
-	req.logout();
+	req.logOut();
 	res.send({success: true})
 });
 

@@ -21,9 +21,13 @@ const UserSchema = new Schema({
 	},
 	role: {
 		type: String,
-		enum: ['renter', 'propertyManager'],
+		enum: ['renter', 'property manager'],
 		default: 'renter'
-	}
+	},
+	property: [{
+		type: Schema.Types.ObjectId,
+		ref: "Property"
+	}]
 });
 
 const User =  mongoose.model('User', UserSchema);

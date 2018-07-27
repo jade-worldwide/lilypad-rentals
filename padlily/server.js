@@ -10,7 +10,8 @@ let LocalStrategy = require('passport-local').Strategy;
 const mongoose = require("mongoose");
 let morgan = require('morgan');
 let mongo = require('mongodb');
-
+let User = require('./models/User');
+let Property = require("./models/Property");
 
 // Routers
 let users = require('./routes/api/users');
@@ -29,13 +30,22 @@ app.use(morgan('tiny'));
 // Express Session
 app.use(session({
   secret: 'secret',
-  saveUninitialized: true,
-  resave: true
+  saveUninitialized: false,
+  resave: false,
+  cookie: { httpOnly: true }
 }));
 
 // Passport init
 app.use(passport.initialize());
 app.use(passport.session());
+
+passport.deserializeUser(function (id, done) {
+	console.log(id, '--');
+	User.getUserById(id, function (err, user) {
+		done(err, user);
+		console.log(user);
+	});
+});
 
 // Express Validator
 app.use(expressValidator({
@@ -74,6 +84,14 @@ if (process.env.NODE_ENV === "production") {
 // Add routes, both API and view
 app.use('/api/users', users);
 app.use(properties);
+
+app.get("/checkapi", ( req, res ) =>{
+  User
+  .find({})
+  .sort({ date: -1 })
+  .then(dbModel => res.json(dbModel))
+  .catch(err => res.status(422).json(err));
+})
 
 // Connect to the Mongo DB
 mongoose.connect(
