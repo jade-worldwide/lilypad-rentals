@@ -27,7 +27,7 @@ export class SignUpModal extends Component {
                 </Field>
                 <Field>
                   <Control>
-                      <Input type="text" placeholder='Phone Number' isSize="medium" />
+                      <Input type="tel" placeholder='Phone Number' isSize="medium" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"/>
                   </Control>
                 </Field>
                 <Field>
