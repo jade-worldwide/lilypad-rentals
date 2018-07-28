@@ -9,9 +9,18 @@ const mainImage = { backgroundImage: `url(${house})` }
 class Property extends Component {
   // Setting our component's initial state
   state = {
+    liked: "far fa-heart"
   };
 
+  likeProperty = (props) => {
+    const isLiked = props.isLiked;
+    if (isLiked) {
+      this.setState({ liked: "far fa-heart" })
+    } else {
+      this.setState({ liked: "fas fa-heart is-liked" })
 
+    }
+  }
 
 
   render() {
@@ -24,7 +33,7 @@ class Property extends Component {
             </div>
             <div className="buttons-right">
               <Button isColor='white'><p><i className="far fa-share-square"></i>  Share</p></Button>
-              <Button isColor='white' className="like-button"><p><i className="far fa-heart"></i>  Like</p></Button>
+              <Button isColor='white' className="like-button" isLiked={false} onClick={this.likeProperty}><p><i className={this.state.liked}></i>  Like</p></Button>
             </div>
           </Container>
         </div>

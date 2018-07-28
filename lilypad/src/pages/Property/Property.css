@@ -107,6 +107,10 @@ img {
   margin-bottom: 2px!important;
 }
 
+.is-liked {
+  color: #f44336;
+}
+
 @media only screen and (max-width: 840px) {
   .container {
     margin: 0 20px;
