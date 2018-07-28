@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { NewPropertyForm } from "../../components/NewPropertyForm";
+import { NewPropertyForm, FormPageOne, FormPageTwo, FormPageThree, FormPageFour } from "../../components/NewPropertyForm";
 import { PropertyList } from "../../components/PropertyList";
 import { Container, Button, Modal, ModalCard, ModalCardTitle, ModalBackground, ModalCardFooter, ModalCardHeader, Delete, ModalCardBody } from 'bloomer';
 import StepZilla from "react-stepzilla";
@@ -8,8 +8,10 @@ import "./Manager.css";
 
 const steps =
     [
-      {name: 'Step 1', component: <PropertyList /> },
-      {name: 'Step 2', component: <NewPropertyForm /> }
+      {name: 'Step 1', component: <FormPageOne /> },
+      {name: 'Step 2', component: <FormPageTwo /> },
+      {name: 'Step 3', component: <FormPageThree /> },
+      {name: 'Step 4', component: <FormPageFour /> }
     ]
 
 const modalBG = { backgroundImage: `url(${modal})` }
