@@ -1,5 +1,5 @@
 import React from "react";
-import { Control, Input, Button } from 'bloomer';
+import { Control, Input, /*Button*/ } from 'bloomer';
 import 'bulma/css/bulma.css';
 import "./MainHero.css";
 

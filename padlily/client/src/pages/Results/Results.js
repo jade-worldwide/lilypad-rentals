@@ -12,7 +12,8 @@ class Results extends Component {
     title: "",
     price: 0,
     numOfBeds: 0,
-    propertySize: ""
+    propertySize: "",
+    photos: ""
   };
 
   // When the component mounts, load all properties and save them to this.state.properties
@@ -41,6 +42,7 @@ class Results extends Component {
             title={property.title}
             price={property.price}
             numOfBeds={property.numOfBeds}
+            photos={property.photos}
             propertySize={property.propertySize}
         />
         </Link>

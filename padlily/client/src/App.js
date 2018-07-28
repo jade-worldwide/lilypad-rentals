@@ -8,7 +8,7 @@ import Manager from "./pages/Manager";
 import Property from "./pages/Property";
 import Results from "./pages/Results";
 import { SignUpModal } from "./components/Nav/SignUpModal.js";
-import { isatty } from 'tty';
+// import { isatty } from 'tty';
 
 // function PrivateRoute({
 //   component: Component, isAuthed, ...rest

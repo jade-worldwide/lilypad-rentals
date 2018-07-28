@@ -13,7 +13,7 @@ import LoginModal from "./LoginModal";
 import { MemberType } from "./MemberType";
 import { getAuthenticated, logout } from '../../actions/authActions'
 
-const padLogo = { image: `url(${pad})` }
+// const padLogo = { image: `url(${pad})` }
 const steps =
   [
     { name: 'Step 1', component: <MemberType /> },
@@ -61,7 +61,7 @@ class Nav extends Component {
       <Navbar className="navbar">
         <NavbarBrand>
           <NavbarItem className="nav-logo-item">
-            <img src={pad} />
+            <img alt="" src={pad} />
           </NavbarItem>
           <NavbarItem>
             <Link to={"/"}><p className="nav-title">Lilypad Rentals</p></Link>
