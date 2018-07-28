@@ -1,7 +1,9 @@
+const mongoose = require('mongoose');
 let Property = require("../../models/Property");
 const express = require('express');
 const router = express.Router();
 
+let User = require('../../models/User');
 
 // Property Controllers
 
@@ -38,18 +40,34 @@ router.get("/property/:id", (req, res) => {
 });
 
 // Create a property
-router.post("/manager/property/create", (req, res) => {
-    console.log("In post router")
+router.post("/manager/property/create/", async (req, res) => {
+    console.log("In post router", req.body.user.email)
+    try {
     if (req.body) {
-        console.log("Request body detected" + req.body)
+        //console.log("Request body detected" + req.body)
     } else {
         console.log("No request body")
     }
+    const newProperty = new Property(req.body);
+    const saveProperty = await newProperty.save();
 
-    Property
-        .create(req.body)
-        .then(dbModel => res.json(dbModel))
-        .catch(err => res.status(422).json(err));
+    console.log('--new Prop', saveProperty._id);
+    const populateUser = await User.update({email: req.body.user.email}, {$push: {property: mongoose.Types.ObjectId(saveProperty._id)}})
+    console.log(populateUser)
+    res.send({sucess: true});
+    } catch(err) {
+        console.log(err)
+        res.sendStatus(400);
+    }
+    // Property
+    //     .create(req.body)
+    //     .then(dbProperty => {
+    //         // If a Book was created successfully, find one library (there's only one) and push the new Book's _id to the Library's `books` array
+    //         // { new: true } tells the query that we want it to return the updated Library -- it returns the original by default
+    //         // Since our mongoose query returns a promise, we can chain another `.then` which receives the result of the query
+    //         return User.findOneAndUpdate({}, { $push: { properties: dbProperty._id } }, { new: true });
+    //       })
+    //     .catch(err => res.status(422).json(err));
 });
 
 // Edit a property

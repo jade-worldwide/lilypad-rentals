@@ -93,13 +93,14 @@ class NewPropertyForm extends Component {
             imageUrl = res.data.secure_url
 
             this.setState({ photos: this.state.photos.concat(imageUrl) });
-            console.log("Input Changed");
-            console.log("URL: ", this.state.photos)
+          
         })
     };
 
     handleFormSubmit = event => {
         event.preventDefault();
+        const { user } = this.props;
+        console.log(user)
         if (this.state.title && this.state.address && this.state.city && this.state.state &&
             this.state.phoneNumber && this.state.numOfBeds && this.state.propertySize && this.state.numOfBaths &&
             this.state.price && this.state.pets && this.state.parking && this.state.laundry &&
@@ -122,7 +123,8 @@ class NewPropertyForm extends Component {
                 heating: this.state.heating,
                 cooling: this.state.cooling,
                 description: this.state.description,
-                photos: this.state.photos
+                photos: this.state.photos,
+                user
             })
                 .then(res => this.loadProperties(),
                     console.log("submitted"))
@@ -352,7 +354,7 @@ class NewPropertyForm extends Component {
                     </span>
                 ) : 
                 <span>
-                    {user.role === 'renter' ? (<span>
+                    {user.role === 'Renter' ? (<span>
                         <p className='help is-danger'>You must be a property manager to post up a property.</p>
                         <Button
                             isColor='primary'

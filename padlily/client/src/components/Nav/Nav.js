@@ -86,7 +86,7 @@ class Nav extends Component {
           ) : (
               <Fragment>
                 <NavbarItem>
-                  <Link to={"/manager"}><p>Property Form</p></Link>
+                  <Link to={"/manager/property/create/:id"}><p>Property Form</p></Link>
                 </NavbarItem>
                 <NavbarItem href="#">
                   <p>Create Listing</p>

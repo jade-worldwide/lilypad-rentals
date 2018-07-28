@@ -21,8 +21,8 @@ const UserSchema = new Schema({
 	},
 	role: {
 		type: String,
-		enum: ['renter', 'property manager'],
-		default: 'renter'
+		enum: ['Renter', 'Property Manager'],
+		default: 'Renter'
 	},
 	property: [{
 		type: Schema.Types.ObjectId,

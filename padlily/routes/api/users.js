@@ -4,7 +4,7 @@ let passport = require('passport');
 let LocalStrategy = require('passport-local').Strategy;
 
 let User = require('../../models/User');
-let Property = require("../../models/Property");
+let property = require("../../models/Property");
 
 
 // Register User
@@ -40,29 +40,27 @@ router.post('/register', function (req, res) {
 
 					User
 					.createUser(newUser, function (err, user) {
+						if (err) throw err;
 						console.log(user);
-					}).populate("Property")    
-					.then(dbModel => res.json(dbModel))
-					.catch(err => res.status(422).json(err));
-
-         	req.flash('success_msg', 'You are registered and can now login');
-					res.redirect('/users/login');
+						res.redirect('/');
+					})
+         			
 				}
 			});
 	}
 });
 
-// router.get('/api', function (req, res){
+router.get('/api', function (req, res){
 
-// 	User.find({})
-//     .populate("property")
-//     .then(function (data) {
-//       res.json(data)
-//     })
-//     .catch(function (err) {
-//       res.json(err);
-//     });
-// });
+	User.find({})
+    .populate("property")
+    .then(function (data) {
+      res.json(data)
+    })
+    .catch(function (err) {
+      res.json(err);
+    });
+});
 
 passport.use(new LocalStrategy({
 	usernameField: 'email'
