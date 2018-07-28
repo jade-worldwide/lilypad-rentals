@@ -1,5 +1,5 @@
 import React from "react";
-import { Table, Image, Subtitle } from 'bloomer';
+import { Table, Image, Subtitle, Button } from 'bloomer';
 import 'bulma/css/bulma.css';
 import "./PropertyList.css";
 
@@ -8,29 +8,53 @@ export const PropertyList = () => (
     <Table>
       <thead>
         <tr>
-          <th>Image</th>
-          <th>Address</th>
-          <th>Rented</th>
-          <th>Delete</th>
+          <th className="address-column">Address</th>
+          <th className="rented-column">Rented</th>
+          <th className="app-column">Applications</th>
+          <th className="delete-column"></th>
         </tr>
       </thead>
 
       <tbody>
           <tr>
-              <td className="list-image"><Image isSize="96x96" src="https://via.placeholder.com/96x96" /></td>
               <td>
-                <Subtitle isSize={4}>Sunny lakeside cottage with beautiful garden.</Subtitle>
                 <p>123 Rainey Street, Springfield ST, 10090</p>
               </td>
-              <td>
+              <td className="rented-column">
                 <div class="field">
                   <input id="switchExample" type="checkbox" name="switchExample" className="switch" />
                 </div>
               </td>
               <td>
-                Delete
+                <Button isColor='primary' className="is-small"><p>View 4</p></Button>
+
+              </td>
+              <td>
+                <Button className="is-small delete-button"><p><i className="far fa-trash-alt"></i></p></Button>
+
               </td>
           </tr>
+
+          <tr>
+              <td>
+                <p>123 Rainey Street, Springfield ST, 10090</p>
+              </td>
+              <td className="rented-column">
+                <div class="field">
+                  <input id="switchExample" type="checkbox" name="switchExample" className="switch" />
+                </div>
+              </td>
+              <td>
+                <Button isColor='primary' className="is-small"><p>View 4</p></Button>
+
+              </td>
+              <td>
+                <Button className="is-small delete-button"><p><i className="far fa-trash-alt"></i></p></Button>
+
+              </td>
+          </tr>
+
+
       </tbody>
     </Table>
   </div>
