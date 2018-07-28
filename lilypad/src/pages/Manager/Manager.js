@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { NewPropertyForm } from "../../components/NewPropertyForm";
+import { PropertyList } from "../../components/PropertyList";
 
 
 class Manager extends Component {
@@ -13,7 +14,7 @@ class Manager extends Component {
   render() {
     return (
       <div className="Manager">
-
+          <PropertyList />
           <NewPropertyForm />
 
       </div>
