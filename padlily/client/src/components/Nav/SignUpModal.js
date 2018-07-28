@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { ModalCardBody, Button, Field, Control, Input } from 'bloomer';
+import { ModalCardBody, Button, Field, Control, Input, Label, Select } from 'bloomer';
 import { FormErrors } from './FormErrors';
 import { Link } from "react-router-dom";
 import API from "../../utils/API";
@@ -13,6 +13,7 @@ export class SignUpModal extends Component {
     email: "",
     phonenumber: "",
     password: "",
+    role: '',
     formErrors: {name: "", email: "", phonenumber: "", password: ""},
     nameValid: false,
     emailValid: false,
@@ -40,7 +41,7 @@ export class SignUpModal extends Component {
   
     switch(fieldName) {
       case 'name':
-        nameValid = value.match(/^$/);
+        nameValid = value.match(/^./);
         fieldValidationErrors.name = nameValid ? '': ' cannot be empty';
         break;
       case 'email':
@@ -76,12 +77,13 @@ export class SignUpModal extends Component {
 
   handleFormSubmit = event => {
     event.preventDefault();
-    if (this.state.name) {
+    if (this.state.email) {
       API.saveUser({
         name: this.state.name,
         email: this.state.email,
         phonenumber: this.state.phonenumber,
-        password: this.state.password
+        password: this.state.password,
+        role: this.state.role
 
       })
         .then(res => {
@@ -144,6 +146,19 @@ export class SignUpModal extends Component {
                       placeholder='Password' 
                       isSize="medium" />
                   </Control>
+                </Field>
+                <Field>
+                    <Label>What is your Member Type</Label>
+                    <Control>
+                        <Select
+                            value={this.state.role}
+                            onChange={this.handleInputChange}
+                            name="role" >
+                            <option>Select One</option>
+                            <option>Renter</option>
+                            <option>Property Manager</option>
+                        </Select>
+                    </Control>
                 </Field>
                 <Button 
                 disabled={!this.state.formValid}
