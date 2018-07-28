@@ -41,7 +41,7 @@ export const getAuthenticated = () => async dispatch => {
 
 export const logout = () => async dispatch => {
     try {
-        const revoke = await API.logout()
+        // const revoke = await API.logout()
         dispatch({
             type: IS_AUTHENTICATED,
             payload: null

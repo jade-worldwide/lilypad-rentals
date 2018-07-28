@@ -1,12 +1,12 @@
-import React, { Component, Fragment } from "react";
+import React, { Component,/* Fragment */} from "react";
 import { Field, Control, Input, Button, TextArea, Select, Label, Container } from 'bloomer';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux'
+// import { bindActionCreators } from 'redux'
 import API from "../../utils/API";
 import axios from "axios";
 import 'bulma/css/bulma.css';
 import "./NewPropertyForm.css";
-import getAuthenticated from '../../actions/authActions'
+// import getAuthenticated from '../../actions/authActions'
 
 // Cloudinary 
 let imageUrl;
@@ -38,36 +38,6 @@ class NewPropertyForm extends Component {
 
     };
 
-
-    componentDidMount() {
-        this.loadProperties();
-    }
-    loadProperties = () => {
-        API.getProperty()
-            .then(res =>
-                this.setState({
-                    property: res.data,
-                    title: "",
-                    address: "",
-                    city: "",
-                    state: "",
-                    phoneNumber: 0,
-                    propertySize: 0,
-                    propertyType: "",
-                    numOfBeds: 0,
-                    numOfBaths: 0,
-                    price: 0,
-                    pets: "",
-                    parking: "",
-                    laundry: "",
-                    heating: "",
-                    cooling: "",
-                    description: "",
-                    photos: []
-                }))
-            .catch(err => console.log(err));
-    };
-
     handleInputChange = event => {
         const { name, value } = event.target;
         this.setState({
@@ -93,6 +63,8 @@ class NewPropertyForm extends Component {
             imageUrl = res.data.secure_url
 
             this.setState({ photos: this.state.photos.concat(imageUrl) });
+            console.log("Input Changed");
+            console.log("URL: ", this.state.photos)
           
         })
     };
@@ -126,9 +98,8 @@ class NewPropertyForm extends Component {
                 photos: this.state.photos,
                 user
             })
-                .then(res => this.loadProperties(),
-                    console.log("submitted"))
-                .catch(err => console.log(err));
+            .then(res => console.log("submitted"))
+            .catch(err => console.log(err));
         } else {
             console.log("Not Submitting")
         }
@@ -136,7 +107,7 @@ class NewPropertyForm extends Component {
 
     render() {
         const { user } = this.props;
-        console.log(user);
+        // console.log(user);
         return (
             <Container>
                 <Field>

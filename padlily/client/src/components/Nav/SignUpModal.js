@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import { ModalCardBody, Button, Field, Control, Input, Label, Select } from 'bloomer';
+import { /*ModalCardBody,*/ Button, Field, Control, Input, Label, Select } from 'bloomer';
 import { FormErrors } from './FormErrors';
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import API from "../../utils/API";
 
 export class SignUpModal extends Component {

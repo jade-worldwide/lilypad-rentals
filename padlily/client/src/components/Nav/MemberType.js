@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { ModalCardBody, Button } from 'bloomer';
-import { Link } from "react-router-dom";
+// import { ModalCardBody, Button } from 'bloomer';
+// import { Link } from "react-router-dom";
 
 
 export class MemberType extends Component {
