@@ -1,7 +1,7 @@
 import React from 'react';
 import 'bulma/css/bulma.css';
 import "./MainHero.css";
-import { Input } from 'bloomer';
+import { Input, Button } from 'bloomer';
 import PlacesAutocomplete, {
   geocodeByAddress,
   getLatLng,
@@ -91,6 +91,8 @@ export class LocationSearchInput extends React.Component {
                   <i class="far fa-times"></i>
                 </button>
               )}
+              <Button isColor='primary' className="is-large search-button"><p>Search</p></Button>
+
             </div>
             <div className="autocomplete-dropdown-container">
               {loading && <div>Loading...</div>}
@@ -114,6 +116,7 @@ export class LocationSearchInput extends React.Component {
                 );
               })}
             </div>
+
           </div>
         )}
       </PlacesAutocomplete>
