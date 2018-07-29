@@ -33,5 +33,9 @@ export default {
   },
   logout: (cb) => {
     return axios.post('/api/users/logout', cb);
-  }
+  },  
+  // Gets the book with the given id
+  getUser: function(id) {
+    return axios.get("/api/users/manager/" + id);
+  },
 };

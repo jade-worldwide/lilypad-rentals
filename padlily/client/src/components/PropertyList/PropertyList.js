@@ -3,7 +3,7 @@ import { Table, Image, Subtitle, Button } from 'bloomer';
 import 'bulma/css/bulma.css';
 import "./PropertyList.css";
 
-export const PropertyList = () => (
+export const PropertyList = props => (
   <div className="property-list">
     <Table>
       <thead>
@@ -18,7 +18,7 @@ export const PropertyList = () => (
       <tbody>
           <tr>
               <td>
-                <p>123 Rainey Street, Springfield ST, 10090</p>
+                <p></p>
               </td>
               <td className="rented-column">
                 <div class="field">
@@ -34,26 +34,6 @@ export const PropertyList = () => (
 
               </td>
           </tr>
-
-          <tr>
-              <td>
-                <p>123 Rainey Street, Springfield ST, 10090</p>
-              </td>
-              <td className="rented-column">
-                <div class="field">
-                  <input id="switchExample" type="checkbox" name="switchExample" className="switch" />
-                </div>
-              </td>
-              <td>
-                <Button isColor='primary' className="is-small"><p>View 4</p></Button>
-
-              </td>
-              <td>
-                <Button className="is-small delete-button"><p><i className="far fa-trash-alt"></i></p></Button>
-
-              </td>
-          </tr>
-
 
       </tbody>
     </Table>

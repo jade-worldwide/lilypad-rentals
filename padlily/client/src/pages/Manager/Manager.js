@@ -6,7 +6,7 @@ import StepZilla from "react-stepzilla";
 import modal from "./modal-bg.svg";
 import "./Manager.css";
 import {login} from '../../actions/authActions'
-
+import API from "../../utils/API";
 
 import {connect} from 'react-redux';
 import { bindActionCreators } from 'redux'
@@ -25,6 +25,7 @@ export class Manager extends Component {
   // Setting our component's initial state
   state = {
     modal: "",
+    user: {}
   };
 
   modalOpen = () => {
@@ -41,14 +42,22 @@ export class Manager extends Component {
   }
 
 
+componentDidMount() {
+  API.getUser(this.props.match.params.id)
+    .then(res => this.setState({ user: res.data }))
+    .catch(err => console.log(err));
+}
+
+
   render() {
     let { user } = this.props;
+    console.log(this.state.user.name)
     return (
       <div className="manager">
         <Container className="manager-container">
           <div className="columns">
             <div className="column">
-              <h1 className="title">Hi {user.name}</h1>
+              <h1 className="title">Hi {this.state.user.name}</h1>
               <h2 className="sub-title">You currently have 3 properties</h2>
               <h2 className="sub-title">Check out the new applications you received.</h2>
             </div>
