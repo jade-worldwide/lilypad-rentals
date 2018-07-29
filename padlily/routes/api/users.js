@@ -24,9 +24,12 @@ router.post('/register', function (req, res) {
 				"$regex": "^" + email + "\\b", "$options": "i"
 		}}, function (err, mail) {
 				if ( mail ) {
-					res.render('register', {
-						mail: mail
-					});
+					res.send({
+						error: 'you cannot do that son'
+					})
+					// res.render('register', {
+					// 	mail: mail
+					// });
 				}
 				else {
 					let newUser = new User({

@@ -3,14 +3,14 @@ import { Field, Control, Input, Button, TextArea, Select, Label, Container } fro
 import 'bulma/css/bulma.css';
 import "./NewPropertyForm.css";
 import ImageUploader from 'react-images-upload';
-
+import API from "../../utils/API";
 
 
 
 export class FormPageOne extends Component {
 
   state = {
-    property = [],
+    property: [],
     title: '',
     price: '',
     numOfbeds: '',
@@ -53,38 +53,56 @@ export class FormPageOne extends Component {
               <Field>
                 <Control>
                     <Input 
-                    type="Text" 
-                    placeholder='Title' 
-                    isSize="medium" />
+                            value={this.state.title}
+                            onChange={this.handleInputChange}
+                            name="title"
+                            type="Text"
+                            placeholder='Title'
+                            isSize="medium" />
                 </Control>
               </Field>
               <Field>
                 <Control>
                     <Input 
-                    type="number" 
-                    placeholder='Monthly Rent' 
-                    isSize="medium" />
+                            value={this.state.price}
+                            onChange={this.handleInputChange}
+                            name="price"
+                            type="number"
+                            placeholder='Monthly Rent'
+                            isSize="medium" />
                 </Control>
               </Field>
               <Field>
                 <Control>
                     <Input 
-                    type="Number" 
-                    placeholder='Bedrooms' 
-                    isSize="medium" />
+                            value={this.state.numOfBeds}
+                            onChange={this.handleInputChange}
+                            name="numOfBeds"
+                            type="Number"
+                            placeholder='Bedrooms'
+                            isSize="medium" />
                 </Control>
               </Field>
               <Field>
                 <Control>
                     <Input 
-                    type="Number" 
-                    placeholder='Bathrooms' 
-                    isSize="medium" />
+                            value={this.state.numOfBaths}
+                            onChange={this.handleInputChange}
+                            name="numOfBaths"
+                            type="Number"
+                            placeholder='Bathrooms'
+                            isSize="medium" />
                 </Control>
               </Field>
               <Field>
                 <Control>
-                    <Input type="Number" placeholder='Square Feet' isSize="medium" />
+                    <Input 
+                            value={this.state.propertySize}
+                            onChange={this.handleInputChange}
+                            name="propertySize"
+                            type="Number"
+                            placeholder='Square Feet'
+                            isSize="medium" />
                 </Control>
               </Field>
             </div>

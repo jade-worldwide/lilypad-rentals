@@ -7,8 +7,10 @@ import Renter from "./pages/Renter";
 import Manager from "./pages/Manager";
 import Property from "./pages/Property";
 import Results from "./pages/Results";
-import { SignUpModal } from "./components/Nav/SignUpModal.js";
+import ManagerTest from "./pages/ManagerTest";
+// import { SignUpModal } from "./components/Nav/SignUpModal.js";
 // import { isatty } from 'tty';
+
 
 // function PrivateRoute({
 //   component: Component, isAuthed, ...rest
@@ -27,11 +29,12 @@ const App = () => (
       <Switch>
         <Route exact path="/" component={Main} />
         <Route exact path="/renter" component={Renter} />
-        <Route exact path="/manager/property/create/:id" component={Manager} />
+        <Route exact path="/manager" component={Manager} />
+        <Route exact path="/managertest" component={ManagerTest} />
         <Route exact path="/property" component={Property} />
         <Route exact path="/property/:id" component={Property} />
         <Route exact path="/results" component={Results} />
-        <Route exact path="/api/users/register" component={SignUpModal} />
+        {/* <Route exact path="/api/users/register" component={SignUpModal} /> */}
 
       </Switch>
     </div>

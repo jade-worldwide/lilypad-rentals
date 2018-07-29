@@ -108,7 +108,7 @@ class NewPropertyForm extends Component {
 
     render() {
         const { user } = this.props;
-        // console.log(user);
+        console.log(user.role);
         return (
             <Container>
                 <Field>

@@ -1,8 +1,31 @@
 import API from "../utils/API";
-import { IS_AUTHENTICATED } from '../constants/actionTypes';
+import { IS_AUTHENTICATED, AUTHENTICATION_FAILED } from '../constants/actionTypes';
 
+export const signup = ({name, email, phonenumber, password, role}) => async dispatch => {
+
+    try {
+        const {data} = await API.saveUser({
+          name,
+          email,
+          phonenumber,
+          password,
+          role
+
+        })
+        dispatch({
+            type: IS_AUTHENTICATED,
+            payload: data.user
+        })
+        console.log('--success', data);
+
+      } catch(error) {
+        console.error(error);
+        console.log('Come on work damnit')
+      }
+}
 
 export const login = ({email, password}) => async dispatch => {
+
     try {
         const {data} = await API.loginUser({
           email,
@@ -13,15 +36,19 @@ export const login = ({email, password}) => async dispatch => {
             type: IS_AUTHENTICATED,
             payload: data.user
         });
-        console.log('--success', data);
+        console.log('--success', data.user.name);
       } catch(error) {
+        dispatch({
+            type: AUTHENTICATION_FAILED,
+            payload: "Invalid credentials, cannot login"
+        });
         console.error(error);
       }
 }
 
 export const getAuthenticated = () => async dispatch => {
     try {
-        const {data} = await API.getAuthenticated();
+        const {data, error} = await API.getAuthenticated();
         console.log(data);
         if(data) {
             dispatch({
@@ -29,7 +56,7 @@ export const getAuthenticated = () => async dispatch => {
                 payload: data
             });
         } else {
-            console.log('ssss')
+            console.log('ssss', error)
         }
         // if(getUser) login
         //else logout

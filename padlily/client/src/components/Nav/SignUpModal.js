@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import { /*ModalCardBody,*/ Button, Field, Control, Input, Label, Select } from 'bloomer';
 import { FormErrors } from './FormErrors';
-// import { Link } from "react-router-dom";
-import API from "../../utils/API";
+import {connect} from 'react-redux';
+import { bindActionCreators } from 'redux'
+import {signup} from '../../actions/authActions'
 
-export class SignUpModal extends Component {
+class SignUpModal extends Component {
   // Setting our component's initial state
   constructor(props) {
     super(props);
@@ -77,19 +78,9 @@ export class SignUpModal extends Component {
 
   handleFormSubmit = event => {
     event.preventDefault();
-    if (this.state.email) {
-      API.saveUser({
-        name: this.state.name,
-        email: this.state.email,
-        phonenumber: this.state.phonenumber,
-        password: this.state.password,
-        role: this.state.role
-
-      })
-        .then(res => {
-        console.log("submitted");
-      })
-        .catch(err => console.log(err));
+    const { name, email, phonenumer, password, role } = this.state
+    if (email) {
+      this.props.signup({name, email, phonenumer, password, role})
     }
   };
 
@@ -102,6 +93,9 @@ export class SignUpModal extends Component {
               <div className="column">
                 <h1 className="title user-title">Almost Home!</h1>
                 <FormErrors formErrors={this.state.formErrors} />
+                <h1 style={{color: "red"}}>
+                    {this.props.user ? this.props.user : ''}
+                </h1>
                 <Field>
                   <Control>
                       <Input 
@@ -176,3 +170,14 @@ export class SignUpModal extends Component {
     );
   }
 }
+
+const mapStateToProps = ({auth}) => ({
+  user: auth.user
+});
+
+
+const mapDispatchToProps = dispatch => ({
+  signup: bindActionCreators(signup, dispatch)
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignUpModal)
