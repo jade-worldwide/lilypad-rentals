@@ -132,4 +132,17 @@ router.post('/logout',  (req, res) => {
 	res.send({success: true})
 });
 
+// View one property
+router.get("/manager/:id", (req, res) => {
+    if (req.params.id === "undefined") {
+        console.log("No property ID detected")
+    } else {
+        User
+            .findById(req.params.id)
+            .then(dbModel => res.json(dbModel))
+            .catch(err => res.status(422).json(err));
+    }
+});
+
+
 module.exports = router;

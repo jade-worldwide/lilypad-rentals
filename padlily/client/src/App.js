@@ -29,7 +29,7 @@ const App = () => (
       <Switch>
         <Route exact path="/" component={Main} />
         <Route exact path="/renter" component={Renter} />
-        <Route exact path="/manager" component={Manager} />
+        <Route exact path="/manager/:id" component={Manager} />
         <Route exact path="/managertest" component={ManagerTest} />
         <Route exact path="/property" component={Property} />
         <Route exact path="/property/:id" component={Property} />
