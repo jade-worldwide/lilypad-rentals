@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { NewPropertyForm, FormPageOne, FormPageTwo, FormPageThree, FormPageFour } from "../../components/NewPropertyForm";
-import { PropertyList } from "../../components/PropertyList";
+import { PropertyList, Filters } from "../../components/PropertyList";
 import { Container, Button, Modal, ModalCard, ModalCardTitle, ModalBackground, ModalCardFooter, ModalCardHeader, Delete, ModalCardBody } from 'bloomer';
 import StepZilla from "react-stepzilla";
 import modal from "./modal-bg.svg";
@@ -10,6 +10,7 @@ import API from "../../utils/API";
 
 import {connect} from 'react-redux';
 import { bindActionCreators } from 'redux'
+import { Link } from "react-router-dom";
 
 const steps =
     [
@@ -25,7 +26,10 @@ export class Manager extends Component {
   // Setting our component's initial state
   state = {
     modal: "",
-    user: {}
+    user: {},
+    properties: [],
+    propertyNum: [],
+    propertyId: ''
   };
 
   modalOpen = () => {
@@ -41,24 +45,40 @@ export class Manager extends Component {
      })
   }
 
-
 componentDidMount() {
+  this.loadUser();
+  this.loadProperties();
+}
+
+loadUser = () => {
   API.getUser(this.props.match.params.id)
-    .then(res => this.setState({ user: res.data }))
+    .then(res => 
+      this.setState({ user: res.data, propertyNum: res.data.property.length, propertyId: res.data.property._id }))
     .catch(err => console.log(err));
 }
+
+  // Loads all properties  and sets them to this.state.properties
+  loadProperties = () => {
+    let userProp = (this.state.user.property)
+    API.getProperties(this.props.match.params.userProp)
+      .then(res =>
+        this.setState({ properties: res.data, title: "" })
+      )
+      .catch(err => console.log(err));
+  };
+
 
 
   render() {
     let { user } = this.props;
-    console.log(this.state.user.name)
+    console.log(this.state.user.property)
     return (
       <div className="manager">
         <Container className="manager-container">
           <div className="columns">
             <div className="column">
               <h1 className="title">Hi {this.state.user.name}</h1>
-              <h2 className="sub-title">You currently have 3 properties</h2>
+              <h2 className="sub-title">You currently have {this.state.propertyNum} properties</h2>
               <h2 className="sub-title">Check out the new applications you received.</h2>
             </div>
             <div className="column user-dash-right">
@@ -73,7 +93,20 @@ componentDidMount() {
 
           <h1 className="title has-text-centered">My Properties</h1>
           <PropertyList />
-
+        <div>
+        {this.state.properties.map(property => (
+        <Link to={"/property/" + property._id}>
+        <PropertyList 
+            title={property.title}
+            price={property.price}
+            numOfBeds={property.numOfBeds}
+            photos={property.photos}
+            propertySize={property.propertySize}
+        />
+        </Link>
+      ))}
+      </div>
+      {this.state.user.property}
 
             <div className="new-property-modal">
               <Modal className={this.state.modal}>

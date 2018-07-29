@@ -18,7 +18,7 @@ export const PropertyList = props => (
       <tbody>
           <tr>
               <td>
-                <p></p>
+                <p>{props.title}</p>
               </td>
               <td className="rented-column">
                 <div class="field">
