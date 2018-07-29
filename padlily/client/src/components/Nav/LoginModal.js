@@ -33,6 +33,9 @@ class LoginModal extends Component {
             <div className="sign-up-modal">
 
                   <ModalCardBody>
+                    <h1 style={{color: "red"}}>
+                    {this.props.authError ? this.props.authError : ''}
+                    </h1>
                     <Field>
                       <Control>
                           <Input 
@@ -71,7 +74,8 @@ class LoginModal extends Component {
 }
 
 const mapStateToProps = ({auth}) => ({
-  user: auth.user
+  user: auth.user,
+  authError: auth.authError
 });
 
 

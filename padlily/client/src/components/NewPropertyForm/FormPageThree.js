@@ -3,18 +3,45 @@ import { Field, Control, Input, Button, TextArea, Select, Label, Container } fro
 import 'bulma/css/bulma.css';
 import "./NewPropertyForm.css";
 import ImageUploader from 'react-images-upload';
-
+import API from "../../utils/API";
 
 
 
 export class FormPageThree extends Component {
 
   state = {
-    file: ""
+    property: [],
+    propertyType: "",
+    pets: "",
+    parking: "",
+    laundry: "",
+    heating: "",
+    cooling: "",
   };
 
 
+  handleInputChange = event => {
+    const { name, value } = event.target;
+    this.setState({
+        [name]: value
+    });
+};
 
+handleFormSubmit = event => {
+  event.preventDefault();
+  const { user } = this.props;
+  console.log(user)
+  if (this.state.description) {
+      console.log("Submitting")
+      API.saveProperty({
+          description: this.state.description,
+      })
+      .then(res => console.log("submitted"))
+      .catch(err => console.log(err));
+  } else {
+      console.log("Not Submitting")
+  }
+};
 
 
   render() {

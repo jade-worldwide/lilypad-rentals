@@ -5,6 +5,11 @@ import { Container, Button, Modal, ModalCard, ModalCardTitle, ModalBackground, M
 import StepZilla from "react-stepzilla";
 import modal from "./modal-bg.svg";
 import "./Manager.css";
+import {login} from '../../actions/authActions'
+
+
+import {connect} from 'react-redux';
+import { bindActionCreators } from 'redux'
 
 const steps =
     [
@@ -16,7 +21,7 @@ const steps =
 
 const modalBG = { backgroundImage: `url(${modal})` }
 
-class Manager extends Component {
+export class Manager extends Component {
   // Setting our component's initial state
   state = {
     modal: "",
@@ -37,17 +42,21 @@ class Manager extends Component {
 
 
   render() {
+    let { user } = this.props;
     return (
       <div className="manager">
         <Container className="manager-container">
           <div className="columns">
             <div className="column">
-              <h1 className="title">Hi User Name!</h1>
+              <h1 className="title">Hi {user.name}</h1>
               <h2 className="sub-title">You currently have 3 properties</h2>
               <h2 className="sub-title">Check out the new applications you received.</h2>
             </div>
             <div className="column user-dash-right">
-              <Button isColor='primary' className="" onClick={this.modalOpen}><p>Create Listing</p></Button>
+              <Button 
+              isColor='primary' 
+              className="" 
+              onClick={this.modalOpen}><p>Create Listing</p></Button>
 
             </div>
 
@@ -89,4 +98,9 @@ class Manager extends Component {
   }
 }
 
-export default Manager;
+const mapStateToProps = ({auth}) => ({
+  user: auth.user,
+  authError: auth.authError
+});
+
+export default connect(mapStateToProps)(Manager)

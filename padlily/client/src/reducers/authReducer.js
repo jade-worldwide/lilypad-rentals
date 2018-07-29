@@ -1,5 +1,6 @@
 import {
-    IS_AUTHENTICATED
+    IS_AUTHENTICATED,
+    AUTHENTICATION_FAILED
 } from '../constants/actionTypes';
 
 const initialState = {
@@ -9,7 +10,9 @@ const initialState = {
 const authReducer = (state = initialState, {type, payload}) => {
     switch(type) {
         case IS_AUTHENTICATED:
-            return {...state, user: payload}
+            return {...state, user: payload, userInfo: payload}
+        case AUTHENTICATION_FAILED:
+            return {...state, user: null, authError: payload}
         default:
             return state
     }

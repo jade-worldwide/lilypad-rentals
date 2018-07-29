@@ -8,7 +8,7 @@ import 'bulma/css/bulma.css';
 import "./Nav.css";
 import pad from "./pad.png";
 import modal from "./modal.svg";
-import { SignUpModal } from "./SignUpModal";
+import SignUpModal from "./SignUpModal";
 import LoginModal from "./LoginModal";
 import { MemberType } from "./MemberType";
 import { getAuthenticated, logout } from '../../actions/authActions'
@@ -86,10 +86,10 @@ class Nav extends Component {
           ) : (
               <Fragment>
                 <NavbarItem>
-                  <Link to={"/manager/property/create/:id"}><p>Property Form</p></Link>
+                  <Link to={"/manager"}><p>Property Form</p></Link>
                 </NavbarItem>
-                <NavbarItem href="#">
-                  <p>Create Listing</p>
+                <NavbarItem href="">
+                <Link to={"/managertest"}><p>Property Form</p></Link>
                 </NavbarItem>
                 <NavbarItem href="#" onClick={this.logout}>
                   <p>Log out</p>
