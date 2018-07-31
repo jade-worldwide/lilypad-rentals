@@ -47,27 +47,31 @@ export class Manager extends Component {
 
 componentDidMount() {
   this.loadUser();
-  this.loadProperties();
+  // this.loadProperties();
 }
 
 loadUser = () => {
   API.getUser(this.props.match.params.id)
-    .then(res => 
-      this.setState({ user: res.data, propertyNum: res.data.property.length, propertyId: res.data.property._id }))
+    .then(res => {
+      this.setState({ user: res.data, propertyNum: res.data.property.length, propertyId: res.data.property })
+        let userProp = (res.data.property)
+        console.log(userProp)
+        API.getProperty(userProp)
+          .then(res =>
+            this.setState({ properties: res.data, title: "" })
+          )
+    })
     .catch(err => console.log(err));
 }
-
-  // Loads all properties  and sets them to this.state.properties
-  loadProperties = () => {
-    let userProp = (this.state.user.property)
-    API.getProperties(this.props.match.params.userProp)
-      .then(res =>
-        this.setState({ properties: res.data, title: "" })
-      )
-      .catch(err => console.log(err));
-  };
-
-
+// loadProperties = () => {
+//   let queryString = (window.location.search)
+//   console.log(queryString)
+//   API.getProperties(queryString)
+//     .then(res =>
+//       this.setState({ properties: res.data, title: "" })
+//     )
+//     .catch(err => console.log(err));
+// };
 
   render() {
     let { user } = this.props;
@@ -92,21 +96,23 @@ loadUser = () => {
           </div>
 
           <h1 className="title has-text-centered">My Properties</h1>
-          <PropertyList />
-        <div>
-        {this.state.properties.map(property => (
-        <Link to={"/property/" + property._id}>
+          <PropertyList 
+            title={this.state.properties.title}
+          />
+        {/* <div>
+        {this.state.properties.map(properties => (
+        <Link to={"/property/" + properties._id}>
         <PropertyList 
-            title={property.title}
-            price={property.price}
-            numOfBeds={property.numOfBeds}
-            photos={property.photos}
-            propertySize={property.propertySize}
+            title={properties.title}
+            price={properties.price}
+            numOfBeds={properties.numOfBeds}
+            photos={properties.photos}
+            propertySize={properties.propertySize}
         />
         </Link>
       ))}
-      </div>
-      {this.state.user.property}
+      </div> */}
+      {/* {this.state.properties.title} */}
 
             <div className="new-property-modal">
               <Modal className={this.state.modal}>
