@@ -7,6 +7,7 @@
     "bloomer": "^0.6.3",
     "bulma": "^0.7.1",
     "bulma-extensions": "^2.2.1",
+    "google-map-react": "^1.0.5",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-image-lightbox": "^5.0.0",
@@ -14,7 +15,8 @@
     "react-places-autocomplete": "^7.2.0",
     "react-router-dom": "^4.3.1",
     "react-scripts": "1.1.4",
-    "react-stepzilla": "^4.7.2"
+    "react-stepzilla": "^4.7.2",
+    "recompose": "^0.27.1"
   },
   "scripts": {
     "start": "react-scripts start",
