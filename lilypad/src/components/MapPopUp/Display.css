@@ -1,9 +1,17 @@
 .card  {
     cursor: pointer;
-    min-width: 100px;
+    min-width: 200px;
     min-height: 100px;
     background-color: white;
+    border-radius: 3px;
 }
-img {
-    width: 25px;
+
+.card-info {
+  /* padding: 10px; */
+}
+
+
+.card-header-title {
+  font-size: 1.25em;
+  font-weight: 400;
 }

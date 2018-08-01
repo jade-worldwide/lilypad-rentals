@@ -10,10 +10,10 @@ class Marker extends Component {
         return (
             <div className="lily" onClick={this.props.onClick}>
                 {/* Replace src={lilypad} with whatever icon that you want */}
-                <img width="20px" src={this.props.image} /> 
+                <img width="20px" src={this.props.markerImage} />
                 {
                     this.props.isBoxVisible ? (
-                        <Dispbox 
+                        <Dispbox
                             text={this.props.text}
                             image={this.props.image}
                             className="card"
