@@ -12,22 +12,22 @@ const TEST_DATA = [
   {
     lat: 37.8716,
     lng: -122.2727,
-    text: 'Toogers HQ',
-    image: "None",
+    text: 'Sunny lakeside cottage with beautiful garden.',
+    image: "https://via.placeholder.com/640x320",
     link: 'https://sfbay.craigslist.org/eby/apa/d/peaceful-amazing-viewmillion/6643700557.html#1'
   },
   {
     lat: 37.8616,
     lng: -122.2627,
-    text: 'Toogerland',
-    image: "None",
+    text: 'Sunny lakeside cottage with beautiful garden.',
+    image: "https://via.placeholder.com/640x320",
     link: 'https://sfbay.craigslist.org/eby/apa/d/peaceful-amazing-viewmillion/6643700557.html#2'
   },
   {
-    lat: 36.8616,
-    lng: -122.2627,
-    text: 'Toogtown',
-    image: "None",
+    lat: 37.8615,
+    lng: -122.2929,
+    text: 'Sunny lakeside cottage with beautiful garden.',
+    image: "https://via.placeholder.com/640x320",
     link: 'https://sfbay.craigslist.org/eby/apa/d/peaceful-amazing-viewmillion/6643700557.html#3'
   },
 ];
@@ -68,8 +68,8 @@ export class GoogleMap extends Component {
           lat={datum.lat}
           lng={datum.lng}
           text={datum.text}
-          image={pad}
-          //image={datum.text} for actual version
+          markerImage={pad}
+          image={datum.image}
           link={datum.link}
           onClick={() => this.markerGotClicked(datum.link)}
           isBoxVisible={datum.link === this.state.openMarker}

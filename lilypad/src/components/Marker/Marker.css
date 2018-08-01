@@ -1,0 +1,7 @@
+.lily {
+  cursor: pointer;
+}
+
+.card {
+  z-index: 10;
+}
