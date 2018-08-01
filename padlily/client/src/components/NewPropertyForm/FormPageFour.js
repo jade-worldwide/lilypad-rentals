@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Field, Control, Input, Button, TextArea, Select, Label, Container } from 'bloomer';
+import {/* Field, Control, Input,*/ Button,/* TextArea, Select, Label, Container*/ } from 'bloomer';
 import 'bulma/css/bulma.css';
 import "./NewPropertyForm.css";
 import ImageUploader from 'react-images-upload';

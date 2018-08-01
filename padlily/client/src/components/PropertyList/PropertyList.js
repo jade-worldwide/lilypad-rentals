@@ -1,5 +1,5 @@
 import React from "react";
-import { Table, Image, Subtitle, Button } from 'bloomer';
+import { Table, /*Image, Subtitle,*/ Button } from 'bloomer';
 import 'bulma/css/bulma.css';
 import "./PropertyList.css";
 

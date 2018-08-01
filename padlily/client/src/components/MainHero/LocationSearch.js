@@ -6,7 +6,7 @@ import PlacesAutocomplete, {
   geocodeByAddress,
   getLatLng,
 } from 'react-places-autocomplete';
-import { address } from 'ip';
+// import { address } from 'ip';
 
 export class LocationSearchInput extends React.Component {
   constructor(props) {
