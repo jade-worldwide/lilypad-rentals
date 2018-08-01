@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { ResultsList, Filters } from "../../components/ResultsList";
 import { Button } from 'bloomer';
-import { ResultsMap } from "../../components/ResultsMap";
 import { GoogleMap } from "../../components/GoogleMap";
 import "./Results.css";
 
