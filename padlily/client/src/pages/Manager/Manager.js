@@ -5,20 +5,20 @@ import { Container, Button, Modal, ModalCard, ModalCardTitle, ModalBackground, M
 import StepZilla from "react-stepzilla";
 import modal from "./modal-bg.svg";
 import "./Manager.css";
-import {login} from '../../actions/authActions'
+import { login } from '../../actions/authActions'
 import API from "../../utils/API";
 
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux'
 import { Link } from "react-router-dom";
 
 const steps =
-    [
-      {name: 'Step 1', component: <FormPageOne /> },
-      {name: 'Step 2', component: <FormPageTwo /> },
-      {name: 'Step 3', component: <FormPageThree /> },
-      {name: 'Step 4', component: <FormPageFour /> }
-    ]
+  [
+    { name: 'Step 1', component: <FormPageOne /> },
+    { name: 'Step 2', component: <FormPageTwo /> },
+    { name: 'Step 3', component: <FormPageThree /> },
+    { name: 'Step 4', component: <FormPageFour /> }
+  ]
 
 const modalBG = { backgroundImage: `url(${modal})` }
 
@@ -29,7 +29,8 @@ export class Manager extends Component {
     user: {},
     properties: [],
     propertyNum: [],
-    propertyId: ''
+    propertyId: '',
+    title: "Peter Panda"
   };
 
   modalOpen = () => {
@@ -42,40 +43,35 @@ export class Manager extends Component {
     this.setState({
       modal: "",
       login: "",
-     })
+    })
   }
 
-componentDidMount() {
-  this.loadUser();
-  // this.loadProperties();
-}
+  componentDidMount() {
+    this.loadUser();
+    // this.loadProperties();
+  }
 
-loadUser = () => {
-  API.getUser(this.props.match.params.id)
-    .then(res => {
-      this.setState({ user: res.data, propertyNum: res.data.property.length, propertyId: res.data.property })
+  loadUser = () => {
+    API.getUser(this.props.match.params.id)
+      .then(res => {
+        this.setState({ user: res.data, propertyNum: res.data.property.length, propertyId: res.data.property })
         let userProp = (res.data.property)
-        console.log(userProp)
-        API.getProperty(userProp)
-          .then(res =>
-            this.setState({ properties: res.data, title: "" })
-          )
-    })
-    .catch(err => console.log(err));
-}
-// loadProperties = () => {
-//   let queryString = (window.location.search)
-//   console.log(queryString)
-//   API.getProperties(queryString)
-//     .then(res =>
-//       this.setState({ properties: res.data, title: "" })
-//     )
-//     .catch(err => console.log(err));
-// };
+        for (let i = 0; i < userProp.length; i++) {
+          let peterPanda = userProp[i]
+          console.log("Property ID: ", peterPanda)
+          API.getProperty(peterPanda)
+            .then(res =>
+              this.setState({ properties: this.state.properties.concat(res.data) })
+            )
+        }
+      })
+
+      .catch(err => console.log(err));
+  }
 
   render() {
     let { user } = this.props;
-    console.log(this.state.user.property)
+    console.log(this.state.properties)
     return (
       <div className="manager">
         <Container className="manager-container">
@@ -86,58 +82,48 @@ loadUser = () => {
               <h2 className="sub-title">Check out the new applications you received.</h2>
             </div>
             <div className="column user-dash-right">
-              <Button 
-              isColor='primary' 
-              className="" 
-              onClick={this.modalOpen}><p>Create Listing</p></Button>
+              <Button
+                isColor='primary'
+                className=""
+                onClick={this.modalOpen}><p>Create Listing</p></Button>
 
             </div>
 
           </div>
 
           <h1 className="title has-text-centered">My Properties</h1>
-          <PropertyList 
-            title={this.state.properties.title}
-          />
-        {/* <div>
-        {this.state.properties.map(properties => (
-        <Link to={"/property/" + properties._id}>
-        <PropertyList 
-            title={properties.title}
-            price={properties.price}
-            numOfBeds={properties.numOfBeds}
-            photos={properties.photos}
-            propertySize={properties.propertySize}
-        />
-        </Link>
-      ))}
-      </div> */}
-      {/* {this.state.properties.title} */}
+          <div>
+            {this.state.properties.map(properties => (
+                <PropertyList
+                  title={properties.title}
+                />
+            ))}
+          </div>
 
-            <div className="new-property-modal">
-              <Modal className={this.state.modal}>
+          <div className="new-property-modal">
+            <Modal className={this.state.modal}>
 
-                <ModalBackground />
-                <ModalCard style={ modalBG } >
+              <ModalBackground />
+              <ModalCard style={modalBG} >
 
-                    <ModalCardBody>
-                        <Delete onClick={this.modalClose} />
+                <ModalCardBody>
+                  <Delete onClick={this.modalClose} />
 
-                        <div className='step-progress'>
-                            <StepZilla
-                              steps={steps}
-                              showSteps={false}
-                              nextButtonCls="button is-medium is-primary"
-                              backButtonCls="button is-medium is-primary"
-                              />
-                        </div>
+                  <div className='step-progress'>
+                    <StepZilla
+                      steps={steps}
+                      showSteps={false}
+                      nextButtonCls="button is-medium is-primary"
+                      backButtonCls="button is-medium is-primary"
+                    />
+                  </div>
 
-                  </ModalCardBody>
+                </ModalCardBody>
 
 
               </ModalCard>
-              </Modal>
-            </div>
+            </Modal>
+          </div>
 
 
         </Container>
@@ -146,7 +132,7 @@ loadUser = () => {
   }
 }
 
-const mapStateToProps = ({auth}) => ({
+const mapStateToProps = ({ auth }) => ({
   user: auth.user,
   authError: auth.authError
 });

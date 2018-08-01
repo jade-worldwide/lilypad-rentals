@@ -1,11 +1,12 @@
 import React from 'react';
 import 'bulma/css/bulma.css';
 import "./MainHero.css";
-import { Input } from 'bloomer';
+import { Input, Button } from 'bloomer';
 import PlacesAutocomplete, {
   geocodeByAddress,
   getLatLng,
 } from 'react-places-autocomplete';
+import { address } from 'ip';
 
 export class LocationSearchInput extends React.Component {
   constructor(props) {
@@ -19,7 +20,7 @@ export class LocationSearchInput extends React.Component {
       latitude: null,
       longitude: null,
       errorMessage: '',
-     });
+    });
   };
 
   handleSelect = selected => {
@@ -32,12 +33,6 @@ export class LocationSearchInput extends React.Component {
         //   longitude: lng,
         //   isGeocoding: false,
         // });
-        let urlParams = selected.split(",")
-        let city = urlParams[0]
-        let state = urlParams[1].replace(/ /g, '')
-        console.log(city)
-        console.log(state)
-        window.location.href = "http://localhost:3000/results?city=" + city + "&state=" + state;
       })
       .catch(error => {
         this.setState({ isGeocoding: false });
@@ -52,6 +47,21 @@ export class LocationSearchInput extends React.Component {
       longitude: null,
     });
   };
+
+  handleSearchClick = () => {
+
+    let selectedAddress = this.state.address
+    let urlParams = selectedAddress.split(",")
+
+    let city = urlParams[0]
+    let state = urlParams[1].replace(/ /g, '')
+
+    console.log("City: ", city)
+    console.log("State: ", state)
+
+    window.location.href = "http://localhost:3000/results?city=" + city + "&state=" + state;
+
+  }
 
   handleError = (status, clearSuggestions) => {
     console.log('Error from Google Maps API', status); // eslint-disable-line no-console
@@ -97,6 +107,12 @@ export class LocationSearchInput extends React.Component {
                   <i class="far fa-times"></i>
                 </button>
               )}
+              <Button isColor='primary'
+                className="is-large search-button"
+                value={address}
+                onClick={this.handleSearchClick}
+              ><p>Search</p></Button>
+
             </div>
             <div className="autocomplete-dropdown-container">
               {loading && <div>Loading...</div>}
@@ -120,6 +136,7 @@ export class LocationSearchInput extends React.Component {
                 );
               })}
             </div>
+
           </div>
         )}
       </PlacesAutocomplete>

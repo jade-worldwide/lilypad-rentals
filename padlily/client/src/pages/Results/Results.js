@@ -27,12 +27,13 @@ class Results extends Component {
     console.log(queryString)
     API.getProperties(queryString)
       .then(res =>
-        this.setState({ properties: res.data, title: "" })
+        this.setState({ properties: res.data})
       )
       .catch(err => console.log(err));
   };
   
   render() {
+    console.log(this.state.properties)
     return (
       <div className="results">
         <Filters />
