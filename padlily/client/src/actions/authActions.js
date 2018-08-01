@@ -12,10 +12,18 @@ export const signup = ({name, email, phonenumber, password, role}) => async disp
           role
 
         })
-        dispatch({
-            type: IS_AUTHENTICATED,
-            payload: data.user
-        })
+
+        if (data.error) {
+            dispatch({
+                type: IS_AUTHENTICATED,
+                payload: "Invalid credentials, cannot signup with that email or username"
+            })
+        } else {
+            dispatch({
+                type: IS_AUTHENTICATED,
+                payload: data.user
+            })
+        }
         console.log('--success', data);
 
       } catch(error) {
