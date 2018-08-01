@@ -83,21 +83,26 @@ class Nav extends Component {
                 <p>Sign Up</p>
               </NavbarItem>
             </Fragment>
-          ) : (
-              <Fragment>
-                <NavbarItem>
-                  <span>
-                  <Link to={"/manager/" + user._id}><p>Manager Dashboard</p></Link>
-                  </span>
-                </NavbarItem>
-                <NavbarItem href="">
-                <Link to={"/managertest"}><p>Create a Property</p></Link>
-                </NavbarItem>
-                <NavbarItem href="#" onClick={this.logout}>
-                  <p>Log out</p>
-                </NavbarItem>
-              </Fragment>
-            )}
+          ) :
+            <span>
+              {user.role === 'Renter' ? (<span>
+              </span>
+              ) : (<span>
+                <Fragment>
+                  <NavbarItem>
+                    <Link to={"/manager/" + user._id}><p>Manager Dashboard</p></Link>
+                  </NavbarItem>
+                  <NavbarItem href="">
+                    <Link to={"/managertest"}><p>Create a Property</p></Link>
+                  </NavbarItem>
+                </Fragment>
+              </span>)}
+              
+              <NavbarItem href="#" onClick={this.logout}>
+                <p>Log out</p>
+              </NavbarItem>
+            </span>
+          }
         </NavbarEnd>
 
         <div className="signup-modal">
