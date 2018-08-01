@@ -1,16 +1,16 @@
 import React, { Component } from "react";
-import { NewPropertyForm, FormPageOne, FormPageTwo, FormPageThree, FormPageFour } from "../../components/NewPropertyForm";
-import { PropertyList, Filters } from "../../components/PropertyList";
-import { Container, Button, Modal, ModalCard, ModalCardTitle, ModalBackground, ModalCardFooter, ModalCardHeader, Delete, ModalCardBody } from 'bloomer';
+import {/* NewPropertyForm,*/ FormPageOne, FormPageTwo, FormPageThree, FormPageFour } from "../../components/NewPropertyForm";
+import { PropertyList, /*Filters*/ } from "../../components/PropertyList";
+import { Container, Button, Modal, ModalCard, ModalBackground, /*ModalCardFooter, ModalCardHeader,*/ Delete, ModalCardBody } from 'bloomer';
 import StepZilla from "react-stepzilla";
 import modal from "./modal-bg.svg";
 import "./Manager.css";
-import { login } from '../../actions/authActions'
+// import { login } from '../../actions/authActions'
 import API from "../../utils/API";
 
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux'
-import { Link } from "react-router-dom";
+// import { bindActionCreators } from 'redux'
+// import { Link } from "react-router-dom";
 
 const steps =
   [
@@ -56,8 +56,7 @@ export class Manager extends Component {
       .then(res => {
         this.setState({ user: res.data, propertyNum: res.data.property.length, propertyId: res.data.property })
         let userProp = (res.data.property)
-        for (let i = 0; i < userProp.length; i++) {
-          let peterPanda = userProp[i]
+        for (let peterPanda of userProp) {
           console.log("Property ID: ", peterPanda)
           API.getProperty(peterPanda)
             .then(res =>
@@ -70,7 +69,6 @@ export class Manager extends Component {
   }
 
   render() {
-    let { user } = this.props;
     console.log(this.state.properties)
     return (
       <div className="manager">
