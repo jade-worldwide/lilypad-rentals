@@ -87,11 +87,11 @@ class Nav extends Component {
               <Fragment>
                 <NavbarItem>
                   <span>
-                  <Link to={"/manager/" + user._id}><p>Property Form</p></Link>
+                  <Link to={"/manager/" + user._id}><p>Manager Dashboard</p></Link>
                   </span>
                 </NavbarItem>
                 <NavbarItem href="">
-                <Link to={"/managertest"}><p>Property Form</p></Link>
+                <Link to={"/managertest"}><p>Create a Property</p></Link>
                 </NavbarItem>
                 <NavbarItem href="#" onClick={this.logout}>
                   <p>Log out</p>
