@@ -61,7 +61,10 @@ export class Nav extends Component {
               <Link to={"/results"}><p>Results</p></Link>
           </NavbarItem>
           <NavbarItem>
-              <Link to={"/manager"}><p>Property Form</p></Link>
+              <Link to={"/renter"}><p>Renter</p></Link>
+          </NavbarItem>
+          <NavbarItem>
+              <Link to={"/manager"}><p>Property Manager</p></Link>
           </NavbarItem>
           <NavbarItem href="#">
               <p>Create Listing</p>
