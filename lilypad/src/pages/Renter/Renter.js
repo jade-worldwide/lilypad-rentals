@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-
-
+import { RenterApplication } from "../../components/RenterApplication";
+import "./Renter.css";
 
 class Renter extends Component {
   // Setting our component's initial state
@@ -12,9 +12,8 @@ class Renter extends Component {
 
   render() {
     return (
-      <div className="Renter">
-    
-
+      <div className="renter">
+        <RenterApplication />
       </div>
     );
   }
