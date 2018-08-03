@@ -20,10 +20,12 @@
     "if-env": "^1.0.4",
     "mongoose": "^5.2.5",
     "morgan": "^1.9.0",
+    "node-geocoder": "^3.22.0",
     "nodemon": "^1.18.3",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
     "path": "^0.12.7",
+    "react-geocode": "^0.1.2",
     "react-scripts": "^1.1.4"
   },
   "scripts": {

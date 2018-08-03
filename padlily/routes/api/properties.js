@@ -8,23 +8,19 @@ let User = require('../../models/User');
 // Property Controllers
 
 // View all properties
-router.get("/results", (req, res) => {
-    if (req.query.city) {
-        console.log("query detected")
-        Property
-            .find({ city: req.query.city })
-            .sort({ date: -1 })
-            .then(dbModel => res.json(dbModel))
-            .catch(err => res.status(422).json(err));
-    } else {
-        console.log("no query")
-        Property
-            .find()
-            .sort({ date: -1 })
-            .then(dbModel => res.json(dbModel))
-            .catch(err => res.status(422).json(err));
-    }
+router.post("/results", (request, response) => {
+    const { dbQuery } = request.body
 
+    console.log('body >>', request.body)
+
+    Property
+        .find(dbQuery)
+        .sort({ date: -1 })
+        .then(dbModel => response.json(dbModel))
+        .catch(err => {
+            console.log('dbError', err)
+            response.status(422).json(err)
+        });
 });
 
 // View one property
@@ -44,7 +40,7 @@ router.post("/manager/property/create/", async (req, res) => {
     console.log("In post router", req.body.user.email)
     try {
     if (req.body) {
-        //console.log("Request body detected" + req.body)
+
     } else {
         console.log("No request body")
     }

@@ -16,8 +16,8 @@ import ManagerTest from "./pages/ManagerTest";
 //   component: Component, isAuthed, ...rest
 // }) {
 // return (
-//   <Route {...rest} render={props => 
-//   isAuthed ? (<Component {...props} />) : 
+//   <Route {...rest} render={props =>
+//   isAuthed ? (<Component {...props} />) :
 // (<Redirect to={{pathname: "/", state: {from: props.location }} } />)}M />)
 // }
 
