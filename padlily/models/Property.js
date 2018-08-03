@@ -22,7 +22,7 @@ const PropertySchema = new Schema({
     require: true
   },
   phoneNumber: {
-    type: Number,
+    type: String,
     required: true
   },
   propertySize: {
@@ -63,6 +63,14 @@ const PropertySchema = new Schema({
   description: {
     type: String,
     require: true
+  },
+  longitude: {
+    type: String,
+    required: true
+  },
+  latitude: {
+    type: String,
+    required: true
   },
   photos: [{
     type: String

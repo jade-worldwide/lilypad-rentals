@@ -1,9 +1,11 @@
-import React, { Component,/* Fragment */} from "react";
+import React, { Component,/* Fragment */ } from "react";
 import { Field, Control, Input, Button, TextArea, Select, Label, Container } from 'bloomer';
 import { connect } from 'react-redux';
 // import { bindActionCreators } from 'redux'
 import API from "../../utils/API";
 import axios from "axios";
+import Geocode from "react-geocode";
+// import format from "react-phone-input-auto-format";
 import 'bulma/css/bulma.css';
 import "./NewPropertyForm.css";
 // import getAuthenticated from '../../actions/authActions'
@@ -14,6 +16,11 @@ let imageUrl;
 let CLOUDINARY_UPLOAD_PRESET = 'nre9efzy'
 let CLOUDINARY_URL = 'https://api.cloudinary.com/v1_1/dkuhmdf7w/upload'
 
+// Geocode
+Geocode.setApiKey("AIzaSyDV-7_RPvHNoZ2-f-pM7XLdMMfYnVAMn5M");
+Geocode.enableDebug();
+
+
 class NewPropertyForm extends Component {
 
     // Setting our component's initial state
@@ -23,6 +30,8 @@ class NewPropertyForm extends Component {
         address: "",
         city: "",
         state: "",
+        latitude: "",
+        longitude: "",
         phoneNumber: "",
         propertySize: "",
         propertyType: "",
@@ -39,12 +48,61 @@ class NewPropertyForm extends Component {
 
     };
 
+
     handleInputChange = event => {
+
         const { name, value } = event.target;
         this.setState({
             [name]: value
         });
+        
+        // if(this.state.price){
+        //     console.log("Hello")
+        //     console.log(this.state.price.toLocaleString());
+        // }
+
     };
+
+    handleGeoCoding = event => {
+
+        const { name, value } = event.target;
+        this.setState({
+            [name]: value
+        });
+
+        if (this.state.address && this.state.city) {
+
+            let address = this.state.address
+            let city = this.state.city;
+            let forMarkers = `"${address}, ${city}"`
+            
+            Geocode.fromAddress(forMarkers).then(
+                response => {
+                    const { lat, lng } = response.results[0].geometry.location;
+                    console.log(`Lat: ${lat} | Lng: ${lng}`);
+                    
+                    console.log(response.results[0].formatted_address)
+                    this.setState({ latitude: lat, longitude: lng })
+                },
+                error => {
+                    console.error(error);
+                }
+            );
+        }
+
+    }
+
+    formatNumber = event => {
+
+        let { value } = event.target
+        let numbers = value.replace(/\D/g, '')
+        let char = { 0: '(', 3: ') ', 6: '-' };
+        value = '';
+
+        for (var i = 0; i < numbers.length; i++) {
+            this.setState({phoneNumber: value += (char[i] || '') + numbers[i]})
+        }
+    }
 
     handleImageUpload = event => {
 
@@ -66,9 +124,16 @@ class NewPropertyForm extends Component {
             this.setState({ photos: this.state.photos.concat(imageUrl) });
             console.log("Input Changed");
             console.log("URL: ", this.state.photos)
-          
+
         })
     };
+
+    consoleLogInput = event => {
+        const { name, value } = event.target;
+
+        console.log(`${name}: ${value}`)
+
+    }
 
     handleFormSubmit = event => {
         event.preventDefault();
@@ -84,6 +149,8 @@ class NewPropertyForm extends Component {
                 address: this.state.address,
                 city: this.state.city,
                 state: this.state.state,
+                latitude: this.state.latitude,
+                longitude: this.state.longitude,
                 phoneNumber: this.state.phoneNumber,
                 propertySize: this.state.propertySize,
                 propertyType: this.state.propertyType,
@@ -99,8 +166,8 @@ class NewPropertyForm extends Component {
                 photos: this.state.photos,
                 user
             })
-            .then(res => console.log("submitted"))
-            .catch(err => console.log(err));
+                .then(res => console.log("submitted"))
+                .catch(err => console.log(err));
         } else {
             console.log("Not Submitting")
         }
@@ -115,6 +182,7 @@ class NewPropertyForm extends Component {
                         <Input
                             value={this.state.title}
                             onChange={this.handleInputChange}
+                            onBlur={this.consoleLogInput}
                             name="title"
                             type="Text"
                             placeholder='Title'
@@ -125,7 +193,8 @@ class NewPropertyForm extends Component {
                     <Control>
                         <Input
                             value={this.state.address}
-                            onChange={this.handleInputChange}
+                            onChange={this.handleGeoCoding}
+                            onBlur={this.consoleLogInput}
                             name="address"
                             type="Text"
                             placeholder='Address'
@@ -136,7 +205,8 @@ class NewPropertyForm extends Component {
                     <Control>
                         <Input
                             value={this.state.city}
-                            onChange={this.handleInputChange}
+                            onChange={this.handleGeoCoding}
+                            onBlur={this.consoleLogInput}
                             name="city"
                             type="Text"
                             placeholder='City'
@@ -148,6 +218,7 @@ class NewPropertyForm extends Component {
                         <Input
                             value={this.state.state}
                             onChange={this.handleInputChange}
+                            onBlur={this.consoleLogInput}
                             name="state"
                             type="Text"
                             placeholder='State'
@@ -159,8 +230,10 @@ class NewPropertyForm extends Component {
                         <Input
                             value={this.state.phoneNumber}
                             onChange={this.handleInputChange}
+                            onKeyUp={this.formatNumber}
+                            onBlur={this.consoleLogInput}
                             name="phoneNumber"
-                            type="number"
+                            type="Text"
                             placeholder='Contact Number'
                             isSize="medium" />
                     </Control>
@@ -170,6 +243,7 @@ class NewPropertyForm extends Component {
                         <Input
                             value={this.state.price}
                             onChange={this.handleInputChange}
+                            onBlur={this.consoleLogInput}
                             name="price"
                             type="number"
                             placeholder='Monthly Rent'
@@ -181,6 +255,7 @@ class NewPropertyForm extends Component {
                         <Input
                             value={this.state.numOfBeds}
                             onChange={this.handleInputChange}
+                            onBlur={this.consoleLogInput}
                             name="numOfBeds"
                             type="Number"
                             placeholder='Bedrooms'
@@ -192,6 +267,7 @@ class NewPropertyForm extends Component {
                         <Input
                             value={this.state.numOfBaths}
                             onChange={this.handleInputChange}
+                            onBlur={this.consoleLogInput}
                             name="numOfBaths"
                             type="Number"
                             placeholder='Bathrooms'
@@ -203,6 +279,7 @@ class NewPropertyForm extends Component {
                         <Input
                             value={this.state.propertySize}
                             onChange={this.handleInputChange}
+                            onBlur={this.consoleLogInput}
                             name="propertySize"
                             type="Number"
                             placeholder='Square Feet'
@@ -215,6 +292,7 @@ class NewPropertyForm extends Component {
                         <TextArea
                             value={this.state.description}
                             onChange={this.handleInputChange}
+                            onBlur={this.consoleLogInput}
                             name="description"
                             placeholder='Description'
                             isSize="medium" />
@@ -227,6 +305,7 @@ class NewPropertyForm extends Component {
                         <Select
                             value={this.state.laundry}
                             onChange={this.handleInputChange}
+                            onBlur={this.consoleLogInput}
                             name="laundry" >
                             <option>Select</option>
                             <option>In Unit</option>
@@ -242,6 +321,7 @@ class NewPropertyForm extends Component {
                         <Select
                             value={this.state.heating}
                             onChange={this.handleInputChange}
+                            onBlur={this.consoleLogInput}
                             name="heating" >
                             <option>Select</option>
                             <option>Central</option>
@@ -257,6 +337,7 @@ class NewPropertyForm extends Component {
                         <Select
                             value={this.state.cooling}
                             onChange={this.handleInputChange}
+                            onBlur={this.consoleLogInput}
                             name="cooling" >
                             <option>Select</option>
                             <option>Central</option>
@@ -273,6 +354,7 @@ class NewPropertyForm extends Component {
                         <Select
                             value={this.state.pets}
                             onChange={this.handleInputChange}
+                            onBlur={this.consoleLogInput}
                             name="pets" >
                             <option>Select</option>
                             <option>Cat</option>
@@ -289,6 +371,7 @@ class NewPropertyForm extends Component {
                         <Select
                             value={this.state.parking}
                             onChange={this.handleInputChange}
+                            onBlur={this.consoleLogInput}
                             name="parking" >
                             <option>Select</option>
                             <option>Covered</option>
@@ -323,40 +406,40 @@ class NewPropertyForm extends Component {
                             <p>Submit</p>
                         </Button>
                     </span>
-                ) : 
-                <span>
-                    {user.role === 'Renter' ? (<span>
-                        <p className='help is-danger'>You must be a property manager to post up a property.</p>
-                        <Button
-                            isColor='primary'
-                            className=""
-                            disabled
-                        >
-                            <p>Submit</p>
-                        </Button>
-                    </span>
-                    ): (<span>
-                         <Button
-                            isColor='primary'
-                            className=""
-                            onClick={this.handleFormSubmit}
-                        >
-                            <p>Submit</p>
-                        </Button>
-                        </span> )}
+                ) :
+                    <span>
+                        {user.role === 'Renter' ? (<span>
+                            <p className='help is-danger'>You must be a property manager to post up a property.</p>
+                            <Button
+                                isColor='primary'
+                                className=""
+                                disabled
+                            >
+                                <p>Submit</p>
+                            </Button>
                         </span>
+                        ) : (<span>
+                            <Button
+                                isColor='primary'
+                                className=""
+                                onClick={this.handleFormSubmit}
+                            >
+                                <p>Submit</p>
+                            </Button>
+                        </span>)}
+                    </span>
                 }
             </Container>
         );
     }
 }
 
-const mapStateToProps = ({auth}) => ({
+const mapStateToProps = ({ auth }) => ({
     user: auth.user
-  });
-  
-  
-  export default connect(mapStateToProps)(NewPropertyForm)
+});
+
+
+export default connect(mapStateToProps)(NewPropertyForm)
 
 
 
