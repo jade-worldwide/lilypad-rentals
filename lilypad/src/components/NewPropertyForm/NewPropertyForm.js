@@ -23,112 +23,141 @@ export class NewPropertyForm extends Component {
   render() {
     return (
             <Container>
+              <h1 className="title has-text-centered">New Property</h1>
     <Field>
+      <Label>Title</Label>
       <Control>
-          <Input type="Text" placeholder='Title' isSize="medium" />
+          <Input type="Text" placeholder='Title'   />
       </Control>
     </Field>
+    <div className="columns">
+      <div className="column">
+        <Field>
+          <Label>Monthly Rent</Label>
+          <Control>
+              <Input type="number" placeholder='Monthly Rent'   />
+          </Control>
+        </Field>
+      </div>
+      <div className="column">
+        <Field>
+          <Label>Bedrooms</Label>
+          <Control>
+              <Input type="Number" placeholder='Bedrooms'   />
+          </Control>
+        </Field>
+      </div>
+      <div className="column">
+        <Field>
+          <Label>Bathrooms</Label>
+          <Control>
+              <Input type="Number" placeholder='Bathrooms'   />
+          </Control>
+        </Field>
+      </div>
+      <div className="column">
+        <Field>
+          <Label>Square Feet</Label>
+          <Control>
+              <Input type="Number" placeholder='Square Feet'   />
+          </Control>
+        </Field>
+      </div>
+    </div>
+
     <Field>
+      <Label>Description</Label>
       <Control>
-          <Input type="number" placeholder='Monthly Rent' isSize="medium" />
+          <TextArea placeholder='Description'   />
       </Control>
     </Field>
-    <Field>
-      <Control>
-          <Input type="Number" placeholder='Bedrooms' isSize="medium" />
-      </Control>
-    </Field>
-    <Field>
-      <Control>
-          <Input type="Number" placeholder='Bathrooms' isSize="medium" />
-      </Control>
-    </Field>
-    <Field>
-      <Control>
-          <Input type="Number" placeholder='Square Feet' isSize="medium" />
-      </Control>
-    </Field>
 
-    <Field>
-      <Control>
-          <TextArea placeholder='Description' isSize="medium" />
-      </Control>
-    </Field>
+    <div className="columns">
+      <div className="column">
+        <Field>
+            <Label>Type</Label>
+            <Control>
+                <Select>
+                  <option>Select</option>
+                    <option>Single Family</option>
+                    <option>Apartment</option>
+                    <option>Duplex</option>
+                </Select>
+            </Control>
+        </Field>
+      </div>
+      <div className="column">
+        <Field>
+            <Label>Laundry</Label>
+            <Control>
+                <Select>
+                  <option>Select</option>
+                    <option>In Unit</option>
+                    <option>On Premise</option>
+                    <option>None</option>
+                </Select>
+            </Control>
+        </Field>
+      </div>
+      <div className="column">
+        <Field>
+            <Label>Heating</Label>
+            <Control>
+                <Select>
+                  <option>Select</option>
+                    <option>Central</option>
+                    <option>Radiator</option>
+                    <option>Wall Heater</option>
+                </Select>
+            </Control>
+        </Field>
+      </div>
+    </div>
 
-    <Field>
-        <Label>Type</Label>
-        <Control>
-            <Select>
-              <option>Select</option>
-                <option>Single Family</option>
-                <option>Apartment</option>
-                <option>Duplex</option>
-            </Select>
-        </Control>
-    </Field>
-
-    <Field>
-        <Label>Laundry</Label>
-        <Control>
-            <Select>
-              <option>Select</option>
-                <option>In Unit</option>
-                <option>On Premise</option>
-                <option>None</option>
-            </Select>
-        </Control>
-    </Field>
-
-    <Field>
-        <Label>Heating</Label>
-        <Control>
-            <Select>
-              <option>Select</option>
-                <option>Central</option>
-                <option>Radiator</option>
-                <option>Wall Heater</option>
-            </Select>
-        </Control>
-    </Field>
-
-    <Field>
-        <Label>Cooling</Label>
-        <Control>
-            <Select>
-              <option>Select</option>
-                <option>Central</option>
-                <option>Swamp</option>
-                <option>Window Mounted</option>
-                <option>None</option>
-            </Select>
-        </Control>
-    </Field>
-
-    <Field>
-        <Label>Pets</Label>
-        <Control>
-            <Select>
-                <option>Select</option>
-                <option>Cat</option>
-                <option>Dog</option>
-                <option>Cat or Dog</option>
-                <option>None</option>
-            </Select>
-        </Control>
-    </Field>
-
-    <Field>
-        <Label>Parking</Label>
-        <Control>
-            <Select>
-              <option>Select</option>
-                <option>Covered</option>
-                <option>Space</option>
-                <option>Street</option>
-                <option>None</option>
-            </Select>
-        </Control>
-    </Field>
+    <div className="columns">
+      <div className="column">
+        <Field>
+            <Label>Cooling</Label>
+            <Control>
+                <Select>
+                  <option>Select</option>
+                    <option>Central</option>
+                    <option>Swamp</option>
+                    <option>Window Mounted</option>
+                    <option>None</option>
+                </Select>
+            </Control>
+        </Field>
+      </div>
+      <div className="column">
+        <Field>
+            <Label>Pets</Label>
+            <Control>
+                <Select>
+                    <option>Select</option>
+                    <option>Cat</option>
+                    <option>Dog</option>
+                    <option>Cat or Dog</option>
+                    <option>None</option>
+                </Select>
+            </Control>
+        </Field>
+      </div>
+      <div className="column">
+        <Field>
+            <Label>Parking</Label>
+            <Control>
+                <Select>
+                  <option>Select</option>
+                    <option>Covered</option>
+                    <option>Space</option>
+                    <option>Street</option>
+                    <option>None</option>
+                </Select>
+            </Control>
+        </Field>
+      </div>
+    </div>
 
     <Field>
       <Label>Upload Images</Label>

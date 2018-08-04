@@ -14,21 +14,19 @@ class Property extends Component {
     shared: "copy-url",
   };
 
-  likeProperty = (props) => {
-    const isLiked = props.isLiked;
-    if (isLiked) {
-      this.setState({ liked: "far fa-heart" })
-    } else {
-      this.setState({ liked: "fas fa-heart is-liked" })
+  showLiked = () => {
+    this.setState({ liked: "fas fa-heart is-liked" })
+  }
 
-    }
+  unlike = () => {
+    this.setState({ liked: "far fa-heart" })
   }
 
   shareProperty = () => {
     this.state.shared === "copy-url" ? this.setState({shared: "copy-notif"}) : this.setState({shared: "copy-url"});
     setTimeout(() => {
       this.setState({shared: "copy-url"});
-    }, 1000);
+    }, 2000);
   }
 
 
@@ -44,11 +42,11 @@ class Property extends Component {
             <CopyToClipboard text={window.location.href}>
               <Button onClick={this.shareProperty} isColor='white'><p><i className="far fa-share-square"></i>  Share</p></Button>
             </CopyToClipboard>
-            <Notification className={this.state.shared}>
+            <Notification className={this.state.shared} isColor='primary'>
               <Delete onClick={this.shareProperty}/>
               <p>Copied to your clipboard!</p>
               </Notification>
-              <Button isColor='white' className="like-button" isLiked={false} onClick={this.likeProperty}><p><i className={this.state.liked}></i>  Like</p></Button>
+              <Button isColor='white' className="like-button" onClick={this.state.liked === "far fa-heart" ? this.showLiked : this.unlike}><p><i className={this.state.liked}></i> Liked</p></Button>
             </div>
           </Container>
         </div>
