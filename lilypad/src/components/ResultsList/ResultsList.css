@@ -66,3 +66,7 @@ td.list-image {
 td.list-like {
   align-self: center;
 }
+
+.is-liked {
+  color: #f44336;
+}
