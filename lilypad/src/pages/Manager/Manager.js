@@ -1,18 +1,9 @@
 import React, { Component } from "react";
-import { NewPropertyForm, FormPageOne, FormPageTwo, FormPageThree, FormPageFour } from "../../components/NewPropertyForm";
+import { NewPropertyForm } from "../../components/NewPropertyForm";
 import { PropertyList } from "../../components/PropertyList";
 import { Container, Button, Modal, ModalCard, ModalCardTitle, ModalBackground, ModalCardFooter, ModalCardHeader, Delete, ModalCardBody } from 'bloomer';
-import StepZilla from "react-stepzilla";
 import modal from "./modal-bg.svg";
 import "./Manager.css";
-
-const steps =
-    [
-      {name: 'Step 1', component: <FormPageOne /> },
-      {name: 'Step 2', component: <FormPageTwo /> },
-      {name: 'Step 3', component: <FormPageThree /> },
-      {name: 'Step 4', component: <FormPageFour /> }
-    ]
 
 const modalBG = { backgroundImage: `url(${modal})` }
 
@@ -65,15 +56,7 @@ class Manager extends Component {
 
                     <ModalCardBody>
                         <Delete onClick={this.modalClose} />
-
-                        <div className='step-progress'>
-                            <StepZilla
-                              steps={steps}
-                              showSteps={false}
-                              nextButtonCls="button is-medium is-primary"
-                              backButtonCls="button is-medium is-primary"
-                              />
-                        </div>
+                        <NewPropertyForm />
 
                   </ModalCardBody>
 
