@@ -15,6 +15,9 @@ export default {
 
     const dbQuery = {}
 
+<<<<<<< HEAD
+    if(query) {
+=======
     if (query) {
       if(query.city === '' || query.state === ''){
         delete query.city
@@ -29,10 +32,20 @@ export default {
           pets: query.pets
         })
       }
+>>>>>>> f52a5247a07a9ac958a463a748b77275a9429379
       Object.assign(dbQuery, {
         city: query.city,
         state: query.state,
         price: {
+<<<<<<< HEAD
+          $lt: query.price
+        },
+        numOfBeds: {
+          $lt: query.numOfBeds
+        },
+        numOfBaths: {
+          $lt: query.numOfBaths
+=======
           $gt: query.minPrice,
           $lt: query.maxPrice
         },
@@ -43,9 +56,11 @@ export default {
         numOfBeds: {
           $gt: query.minBeds,
           $lt: query.maxBeds
+>>>>>>> f52a5247a07a9ac958a463a748b77275a9429379
         }
       })
-    }
+    } 
+ 
 
 
     // numOfBeds: {
@@ -71,7 +86,16 @@ export default {
     console.log("In Axios route")
     return axios.post("/manager/property/create", propertyData)
   },
+<<<<<<< HEAD
+  // Saves a book to the database
+  saveApplication: function(applicationData) {
+    console.log("In Axios route")
+    return axios.post("/renter/application/create", applicationData)
+  },
+  loginUser: function(userData) {
+=======
   loginUser: function (userData) {
+>>>>>>> f52a5247a07a9ac958a463a748b77275a9429379
     console.log('we are sssending a POST request to users/login')
     return axios.post("/api/users/login", userData);
   },

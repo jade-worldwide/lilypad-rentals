@@ -9,6 +9,11 @@ import API from "../../utils/API";
 const defaultForm = {
   city:  '',
   state: '',
+<<<<<<< HEAD
+  pets: 'none',
+  numOfBeds: 100,
+  numOfBaths: 100
+=======
   minPrice: 0,
   maxPrice: 100000000,
   minSqFeet: 0,
@@ -16,6 +21,7 @@ const defaultForm = {
   minBeds: 0,
   maxBeds: 10,
   pets: "Any"
+>>>>>>> f52a5247a07a9ac958a463a748b77275a9429379
 }
 
 class Results extends Component {
@@ -53,6 +59,7 @@ class Results extends Component {
   // When the component mounts, load all properties and save them to this.state.properties
   componentDidMount() {
     this.fetchProperties();
+    // this.loadProperties();
   }
 
   // Loads all properties  and sets them to this.state.properties
@@ -127,10 +134,15 @@ class Results extends Component {
                 <Control>
                   <Input
                     onChange={this.handleInputChange}
+<<<<<<< HEAD
+                    value={form.numOfBaths}
+                    name="numOfBaths"
+=======
                     value={form.minBeds}
                     name="minBeds"
+>>>>>>> f52a5247a07a9ac958a463a748b77275a9429379
                     type="number"
-                    placeholder='Minimum Bedroom'
+                    placeholder='Minimum Bathroom'
                     isSize="medium" />
                 </Control>
               </Field>

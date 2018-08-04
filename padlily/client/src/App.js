@@ -35,7 +35,6 @@ const App = () => (
         <Route exact path="/property" component={Property} />
         <Route exact path="/property/:id" component={Property} />
         <Route exact path="/results" component={Results} />
-        {/* <Route exact path="/api/users/register" component={SignUpModal} /> */}
 
       </Switch>
     </div>
