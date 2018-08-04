@@ -7,7 +7,6 @@ import Renter from "./pages/Renter";
 import Manager from "./pages/Manager";
 import Property from "./pages/Property";
 import Results from "./pages/Results";
-import bulmaSwitch from 'bulma-extensions';
 
 
 const App = () => (
