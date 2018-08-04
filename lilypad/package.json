@@ -9,6 +9,7 @@
     "bulma-extensions": "^2.2.1",
     "google-map-react": "^1.0.5",
     "react": "^16.4.1",
+    "react-copy-to-clipboard": "^5.0.1",
     "react-dom": "^16.4.1",
     "react-image-lightbox": "^5.0.0",
     "react-images-upload": "^1.2.0",
