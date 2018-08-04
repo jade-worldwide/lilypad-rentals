@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 
-
 let Schema = mongoose.Schema;
 
 let ApplicationSchema = new Schema({
@@ -14,8 +13,8 @@ let ApplicationSchema = new Schema({
     required: true
   },
   phoneNumber: {
-      type: Number,
-      require: true
+    type: Number,
+    require: true
   },
   currentAddress: {
     type: String,

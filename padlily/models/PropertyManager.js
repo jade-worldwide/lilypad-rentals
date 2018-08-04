@@ -21,8 +21,6 @@ let PropertyManagerSchema = new Schema({
   }]
 });
 
-// This creates our model from the above schema, using mongoose's model method
 let PropertyManager = mongoose.model("PropertyManager", PropertyManagerSchema);
 
-// Export the Article model
 module.exports = PropertyManager;
