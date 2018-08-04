@@ -27,9 +27,7 @@ router.post('/register', function (req, res) {
 					res.send({
 						error: 'you cannot do that son'
 					})
-					// res.render('register', {
-					// 	mail: mail
-					// });
+
 				}
 				else {
 					let newUser = new User({
@@ -96,13 +94,6 @@ passport.deserializeUser(function (id, done) {
 		console.log(user);
 	});
 });
-
-// router.post('/login',
-// 	passport.authenticate('local', { successRedirect: '/', failureRedirect: '/YOU_FAILED_SCRUB', failureFlash: true }),
-// 	function (req, res) {
-// 		console.log(req.user, '---should contain user token or info')
-// 		res.send(req.user);
-// 	});
 
 
 router.post('/login', function(req, res, next) {
