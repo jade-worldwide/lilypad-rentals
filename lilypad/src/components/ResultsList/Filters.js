@@ -12,19 +12,19 @@ return (
       <Field>
         <Label>Minimum Bedrooms</Label>
         <Control>
-            <Input type="number" value="1" />
+            <Input type="number" placeholder="1"/>
         </Control>
       </Field>
       <Field>
         <Label>Minimum Bathrooms</Label>
         <Control>
-            <Input type="number" value="1" />
+            <Input type="number" placeholder="1"/>
         </Control>
       </Field>
       <Field>
         <Label>Max Price</Label>
         <Control>
-            <Input type="number" value="3000" />
+            <Input type="number" placeholder="2500"/>
         </Control>
       </Field>
       <Field>
