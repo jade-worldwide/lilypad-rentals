@@ -34,10 +34,9 @@ class Results extends Component {
     this.state = {
       properties: [],
       show: "columns results-columns",
-      title: "",
-      propertySize: "",
-      photos: "",
-      form
+      price: [],
+      sqFtToString: [],
+      form,
     }
   }
 
@@ -57,7 +56,12 @@ class Results extends Component {
 
   fetchProperties = () => {
     API.getProperties(this.state.form)
-      .then(res => this.setState({ properties: res.data }))
+      .then(res => {
+        console.log("Res Data =>", res.data)
+        this.setState({ properties: res.data })
+        console.log("Price: =>", this.state.properties)
+      })
+
       .catch(err => console.log(err));
   }
 
@@ -75,7 +79,6 @@ class Results extends Component {
   };
 
   render() {
-    console.log(this.state.properties)
     const { form } = this.state
 
     return (

@@ -13,7 +13,7 @@ let ApplicationSchema = new Schema({
     required: true
   },
   phoneNumber: {
-    type: Number,
+    type: String,
     require: true
   },
   currentAddress: {
@@ -25,7 +25,7 @@ let ApplicationSchema = new Schema({
     required: true
   },
   referencePhoneNumber1: {
-    type: Number,
+    type: String,
     required: true
   },
   referenceName2: {
@@ -33,7 +33,7 @@ let ApplicationSchema = new Schema({
     required: true
   },
   referencePhoneNumber2: {
-    type: Number,
+    type: String,
     required: true
   },
   currentEmployment: {
@@ -41,7 +41,7 @@ let ApplicationSchema = new Schema({
     required: true
   },
   employmentPhoneNumber: {
-    type: Number,
+    type: String,
     required: true
   },
   income: {

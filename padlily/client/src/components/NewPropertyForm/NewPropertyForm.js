@@ -20,6 +20,9 @@ let CLOUDINARY_URL = 'https://api.cloudinary.com/v1_1/dkuhmdf7w/upload'
 Geocode.setApiKey("AIzaSyDV-7_RPvHNoZ2-f-pM7XLdMMfYnVAMn5M");
 Geocode.enableDebug();
 
+let price;
+let propertySize;
+
 
 class NewPropertyForm extends Component {
 
@@ -56,11 +59,6 @@ class NewPropertyForm extends Component {
             [name]: value
         });
         
-        // if(this.state.price){
-        //     console.log("Hello")
-        //     console.log(this.state.price.toLocaleString());
-        // }
-
     };
 
     handleGeoCoding = event => {
@@ -92,16 +90,46 @@ class NewPropertyForm extends Component {
 
     }
 
-    formatNumber = event => {
-
-        let { value } = event.target
-        let numbers = value.replace(/\D/g, '')
-        let char = { 0: '(', 3: ') ', 6: '-' };
-        value = '';
-
-        for (var i = 0; i < numbers.length; i++) {
-            this.setState({phoneNumber: value += (char[i] || '') + numbers[i]})
+    // Format phone number with (xxx) xxx-xxxx formats price and property size to have "," seperators
+    formatPhoneNumber = event => {
+        
+        if(this.state.phoneNumber){
+            let {name, value } = event.target
+            let numbers = value.replace(/\D/g, '')
+            let char = { 0: '(', 3: ') ', 6: '-' };
+            value = '';
+    
+            for (var i = 0; i < numbers.length; i++) {
+                this.setState({[name]: value += (char[i] || '') + numbers[i]})
+            }
         }
+    }
+
+    formatThousands = event => {
+
+        let {name, value} = event.target;
+        let x;
+        let x1;
+        let x2;
+        let number = value.replace(/,/g, "")
+        value = "";
+        number += '';
+        x = number.split('.');
+        x1 = x[0];
+        x2 = x.length > 1 ? '.' + x[1] : '';
+
+        var rgx = /(\d+)(\d{3})/;
+
+        while (rgx.test(x1)) {
+            x1 = x1.replace(rgx, '$1' + ',' + '$2');
+        }
+        this.setState({[name]: value = x1 + x2})
+
+        // Unformat PropertySize & Price in before we push into database
+        propertySize = this.state.propertySize.replace( /,/g, "" )
+        price = this.state.price.replace( /,/g, "" )
+        console.log(price)
+        console.log(propertySize)
     }
 
     handleImageUpload = event => {
@@ -152,11 +180,11 @@ class NewPropertyForm extends Component {
                 latitude: this.state.latitude,
                 longitude: this.state.longitude,
                 phoneNumber: this.state.phoneNumber,
-                propertySize: this.state.propertySize,
+                propertySize: propertySize,
                 propertyType: this.state.propertyType,
                 numOfBeds: this.state.numOfBeds,
                 numOfBaths: this.state.numOfBaths,
-                price: this.state.price,
+                price: price,
                 pets: this.state.pets,
                 parking: this.state.parking,
                 laundry: this.state.laundry,
@@ -230,7 +258,7 @@ class NewPropertyForm extends Component {
                         <Input
                             value={this.state.phoneNumber}
                             onChange={this.handleInputChange}
-                            onKeyUp={this.formatNumber}
+                            onKeyUp={this.formatPhoneNumber}
                             onBlur={this.consoleLogInput}
                             name="phoneNumber"
                             type="Text"
@@ -243,9 +271,10 @@ class NewPropertyForm extends Component {
                         <Input
                             value={this.state.price}
                             onChange={this.handleInputChange}
+                            onKeyUp={this.formatThousands}
                             onBlur={this.consoleLogInput}
                             name="price"
-                            type="number"
+                            type="text"
                             placeholder='Monthly Rent'
                             isSize="medium" />
                     </Control>
@@ -279,9 +308,10 @@ class NewPropertyForm extends Component {
                         <Input
                             value={this.state.propertySize}
                             onChange={this.handleInputChange}
+                            onKeyUp={this.formatThousands}
                             onBlur={this.consoleLogInput}
                             name="propertySize"
-                            type="Number"
+                            type="text"
                             placeholder='Square Feet'
                             isSize="medium" />
                     </Control>

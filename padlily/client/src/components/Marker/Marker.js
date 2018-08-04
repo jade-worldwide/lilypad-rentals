@@ -3,7 +3,6 @@ import 'bulma/css/bulma.css';
 import "./Marker.css";
 import Dispbox from '../MapPopUp/Display.js'
 
-
 class Marker extends Component {
 
     render() {

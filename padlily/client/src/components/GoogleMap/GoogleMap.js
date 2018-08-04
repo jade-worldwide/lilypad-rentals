@@ -6,31 +6,6 @@ import 'bulma/css/bulma.css';
 import "./GoogleMap.css";
 import API from "../../utils/API";
 
-
-// Import data here
-const TEST_DATA = [
-  {
-    latitude: 37.8716,
-    longitude: -122.2727,
-    text: 'Toogers HQ',
-    image: "None",
-    link: 'https://sfbay.craigslist.org/eby/apa/d/peaceful-amazing-viewmillion/6643700557.html#1'
-  },
-  {
-    latitude: 37.8616,
-    longitude: -122.2627,
-    text: 'Toogerland',
-    image: "None",
-    link: 'https://sfbay.craigslist.org/eby/apa/d/peaceful-amazing-viewmillion/6643700557.html#2'
-  },
-  {
-    latitude: 36.8616,
-    longitude: -122.2627,
-    text: 'Toogtown',
-    image: "None",
-    link: 'https://sfbay.craigslist.org/eby/apa/d/peaceful-amazing-viewmillion/6643700557.html#3'
-  },
-];
 export class GoogleMap extends Component {
   static defaultProps = {
     center: {
@@ -61,11 +36,11 @@ export class GoogleMap extends Component {
 
   // When the component mounts, load all properties and save them to this.state.properties
   componentDidMount() {
-    this.loadProperties();
+    this.fetchProperties();
   }
 
   // Loads all properties  and sets them to this.state.properties
-  loadProperties = () => {
+  fetchProperties = () => {
     API.getProperties()
       .then(res =>
         this.setState({ properties: res.data })
