@@ -25,7 +25,6 @@ const modalBG = { backgroundImage: `url(${modal})` }
 class Nav extends Component {
 
   componentWillMount() {
-    //move this to top level component app.js
     this.props.getAuthenticated();
   }
 
@@ -87,8 +86,8 @@ class Nav extends Component {
             <span>
               {user.role === 'Renter' ? (<span>
                 <NavbarItem>
-              <Link to={"/renter"}><p>Renter</p></Link>
-          </NavbarItem>
+                  <Link to={"/renter"}><p>Renter</p></Link>
+                </NavbarItem>
               </span>
               ) : (<span>
                 <Fragment>
@@ -100,7 +99,7 @@ class Nav extends Component {
                   </NavbarItem>
                 </Fragment>
               </span>)}
-              
+
               <NavbarItem href="#" onClick={this.logout}>
                 <p>Log out</p>
               </NavbarItem>

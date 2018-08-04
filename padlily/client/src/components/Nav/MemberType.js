@@ -23,24 +23,24 @@ export class MemberType extends Component {
 
   render() {
     return (
-            <div className="columns member-type-modal">
+      <div className="columns member-type-modal">
 
-                <div className="column">
-                </div>
-                <div className="column">
+        <div className="column">
+        </div>
+        <div className="column">
 
-                  <h1 className="title user-title">Who are you?</h1>
+          <h1 className="title user-title">Who are you?</h1>
 
-                  <div className="user-type renter" id={this.state.renter} onClick={this.renterActive}>
-                    <h1 className="subtitle">I'm a renter</h1>
-                  </div>
+          <div className="user-type renter" id={this.state.renter} onClick={this.renterActive}>
+            <h1 className="subtitle">I'm a renter</h1>
+          </div>
 
-                  <div className="user-type manager" id={this.state.manager} onClick={this.managerActive}>
-                    <h1 className="subtitle">I'm a property manager</h1>
-                  </div>
+          <div className="user-type manager" id={this.state.manager} onClick={this.managerActive}>
+            <h1 className="subtitle">I'm a property manager</h1>
+          </div>
 
-                </div>
-            </div>
+        </div>
+      </div>
 
     );
   }

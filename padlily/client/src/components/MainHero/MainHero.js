@@ -8,14 +8,14 @@ const bgImage = { backgroundImage: `url(${background})` }
 
 export const MainHero = props => (
 
-  <Hero isSize='medium' isFullHeight style={ bgImage } className="main-hero">
+  <Hero isSize='medium' isFullHeight style={bgImage} className="main-hero">
 
     <HeroBody>
 
-        <Container className="hero-container">
-          <Title>Let the perfect home find you!</Title>
-            {props.children}
-        </Container>
+      <Container className="hero-container">
+        <Title>Let the perfect home find you!</Title>
+        {props.children}
+      </Container>
     </HeroBody>
 
   </Hero>

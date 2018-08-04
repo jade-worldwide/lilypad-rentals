@@ -7,13 +7,8 @@ import { Link, withRouter } from "react-router-dom";
 import API from "../../utils/API";
 
 const defaultForm = {
-  city:  '',
+  city: '',
   state: '',
-<<<<<<< HEAD
-  pets: 'none',
-  numOfBeds: 100,
-  numOfBaths: 100
-=======
   minPrice: 0,
   maxPrice: 100000000,
   minSqFeet: 0,
@@ -21,7 +16,6 @@ const defaultForm = {
   minBeds: 0,
   maxBeds: 10,
   pets: "Any"
->>>>>>> f52a5247a07a9ac958a463a748b77275a9429379
 }
 
 class Results extends Component {
@@ -59,23 +53,9 @@ class Results extends Component {
   // When the component mounts, load all properties and save them to this.state.properties
   componentDidMount() {
     this.fetchProperties();
-    // this.loadProperties();
   }
 
-  // Loads all properties  and sets them to this.state.properties
-  // loadProperties = () => {
-  //   let queryString = (window.location.search)
-  //   API.getProperties(queryString)
-  //     .then(res =>
-  //       this.setState({ properties: res.data })
-  //     )
-  //     .catch(err => console.log(err));
-  // };
-
   fetchProperties = () => {
-    // TODO: make a bit less brittle.
-    // const { form } = this.state
-
     API.getProperties(this.state.form)
       .then(res => this.setState({ properties: res.data }))
       .catch(err => console.log(err));
@@ -100,7 +80,6 @@ class Results extends Component {
 
     return (
       <div className="results">
-        {/* <Filters handler={this.handler} /> */}
         <div className={this.state.show}>
           <div className="column results-column list-column">
             <div className="filter-header">
@@ -134,13 +113,8 @@ class Results extends Component {
                 <Control>
                   <Input
                     onChange={this.handleInputChange}
-<<<<<<< HEAD
-                    value={form.numOfBaths}
-                    name="numOfBaths"
-=======
                     value={form.minBeds}
                     name="minBeds"
->>>>>>> f52a5247a07a9ac958a463a748b77275a9429379
                     type="number"
                     placeholder='Minimum Bathroom'
                     isSize="medium" />

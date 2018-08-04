@@ -92,7 +92,7 @@ export class Manager extends Component {
           <h1 className="title has-text-centered">My Properties</h1>
           <div>
             {this.state.properties.map(properties => (
-                <Link to={"/property/" + properties._id}>
+              <Link to={"/property/" + properties._id}>
                 <PropertyList
                   title={properties.title}
                 />

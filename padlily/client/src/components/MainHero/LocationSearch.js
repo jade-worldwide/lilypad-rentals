@@ -92,7 +92,7 @@ export class LocationSearchInput extends React.Component {
           <div className="location-input-div">
 
             <div className="search-input">
-              <i class="fal fa-search search-input-icon"></i>
+              <i className="fal fa-search search-input-icon"></i>
               <Input
                 {...getInputProps({
                   placeholder: 'Try "Berkeley"',

@@ -17,7 +17,7 @@ let ApplicationSchema = new Schema({
       type: Number,
       require: true
   },
-  currentAdress: {
+  currentAddress: {
     type: String,
     required: true
   },

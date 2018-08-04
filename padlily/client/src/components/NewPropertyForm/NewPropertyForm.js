@@ -1,15 +1,15 @@
 import React, { Component,/* Fragment */ } from "react";
 import { Field, Control, Input, Button, TextArea, Select, Label, Container } from 'bloomer';
 import { connect } from 'react-redux';
-// import { bindActionCreators } from 'redux'
 import API from "../../utils/API";
 import axios from "axios";
 import Geocode from "react-geocode";
 // import format from "react-phone-input-auto-format";
 import 'bulma/css/bulma.css';
 import "./NewPropertyForm.css";
+// import { bindActionCreators } from 'redux'
 // import getAuthenticated from '../../actions/authActions'
-// hello world
+
 
 // Cloudinary 
 let imageUrl;
@@ -440,25 +440,3 @@ const mapStateToProps = ({ auth }) => ({
 
 
 export default connect(mapStateToProps)(NewPropertyForm)
-
-
-
-//   loadUser = () => {
-//     API.getUser(this.props.match.params.id)
-//       .then(res => {
-//         this.setState({ user: res.data, propertyNum: res.data.property.length, propertyId: res.data.property })
-//         let userProp = (res.data.property)
-//         for (let i = 0; i < userProp.length; i++) {
-//           let peterPanda = userProp[i]
-//           console.log(peterPanda)
-
-//           API.getProperty(peterPanda)
-//             .then(res =>
-//               this.setState({ properties: res.data, title: "" })
-//             )
-//             console.log("PeterPanda: " + res.data.title)
-//         }
-//       })
-
-//       .catch(err => console.log(err));
-//   }
