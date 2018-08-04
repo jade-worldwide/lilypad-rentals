@@ -16,24 +16,24 @@ export const PropertyList = props => (
       </thead>
 
       <tbody>
-          <tr>
-              <td>
-                <p>{props.title}</p>
-              </td>
-              <td className="rented-column">
-                <div class="field">
-                  <input id="switchExample" type="checkbox" name="switchExample" className="switch" />
-                </div>
-              </td>
-              <td>
-                <Button isColor='primary' className="is-small"><p>View 4</p></Button>
+        <tr>
+          <td>
+            <p>{props.title}</p>
+          </td>
+          <td className="rented-column">
+            <div class="field">
+              <input id="switchExample" type="checkbox" name="switchExample" className="switch" />
+            </div>
+          </td>
+          <td>
+            <Button isColor='primary' className="is-small"><p>View 4</p></Button>
 
-              </td>
-              <td>
-                <Button className="is-small delete-button"><p><i className="far fa-trash-alt"></i></p></Button>
+          </td>
+          <td>
+            <Button className="is-small delete-button"><p><i className="far fa-trash-alt"></i></p></Button>
 
-              </td>
-          </tr>
+          </td>
+        </tr>
 
       </tbody>
     </Table>

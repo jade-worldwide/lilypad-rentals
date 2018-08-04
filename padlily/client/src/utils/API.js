@@ -15,9 +15,6 @@ export default {
 
     const dbQuery = {}
 
-<<<<<<< HEAD
-    if(query) {
-=======
     if (query) {
       if(query.city === '' || query.state === ''){
         delete query.city
@@ -32,70 +29,48 @@ export default {
           pets: query.pets
         })
       }
->>>>>>> f52a5247a07a9ac958a463a748b77275a9429379
       Object.assign(dbQuery, {
         city: query.city,
         state: query.state,
         price: {
-<<<<<<< HEAD
-          $lt: query.price
-        },
-        numOfBeds: {
-          $lt: query.numOfBeds
-        },
-        numOfBaths: {
-          $lt: query.numOfBaths
-=======
-          $gt: query.minPrice,
-          $lt: query.maxPrice
+          $gte: query.minPrice,
+          $lte: query.maxPrice
         },
         propertySize: {
-          $gt: query.minSqFeet,
-          $lt: query.maxSqFeet
+          $gte: query.minSqFeet,
+          $lte: query.maxSqFeet
         },
         numOfBeds: {
-          $gt: query.minBeds,
-          $lt: query.maxBeds
->>>>>>> f52a5247a07a9ac958a463a748b77275a9429379
+          $gte: query.minBeds,
+          $lte: query.maxBeds
         }
       })
     } 
  
-
-
-    // numOfBeds: {
-    //   $gt: query.minBeds,
-    //   $lt: query.maxBeds
-    // },
-    // pets: query.pets
     console.log('dbQuery ->', dbQuery)
     console.log('query ->', query)
     return axios.post(urlPath, { dbQuery })
   },
 
-  // Gets the book with the given id
+  // Gets the Property with the given id
   getProperty: function (id) {
     return axios.get("/property/" + id);
   },
-  // Deletes the book with the given id
+  // Deletes the Property with the given id
   deleteProperty: function (id) {
     return axios.delete("/manager/properties/delete" + id);
   },
-  // Saves a book to the database
+  // Saves a Properties to the database
   saveProperty: function (propertyData) {
     console.log("In Axios route")
     return axios.post("/manager/property/create", propertyData)
   },
-<<<<<<< HEAD
-  // Saves a book to the database
+  // Saves a Applications to the database
   saveApplication: function(applicationData) {
     console.log("In Axios route")
     return axios.post("/renter/application/create", applicationData)
   },
   loginUser: function(userData) {
-=======
-  loginUser: function (userData) {
->>>>>>> f52a5247a07a9ac958a463a748b77275a9429379
     console.log('we are sssending a POST request to users/login')
     return axios.post("/api/users/login", userData);
   },
@@ -110,7 +85,7 @@ export default {
   logout: (cb) => {
     return axios.post('/api/users/logout', cb);
   },
-  // Gets the book with the given id
+  // Gets the User with the given id
   getUser: function (id) {
     return axios.get("/api/users/manager/" + id);
   },

@@ -8,18 +8,6 @@ import Manager from "./pages/Manager";
 import Property from "./pages/Property";
 import Results from "./pages/Results";
 import ManagerTest from "./pages/ManagerTest";
-// import { SignUpModal } from "./components/Nav/SignUpModal.js";
-// import { isatty } from 'tty';
-
-
-// function PrivateRoute({
-//   component: Component, isAuthed, ...rest
-// }) {
-// return (
-//   <Route {...rest} render={props =>
-//   isAuthed ? (<Component {...props} />) :
-// (<Redirect to={{pathname: "/", state: {from: props.location }} } />)}M />)
-// }
 
 const App = () => (
 

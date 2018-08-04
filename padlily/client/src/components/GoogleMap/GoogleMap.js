@@ -59,18 +59,18 @@ export class GoogleMap extends Component {
     }
   }
 
-    // When the component mounts, load all properties and save them to this.state.properties
-    componentDidMount() {
-      this.loadProperties();
-    }
+  // When the component mounts, load all properties and save them to this.state.properties
+  componentDidMount() {
+    this.loadProperties();
+  }
 
-    // Loads all properties  and sets them to this.state.properties
-    loadProperties = () => {
-      API.getProperties()
-        .then(res =>
-          this.setState({properties: res.data})
-        ).catch(err => console.log(err));
-    };
+  // Loads all properties  and sets them to this.state.properties
+  loadProperties = () => {
+    API.getProperties()
+      .then(res =>
+        this.setState({ properties: res.data })
+      ).catch(err => console.log(err));
+  };
 
   render() {
     const { properties } = this.state
@@ -83,10 +83,10 @@ export class GoogleMap extends Component {
         lng={marker.longitude}
         text={"Hello World"}
         image={pad}
-        //image={datum.text} for actual version
-        // link={datum.link}
-        // onClick={() => this.markerGotClicked(datum.link)}
-        // isBoxVisible={datum.link === this.state.openMarker}
+      //image={datum.text} for actual version
+      // link={datum.link}
+      // onClick={() => this.markerGotClicked(datum.link)}
+      // isBoxVisible={datum.link === this.state.openMarker}
       />
     })
 
@@ -94,11 +94,11 @@ export class GoogleMap extends Component {
       // Important! Always set the container height explicitly
       <div className="map-div">
         <GoogleMapReact
-        //   bootstrapURLKeys={{ key: /* YOUR KEY HERE */ }}
+          //   bootstrapURLKeys={{ key: /* YOUR KEY HERE */ }}
           defaultCenter={this.props.center}
           defaultZoom={this.props.zoom}
         >
-        {markers}
+          {markers}
         </GoogleMapReact>
       </div>
     );

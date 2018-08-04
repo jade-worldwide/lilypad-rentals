@@ -1,15 +1,15 @@
 import API from "../utils/API";
 import { IS_AUTHENTICATED, AUTHENTICATION_FAILED } from '../constants/actionTypes';
 
-export const signup = ({name, email, phonenumber, password, role}) => async dispatch => {
+export const signup = ({ name, email, phonenumber, password, role }) => async dispatch => {
 
     try {
-        const {data} = await API.saveUser({
-          name,
-          email,
-          phonenumber,
-          password,
-          role
+        const { data } = await API.saveUser({
+            name,
+            email,
+            phonenumber,
+            password,
+            role
 
         })
 
@@ -26,18 +26,18 @@ export const signup = ({name, email, phonenumber, password, role}) => async disp
         }
         console.log('--success', data);
 
-      } catch(error) {
+    } catch (error) {
         console.error(error);
         console.log('Come on work damnit')
-      }
+    }
 }
 
-export const login = ({email, password}) => async dispatch => {
+export const login = ({ email, password }) => async dispatch => {
 
     try {
-        const {data} = await API.loginUser({
-          email,
-          password
+        const { data } = await API.loginUser({
+            email,
+            password
 
         })
         dispatch({
@@ -45,20 +45,20 @@ export const login = ({email, password}) => async dispatch => {
             payload: data.user
         });
         console.log('--success', data.user.name);
-      } catch(error) {
+    } catch (error) {
         dispatch({
             type: AUTHENTICATION_FAILED,
             payload: "Invalid credentials, cannot login"
         });
         console.error(error);
-      }
+    }
 }
 
 export const getAuthenticated = () => async dispatch => {
     try {
-        const {data, error} = await API.getAuthenticated();
+        const { data, error } = await API.getAuthenticated();
         console.log(data);
-        if(data) {
+        if (data) {
             dispatch({
                 type: IS_AUTHENTICATED,
                 payload: data
@@ -68,7 +68,7 @@ export const getAuthenticated = () => async dispatch => {
         }
         // if(getUser) login
         //else logout
-    } catch(error) {
+    } catch (error) {
         //window redirect to login
     }
 }
@@ -83,7 +83,7 @@ export const logout = () => async dispatch => {
         });
         //should automatically display logout nav 
         //or redirect to anther page
-    } catch(e) {
+    } catch (e) {
         //just refresh page
     }
 }
