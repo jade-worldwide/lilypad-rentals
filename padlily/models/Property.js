@@ -26,7 +26,7 @@ const PropertySchema = new Schema({
     required: true
   },
   propertySize: {
-    type: String,
+    type: Number,
     required: true
   },
   propertyType: {
