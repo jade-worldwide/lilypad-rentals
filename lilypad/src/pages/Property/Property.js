@@ -1,15 +1,17 @@
 import React, { Component } from "react";
 import LightBox from "../../components/LightBox";
-import { Container, Title, Box, Button, Subtitle } from 'bloomer';
+import { Container, Title, Box, Button, Subtitle, Notification,Delete } from 'bloomer';
 import house from './house.jpg';
 import "./Property.css";
+import {CopyToClipboard} from 'react-copy-to-clipboard';
 
 const mainImage = { backgroundImage: `url(${house})` }
 
 class Property extends Component {
   // Setting our component's initial state
   state = {
-    liked: "far fa-heart"
+    liked: "far fa-heart",
+    shared: "copy-url",
   };
 
   likeProperty = (props) => {
@@ -22,6 +24,10 @@ class Property extends Component {
     }
   }
 
+  shareProperty = () => {
+    this.state.shared === "copy-url" ? this.setState({shared: "copy-notif"}) : this.setState({shared: "copy-url"});
+  }
+
 
   render() {
     return (
@@ -32,7 +38,13 @@ class Property extends Component {
               <LightBox />
             </div>
             <div className="buttons-right">
-              <Button isColor='white'><p><i className="far fa-share-square"></i>  Share</p></Button>
+            <CopyToClipboard text={window.location.href}>
+              <Button onClick={this.shareProperty} isColor='white'><p><i className="far fa-share-square"></i>  Share</p></Button>
+            </CopyToClipboard>
+            <Notification className={this.state.shared}>
+              <Delete onClick={this.shareProperty}/>
+              <p>Copied to your clipboard!</p>
+              </Notification>
               <Button isColor='white' className="like-button" isLiked={false} onClick={this.likeProperty}><p><i className={this.state.liked}></i>  Like</p></Button>
             </div>
           </Container>

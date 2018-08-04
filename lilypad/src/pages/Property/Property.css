@@ -17,6 +17,17 @@ background-size: cover !important;
 background-position: 50% 50% !important;
 }
 
+.copy-url {
+  display: none;
+}
+.copy-notif {
+  display: flex;
+  position: fixed;
+  right: 20px;
+  top: 70px;
+  z-index: 10;
+}
+
 .image-buttons {
   display: flex;
   flex-direction: row;
