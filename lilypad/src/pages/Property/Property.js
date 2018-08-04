@@ -26,6 +26,9 @@ class Property extends Component {
 
   shareProperty = () => {
     this.state.shared === "copy-url" ? this.setState({shared: "copy-notif"}) : this.setState({shared: "copy-url"});
+    setTimeout(() => {
+      this.setState({shared: "copy-url"});
+    }, 1000);
   }
 
 

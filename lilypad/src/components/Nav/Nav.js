@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Navbar, NavbarBrand, NavbarItem,  NavbarEnd, Modal, ModalCard, ModalCardTitle, ModalBackground, ModalCardFooter, ModalCardHeader, Delete, ModalCardBody } from 'bloomer';
 import { Link } from "react-router-dom";
-import StepZilla from "react-stepzilla";
 import 'bulma/css/bulma.css';
 import "./Nav.css";
 import pad from "./pad.png";
@@ -10,14 +9,9 @@ import { SignUpModal } from "./SignUpModal";
 import { LoginModal } from "./LoginModal";
 import { MemberType } from "./MemberType";
 
-const padLogo = { image: `url(${pad})` }
-const steps =
-    [
-      {name: 'Step 1', component: <MemberType />},
-      {name: 'Step 2', component: <SignUpModal />}
-    ]
+const padLogo = { image: `url(${pad})` };
 
-const modalBG = { backgroundImage: `url(${modal})` }
+const modalBG = { backgroundImage: `url(${modal})` };
 
 export class Nav extends Component {
 
@@ -87,12 +81,7 @@ export class Nav extends Component {
                     <Delete onClick={this.modalClose} />
 
                     <div className='step-progress'>
-                        <StepZilla
-                          steps={steps}
-                          showSteps={false}
-                          nextButtonCls="button is-medium is-primary"
-                          backButtonCls="button is-medium is-primary"
-                          />
+                      <SignUpModal/>
                     </div>
 
               </ModalCardBody>
