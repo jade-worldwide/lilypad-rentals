@@ -1,5 +1,6 @@
 import axios from "axios";
 import url from "url";
+import { SSL_OP_NO_QUERY_MTU } from "constants";
 // axios.defaults.withCredentials = true;
 
 export default {
@@ -15,41 +16,70 @@ export default {
     const dbQuery = {}
 
     if (query) {
+      if(query.city === '' || query.state === ''){
+        delete query.city
+        delete query.state
+      }
+      if (query.pets === "Any") {
+        delete query.pets
+
+      } if (query.pets) {
+
+        Object.assign(dbQuery, {
+          pets: query.pets
+        })
+      }
       Object.assign(dbQuery, {
         city: query.city,
         state: query.state,
         price: {
-          $lt: query.price
+          $gt: query.minPrice,
+          $lt: query.maxPrice
+        },
+        propertySize: {
+          $gt: query.minSqFeet,
+          $lt: query.maxSqFeet
+        },
+        numOfBeds: {
+          $gt: query.minBeds,
+          $lt: query.maxBeds
         }
       })
     }
 
+
+    // numOfBeds: {
+    //   $gt: query.minBeds,
+    //   $lt: query.maxBeds
+    // },
+    // pets: query.pets
+    console.log('dbQuery ->', dbQuery)
     console.log('query ->', query)
     return axios.post(urlPath, { dbQuery })
   },
 
   // Gets the book with the given id
-  getProperty: function(id) {
+  getProperty: function (id) {
     return axios.get("/property/" + id);
   },
   // Deletes the book with the given id
-  deleteProperty: function(id) {
+  deleteProperty: function (id) {
     return axios.delete("/manager/properties/delete" + id);
   },
   // Saves a book to the database
-  saveProperty: function(propertyData) {
+  saveProperty: function (propertyData) {
     console.log("In Axios route")
     return axios.post("/manager/property/create", propertyData)
   },
-  loginUser: function(userData) {
+  loginUser: function (userData) {
     console.log('we are sssending a POST request to users/login')
     return axios.post("/api/users/login", userData);
   },
-  saveUser: function(userData) {
+  saveUser: function (userData) {
     console.log("Registering Account")
     return axios.post("/api/users/register", userData);
   },
-  getAuthenticated: function(isAuthenticated) {
+  getAuthenticated: function (isAuthenticated) {
     console.log('Checking if youre logged in Yo')
     return axios.get("/api/users/authenticated", isAuthenticated);
   },
@@ -57,7 +87,7 @@ export default {
     return axios.post('/api/users/logout', cb);
   },
   // Gets the book with the given id
-  getUser: function(id) {
+  getUser: function (id) {
     return axios.get("/api/users/manager/" + id);
   },
 };
