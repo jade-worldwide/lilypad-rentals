@@ -7,12 +7,15 @@ import { Link, withRouter } from "react-router-dom";
 import API from "../../utils/API";
 
 const defaultForm = {
-  price: 1000000000,
   city:  '',
   state: '',
-  pets: 'none',
-  numOfBeds: 0,
-  numOfBaths: 0
+  minPrice: 0,
+  maxPrice: 100000000,
+  minSqFeet: 0,
+  maxSqFeet: 100000000,
+  minBeds: 0,
+  maxBeds: 10,
+  pets: "Any"
 }
 
 class Results extends Component {
@@ -85,6 +88,7 @@ class Results extends Component {
   };
 
   render() {
+    console.log(this.state.properties)
     const { form } = this.state
 
     return (
@@ -100,8 +104,8 @@ class Results extends Component {
                 <Control>
                   <Input
                     onChange={this.handleInputChange}
-                    value={form.price}
-                    name="price"
+                    value={form.maxPrice}
+                    name="maxPrice"
                     type="number"
                     placeholder='Maximum Price'
                     isSize="medium" />
@@ -111,8 +115,8 @@ class Results extends Component {
                 <Control>
                   <Input
                     onChange={this.handleInputChange}
-                    value={form.numOfBeds}
-                    name="numOfBeds"
+                    value={form.maxBeds}
+                    name="maxBeds"
                     type="number"
                     placeholder='Maximum Bedroom'
                     isSize="medium" />
@@ -123,7 +127,8 @@ class Results extends Component {
                 <Control>
                   <Input
                     onChange={this.handleInputChange}
-                    name="Minimum Bedroom"
+                    value={form.minBeds}
+                    name="minBeds"
                     type="number"
                     placeholder='Minimum Bedroom'
                     isSize="medium" />
@@ -137,7 +142,7 @@ class Results extends Component {
                     name="pets"
                     type="text"
                     isSize="medium" >
-                    <option>Select</option>
+                    <option>Any</option>
                     <option>Cat</option>
                     <option>Dog</option>
                     <option>Cat or Dog</option>
