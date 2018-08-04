@@ -27,6 +27,10 @@ const UserSchema = new Schema({
 	property: [{
 		type: Schema.Types.ObjectId,
 		ref: "Property"
+	}],
+	application: [{
+		type: Schema.Types.ObjectId,
+		ref: "Application"
 	}]
 });
 

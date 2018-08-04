@@ -9,11 +9,7 @@ let ApplicationSchema = new Schema({
     type: String,
     required: true
   },
-  currentAdress: {
-    type: String,
-    required: true
-  },
-  email: {
+  emailAddress: {
     type: String,
     required: true
   },
@@ -21,8 +17,32 @@ let ApplicationSchema = new Schema({
       type: Number,
       require: true
   },
-  references: {
+  currentAdress: {
     type: String,
+    required: true
+  },
+  referenceName1: {
+    type: String,
+    required: true
+  },
+  referencePhoneNumber1: {
+    type: Number,
+    required: true
+  },
+  referenceName2: {
+    type: String,
+    required: true
+  },
+  referencePhoneNumber2: {
+    type: Number,
+    required: true
+  },
+  currentEmployment: {
+    type: String,
+    required: true
+  },
+  employmentPhoneNumber: {
+    type: Number,
     required: true
   },
   income: {
@@ -30,12 +50,18 @@ let ApplicationSchema = new Schema({
     required: true
   },
   pets: {
-    type: Boolean,
-    default: false 
+    type: String,
   },
-  laundry: {
-    type: Boolean,
-    default: false
+  socialNumber: {
+    type: Number,
+    required: true
+  },
+  driverNumber: {
+    type: String,
+    required: true
+  },
+  additionalNotes: {
+    type: String
   }
 });
 

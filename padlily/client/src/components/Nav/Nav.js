@@ -86,6 +86,9 @@ class Nav extends Component {
           ) :
             <span>
               {user.role === 'Renter' ? (<span>
+                <NavbarItem>
+              <Link to={"/renter"}><p>Renter</p></Link>
+          </NavbarItem>
               </span>
               ) : (<span>
                 <Fragment>

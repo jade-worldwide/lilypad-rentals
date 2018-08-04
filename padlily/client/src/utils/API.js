@@ -14,15 +14,22 @@ export default {
 
     const dbQuery = {}
 
-    if (query) {
+    if(query) {
       Object.assign(dbQuery, {
         city: query.city,
         state: query.state,
         price: {
           $lt: query.price
+        },
+        numOfBeds: {
+          $lt: query.numOfBeds
+        },
+        numOfBaths: {
+          $lt: query.numOfBaths
         }
       })
-    }
+    } 
+ 
 
     console.log('query ->', query)
     return axios.post(urlPath, { dbQuery })
@@ -40,6 +47,11 @@ export default {
   saveProperty: function(propertyData) {
     console.log("In Axios route")
     return axios.post("/manager/property/create", propertyData)
+  },
+  // Saves a book to the database
+  saveApplication: function(applicationData) {
+    console.log("In Axios route")
+    return axios.post("/renter/application/create", applicationData)
   },
   loginUser: function(userData) {
     console.log('we are sssending a POST request to users/login')

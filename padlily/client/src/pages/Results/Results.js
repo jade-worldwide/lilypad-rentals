@@ -11,8 +11,8 @@ const defaultForm = {
   city:  '',
   state: '',
   pets: 'none',
-  numOfBeds: 0,
-  numOfBaths: 0
+  numOfBeds: 100,
+  numOfBaths: 100
 }
 
 class Results extends Component {
@@ -50,6 +50,7 @@ class Results extends Component {
   // When the component mounts, load all properties and save them to this.state.properties
   componentDidMount() {
     this.fetchProperties();
+    // this.loadProperties();
   }
 
   // Loads all properties  and sets them to this.state.properties
@@ -123,9 +124,10 @@ class Results extends Component {
                 <Control>
                   <Input
                     onChange={this.handleInputChange}
-                    name="Minimum Bedroom"
+                    value={form.numOfBaths}
+                    name="numOfBaths"
                     type="number"
-                    placeholder='Minimum Bedroom'
+                    placeholder='Minimum Bathroom'
                     isSize="medium" />
                 </Control>
               </Field>
