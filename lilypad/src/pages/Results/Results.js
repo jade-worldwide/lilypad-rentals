@@ -29,7 +29,7 @@ state = {
         <div className={this.state.show}>
           <div className="column results-column list-column">
             <div className="filter-header">
-              <Button isColor='primary' className="show-filters" onClick={this.filtersShow}><p>Filters</p></Button>
+              <Button isColor='primary' className="show-filters" onClick={this.state.show === "columns results-columns" ? this.filtersShow : this.filtersHide}><p>Filters</p></Button>
             </div>
             <div className="result-list">
               <ResultsList />
