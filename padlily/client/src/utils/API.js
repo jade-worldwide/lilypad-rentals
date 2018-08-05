@@ -23,12 +23,7 @@ export default {
       if (query.pets === "Any") {
         delete query.pets
 
-      } if (query.pets) {
-
-        Object.assign(dbQuery, {
-          pets: query.pets
-        })
-      }
+      } 
       Object.assign(dbQuery, {
         city: query.city,
         state: query.state,
@@ -43,7 +38,8 @@ export default {
         numOfBeds: {
           $gte: query.minBeds,
           $lte: query.maxBeds
-        }
+        },
+        pets: query.pets
       })
     } 
  

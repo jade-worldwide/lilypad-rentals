@@ -4,6 +4,7 @@ import { ResultsList, Filters } from "../../components/ResultsList";
 import { Field, Control, Select, Input, Button } from 'bloomer';
 import { GoogleMap } from "../../components/GoogleMap";
 import { Link, withRouter } from "react-router-dom";
+import debounce from 'lodash/debounce';
 import API from "../../utils/API";
 
 const defaultForm = {
@@ -34,8 +35,6 @@ class Results extends Component {
     this.state = {
       properties: [],
       show: "columns results-columns",
-      price: [],
-      sqFtToString: [],
       form,
     }
   }
@@ -58,8 +57,7 @@ class Results extends Component {
     API.getProperties(this.state.form)
       .then(res => {
         console.log("Res Data =>", res.data)
-        this.setState({ properties: res.data })
-        console.log("Price: =>", this.state.properties)
+        this.setState({ properties: res.data})
       })
 
       .catch(err => console.log(err));
@@ -78,6 +76,11 @@ class Results extends Component {
     this.fetchProperties()
   };
 
+  handleFilters = event => {
+    // Every time there's a change, make an API request, update the state, re-render.
+    this.fetchProperties()
+  }
+
   render() {
     const { form } = this.state
 
@@ -93,6 +96,7 @@ class Results extends Component {
                 <Control>
                   <Input
                     onChange={this.handleInputChange}
+                    onKeyUp={this.handleFilters.bind(this)}
                     value={form.maxPrice}
                     name="maxPrice"
                     type="number"
@@ -104,6 +108,7 @@ class Results extends Component {
                 <Control>
                   <Input
                     onChange={this.handleInputChange}
+                    onKeyUp={this.handleFilters.bind(this)}
                     value={form.maxBeds}
                     name="maxBeds"
                     type="number"
@@ -116,6 +121,7 @@ class Results extends Component {
                 <Control>
                   <Input
                     onChange={this.handleInputChange}
+                    onKeyUp={this.handleFilters.bind(this)}
                     value={form.minBeds}
                     name="minBeds"
                     type="number"
@@ -127,6 +133,7 @@ class Results extends Component {
                 <Control>
                   <Select
                     onChange={this.handleInputChange}
+                    onKeyUp={this.handleFilters.bind(this)}
                     value={form.pets}
                     name="pets"
                     type="text"
@@ -144,17 +151,18 @@ class Results extends Component {
                 <Link key={property._id} to={"/property/" + property._id}>
                   <ResultsList
                     title={property.title}
-                    price={property.price}
+                    price={property.price.toLocaleString()}
                     numOfBeds={property.numOfBeds}
                     photos={property.photos}
-                    propertySize={property.propertySize}
+                    propertySize={property.propertySize.toLocaleString()}
                   />
                 </Link>
               ))}
             </div>
           </div>
           <div className="column results-column">
-            <GoogleMap />
+            <GoogleMap
+              properties={this.state.properties} />
           </div>
         </div>
       </div>

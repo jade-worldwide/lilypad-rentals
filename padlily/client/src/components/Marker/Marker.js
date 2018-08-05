@@ -14,7 +14,7 @@ class Marker extends Component {
                     this.props.isBoxVisible ? (
                         <Dispbox 
                             text={this.props.text}
-                            image={this.props.image}
+                            photo={this.props.photos}
                             className="card"
                             link={this.props.link}
                         ></Dispbox>
