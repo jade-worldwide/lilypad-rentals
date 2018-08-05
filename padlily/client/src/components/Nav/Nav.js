@@ -137,7 +137,8 @@ class Nav extends Component {
                 <ModalCardTitle></ModalCardTitle>
                 <Delete onClick={this.modalClose} />
               </ModalCardHeader>
-              <LoginModal />
+              <LoginModal 
+              close={this.modalClose}/>
               <ModalCardFooter hasTextAlign="centered">
                 <p>Already have an account? <Link to={""}>Log In</Link></p>
               </ModalCardFooter>
