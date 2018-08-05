@@ -16,3 +16,7 @@ h2.subtitle.is-4 {
 td.list-image {
     padding: 0;
 }
+
+.select, .select select {
+    width: 100%;
+}

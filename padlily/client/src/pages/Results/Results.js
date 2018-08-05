@@ -101,7 +101,7 @@ class Results extends Component {
               <Field>
                 <Control>
                   <Input
-                    onKeyUp={this.handleInputChange}
+                    onChange={this.handleInputChange}
                     value={form.maxPrice}
                     name="maxPrice"
                     type="number"
@@ -112,7 +112,7 @@ class Results extends Component {
               <Field>
                 <Control>
                   <Input
-                    onKeyUp={this.handleInputChange}
+                    onChange={this.handleInputChange}
                     value={form.maxBeds}
                     name="maxBeds"
                     type="number"
@@ -124,7 +124,7 @@ class Results extends Component {
               <Field>
                 <Control>
                   <Input
-                    onKeyUp={this.handleInputChange}
+                    onChange={this.handleInputChange}
                     value={form.minBeds}
                     name="minBeds"
                     type="number"

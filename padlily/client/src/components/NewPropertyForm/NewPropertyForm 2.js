@@ -1,12 +1,9 @@
 import React, { Component } from "react";
 import { Field, Control, Input, Button, TextArea, Select, Label, Container } from 'bloomer';
-import { connect } from 'react-redux';
-import API from "../../utils/API";
-import axios from "axios";
-import Geocode from "react-geocode";
 import 'bulma/css/bulma.css';
 import "./NewPropertyForm.css";
 import ImageUploader from 'react-images-upload';
+
 
 // Cloudinary 
 let imageUrl;
@@ -218,66 +215,6 @@ handleFormSubmit = event => {
           placeholder='Title'   />
       </Control>
     </Field>
-    <div className="columns">
-      <div className="column">
-        <Field>
-          <Label>Monthly Rent</Label>
-          <Control>
-              <Input 
-              value={this.state.price}
-              onChange={this.handleInputChange}
-              onKeyUp={this.formatThousands}
-              onBlur={this.consoleLogInput}
-              name="price"
-              type="number" 
-              placeholder='Monthly Rent'   />
-          </Control>
-        </Field>
-      </div>
-      <div className="column">
-        <Field>
-          <Label>Bedrooms</Label>
-          <Control>
-              <Input 
-              value={this.state.numOfBeds}
-              onChange={this.handleInputChange}
-              onBlur={this.consoleLogInput}
-              name="numOfBeds"
-              type="Number" 
-              placeholder='Bedrooms'   />
-          </Control>
-        </Field>
-      </div>
-      <div className="column">
-        <Field>
-          <Label>Bathrooms</Label>
-          <Control>
-              <Input 
-              value={this.state.numOfBaths}
-              onChange={this.handleInputChange}
-              onBlur={this.consoleLogInput}
-              name="numOfBaths"
-              type="Number" 
-              placeholder='Bathrooms'   />
-          </Control>
-        </Field>
-      </div>
-      <div className="column">
-        <Field>
-          <Label>Square Feet</Label>
-          <Control>
-              <Input 
-              value={this.state.propertySize}
-              onChange={this.handleInputChange}
-              onKeyUp={this.formatThousands}
-              onBlur={this.consoleLogInput}
-              name="propertySize"
-              type="Number" 
-              placeholder='Square Feet'   />
-          </Control>
-        </Field>
-      </div>
-    </div>
     <div className="columns">
       <div className="column">
         <Field>

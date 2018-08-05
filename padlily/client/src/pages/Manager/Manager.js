@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import {/* NewPropertyForm,*/ FormPageOne, FormPageTwo, FormPageThree, FormPageFour } from "../../components/NewPropertyForm";
+import { NewPropertyForm } from "../../components/NewPropertyForm/NewPropertyForm";
 import { PropertyList, /*Filters*/ } from "../../components/PropertyList";
 import { Container, Button, Modal, ModalCard, ModalBackground, /*ModalCardFooter, ModalCardHeader,*/ Delete, ModalCardBody } from 'bloomer';
 import StepZilla from "react-stepzilla";
@@ -11,14 +11,6 @@ import API from "../../utils/API";
 import { connect } from 'react-redux';
 // import { bindActionCreators } from 'redux'
 import { Link } from "react-router-dom";
-
-const steps =
-  [
-    { name: 'Step 1', component: <FormPageOne /> },
-    { name: 'Step 2', component: <FormPageTwo /> },
-    { name: 'Step 3', component: <FormPageThree /> },
-    { name: 'Step 4', component: <FormPageFour /> }
-  ]
 
 const modalBG = { backgroundImage: `url(${modal})` }
 
@@ -108,15 +100,8 @@ export class Manager extends Component {
 
                 <ModalCardBody>
                   <Delete onClick={this.modalClose} />
-
-                  <div className='step-progress'>
-                    <StepZilla
-                      steps={steps}
-                      showSteps={false}
-                      nextButtonCls="button is-medium is-primary"
-                      backButtonCls="button is-medium is-primary"
-                    />
-                  </div>
+                  <NewPropertyForm />
+                  
 
                 </ModalCardBody>
 
