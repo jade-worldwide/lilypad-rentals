@@ -4,7 +4,7 @@ import { ResultsList, Filters } from "../../components/ResultsList";
 import { Field, Control, Select, Input, Button } from 'bloomer';
 import { GoogleMap } from "../../components/GoogleMap";
 import { Link, withRouter } from "react-router-dom";
-import debounce from 'lodash/debounce';
+import _ from 'lodash';
 import API from "../../utils/API";
 
 const defaultForm = {
@@ -30,12 +30,13 @@ class Results extends Component {
 
     Object.keys(defaultForm).forEach(key => {
       form[key] = urlParams.get(key) || defaultForm[key]
+      this.handleFilters = _.debounce(this.handleFilters, 100);
     })
 
     this.state = {
+      form,
       properties: [],
       show: "columns results-columns",
-      form,
     }
   }
 
@@ -62,6 +63,17 @@ class Results extends Component {
 
       .catch(err => console.log(err));
   }
+  // When search query is updated, debounce
+  handleFilters = event => {
+
+    API.getProperties(this.state.form)
+      .then(res => {
+        console.log("Res Data =>", res.data)
+        this.setState({ properties: res.data})
+      })
+
+      .catch(err => console.log(err));
+  }
 
   handleInputChange = event => {
     const { form } = this.state;
@@ -72,14 +84,8 @@ class Results extends Component {
     console.log('handleinput', form);
     this.setState({ form });
 
-    // Every time there's a change, make an API request, update the state, re-render.
-    this.fetchProperties()
+    this.handleFilters();
   };
-
-  handleFilters = event => {
-    // Every time there's a change, make an API request, update the state, re-render.
-    this.fetchProperties()
-  }
 
   render() {
     const { form } = this.state
@@ -95,8 +101,7 @@ class Results extends Component {
               <Field>
                 <Control>
                   <Input
-                    onChange={this.handleInputChange}
-                    onKeyUp={this.handleFilters.bind(this)}
+                    onKeyUp={this.handleInputChange}
                     value={form.maxPrice}
                     name="maxPrice"
                     type="number"
@@ -107,8 +112,7 @@ class Results extends Component {
               <Field>
                 <Control>
                   <Input
-                    onChange={this.handleInputChange}
-                    onKeyUp={this.handleFilters.bind(this)}
+                    onKeyUp={this.handleInputChange}
                     value={form.maxBeds}
                     name="maxBeds"
                     type="number"
@@ -120,8 +124,7 @@ class Results extends Component {
               <Field>
                 <Control>
                   <Input
-                    onChange={this.handleInputChange}
-                    onKeyUp={this.handleFilters.bind(this)}
+                    onKeyUp={this.handleInputChange}
                     value={form.minBeds}
                     name="minBeds"
                     type="number"
@@ -133,7 +136,6 @@ class Results extends Component {
                 <Control>
                   <Select
                     onChange={this.handleInputChange}
-                    onKeyUp={this.handleFilters.bind(this)}
                     value={form.pets}
                     name="pets"
                     type="text"
