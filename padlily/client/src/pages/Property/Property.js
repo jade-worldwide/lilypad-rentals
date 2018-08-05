@@ -1,16 +1,19 @@
 import React, { Component } from "react";
 import LightBox from "../../components/LightBox";
 import API from "../../utils/API";
-import { Container, Title, /*Image,*/ Box, Button, Subtitle } from 'bloomer';
+import { Container, Title, Box, Button, Subtitle, Notification,Delete } from 'bloomer';
 import house from './house.jpg';
 import "./Property.css";
+import {CopyToClipboard} from 'react-copy-to-clipboard';
 
 const mainImage = { backgroundImage: `url(${house})` }
 
 class Property extends Component {
   // Setting our component's initial state
   state = {
-    property: {}
+    property: {},
+    liked: "far fa-heart",
+    shared: "copy-url",
   };
 
     // When the component mounts, load all properties and save them to this.state.properties
@@ -20,18 +23,39 @@ class Property extends Component {
         .catch(err => console.log(err));
     }
 
+    showLiked = () => {
+      this.setState({ liked: "fas fa-heart is-liked" })
+    }
+  
+    unlike = () => {
+      this.setState({ liked: "far fa-heart" })
+    }
+  
+    shareProperty = () => {
+      this.state.shared === "copy-url" ? this.setState({shared: "copy-notif"}) : this.setState({shared: "copy-url"});
+      setTimeout(() => {
+        this.setState({shared: "copy-url"});
+      }, 2000);
+    }
+  
 
   render() {
     return (
-      <div className="Property">
+      <div className="property">
         <div className="main-image" style={ mainImage }>
           <Container className="property-container image-buttons">
             <div className="buttons-left">
               <LightBox />
             </div>
             <div className="buttons-right">
-              <Button isColor='white'><p><i className="far fa-share-square"></i>  Share</p></Button>
-              <Button isColor='white' className="like-button"><p><i className="far fa-heart"></i>  Like</p></Button>
+            <CopyToClipboard text={window.location.href}>
+              <Button onClick={this.shareProperty} isColor='white'><p><i className="far fa-share-square"></i>  Share</p></Button>
+            </CopyToClipboard>
+            <Notification className={this.state.shared} isColor='primary'>
+              <Delete onClick={this.shareProperty}/>
+              <p>Copied to your clipboard!</p>
+              </Notification>
+              <Button isColor='white' className="like-button" onClick={this.state.liked === "far fa-heart" ? this.showLiked : this.unlike}><p><i className={this.state.liked}></i> Liked</p></Button>
             </div>
           </Container>
         </div>
