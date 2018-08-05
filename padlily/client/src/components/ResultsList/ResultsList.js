@@ -11,7 +11,7 @@ export const ResultsList = props => (
               <td className="list-image"><Image isSize="96x96" src={props.photos}/></td>
               <td>
               <Subtitle isSize={4}>{props.title}</Subtitle>
-              <p>${props.price} - {props.numOfBeds} Bedrooms - {props.propertySize}</p>
+              <p>${props.price} - {props.numOfBeds} Bedrooms - {props.propertySize} Sq Ft</p>
               </td>
           </tr>
 

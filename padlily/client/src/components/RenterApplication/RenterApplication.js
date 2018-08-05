@@ -7,6 +7,7 @@ import API from "../../utils/API";
 
 import { Z_STREAM_ERROR } from "zlib";
 
+let income;
 
 class RenterApplication extends Component {
 
@@ -38,9 +39,49 @@ class RenterApplication extends Component {
     this.setState({
       [name]: value
     });
-    console.log(value);
   };
 
+  formatPhoneNumber = event => {
+        
+        let {name, value } = event.target
+        let numbers = value.replace(/\D/g, '')
+        let char = { 0: '(', 3: ') ', 6: '-' };
+        value = '';
+
+        for (var i = 0; i < numbers.length; i++) {
+            this.setState({[name]: value += (char[i] || '') + numbers[i]})
+        }
+  }
+
+  formatThousands = event => {
+
+      let {name, value} = event.target;
+      let x;
+      let x1;
+      let x2;
+      let number = value.replace(/,/g, "")
+      value = "";
+      number += '';
+      x = number.split('.');
+      x1 = x[0];
+      x2 = x.length > 1 ? '.' + x[1] : '';
+
+      var rgx = /(\d+)(\d{3})/;
+
+      while (rgx.test(x1)) {
+          x1 = x1.replace(rgx, '$1' + ',' + '$2');
+      }
+      this.setState({[name]: value = x1 + x2})
+
+      // Unformat PropertySize & Price in before we push into database
+      income = this.state.income.replace( /,/g, "" )
+  }
+    consoleLogInput = event => {
+    const { name, value } = event.target;
+
+    console.log(`${name}: ${value}`)
+
+    }
   handleFormSubmit = event => {
     event.preventDefault();
     const { user } = this.props;
@@ -52,14 +93,14 @@ class RenterApplication extends Component {
         name: this.state.name,
         emailAddress: this.state.emailAddress,
         phonenumber: this.state.phonenumber,
-        currentAddress: '251 Callan Street Milpitas, Ca',
+        currentAddress: this.state.currentAddress,
         referenceName1: this.state.referenceName1,
         referencePhoneNumber1: this.state.referencePhoneNumber1,
         referenceName2: this.state.referenceName2,
         referencePhoneNumber2: this.state.referencePhoneNumber2,
         currentEmployment: this.state.currentEmployment,
         employmentPhoneNumber: this.state.employmentPhoneNumber,
-        income: this.state.income,
+        income: income,
         pets: this.state.pets,
         socialNumber: this.state.socialNumber,
         driverNumber: this.state.driverNumber,
@@ -85,6 +126,7 @@ class RenterApplication extends Component {
                 <Input
                   value={this.state.firstName}
                   onChange={this.handleInputChange}
+                  onBlur={this.consoleLogInput}
                   name="firstName"
                   type="Text" />
               </Control>
@@ -95,6 +137,7 @@ class RenterApplication extends Component {
                 <Input
                   value={this.state.emailAddress}
                   onChange={this.handleInputChange}
+                  onBlur={this.consoleLogInput}
                   name="emailAddress"
                   type="Text"
                   type="Email" />
@@ -108,6 +151,7 @@ class RenterApplication extends Component {
                 <Input
                   value={this.state.lastName}
                   onChange={this.handleInputChange}
+                  onBlur={this.consoleLogInput}
                   name="lastName"
                   type="Text" />
               </Control>
@@ -118,6 +162,8 @@ class RenterApplication extends Component {
                 <Input
                   value={this.state.phonenumber}
                   onChange={this.handleInputChange}
+                  onKeyUp={this.formatPhoneNumber}
+                  onBlur={this.consoleLogInput}
                   name="phonenumber"
                   type="Tel" />
               </Control>
@@ -126,10 +172,11 @@ class RenterApplication extends Component {
         </div>
         <Field>
           <Control>
-            <Label>Phone Number</Label>
+            <Label>Current Address</Label>
             <Input
               value={this.state.currentAddress}
               onChange={this.handleInputChange}
+              onBlur={this.consoleLogInput}
               name="currentAddress"
               type="Tel" />
           </Control>
@@ -153,6 +200,7 @@ class RenterApplication extends Component {
                 <Input
                   value={this.state.referenceName2}
                   onChange={this.handleInputChange}
+                  onBlur={this.consoleLogInput}
                   name="referenceName2"
                   type="Text" />
               </Control>
@@ -166,6 +214,8 @@ class RenterApplication extends Component {
                 <Input
                   value={this.state.referencePhoneNumber1}
                   onChange={this.handleInputChange}
+                  onKeyUp={this.formatPhoneNumber}
+                  onBlur={this.consoleLogInput}
                   name="referencePhoneNumber1"
                   type="Tel" />
               </Control>
@@ -176,6 +226,8 @@ class RenterApplication extends Component {
                 <Input
                   value={this.state.referencePhoneNumber2}
                   onChange={this.handleInputChange}
+                  onKeyUp={this.formatPhoneNumber}
+                  onBlur={this.consoleLogInput}
                   name="referencePhoneNumber2"
                   type="Tel" />
               </Control>
@@ -191,6 +243,7 @@ class RenterApplication extends Component {
                 <Input
                   value={this.state.currentEmployment}
                   onChange={this.handleInputChange}
+                  onBlur={this.consoleLogInput}
                   name="currentEmployment"
                   type="Text" />
               </Control>
@@ -204,8 +257,10 @@ class RenterApplication extends Component {
                 <Input
                   value={this.state.employmentPhoneNumber}
                   onChange={this.handleInputChange}
+                  onKeyUp={this.formatPhoneNumber}
+                  onBlur={this.consoleLogInput}
                   name="employmentPhoneNumber"
-                  type="Tel" />
+                  type="text" />
               </Control>
             </Field>
           </div>
@@ -217,8 +272,10 @@ class RenterApplication extends Component {
                 <Input
                   value={this.state.income}
                   onChange={this.handleInputChange}
+                  onKeyUp={this.formatThousands}
+                  onBlur={this.consoleLogInput}
                   name="income"
-                  type="Number" />
+                  type="text" />
               </Control>
             </Field>
           </div>
@@ -233,6 +290,7 @@ class RenterApplication extends Component {
                 <Select
                   value={this.state.pets}
                   onChange={this.handleInputChange}
+                  onBlur={this.consoleLogInput}
                   name="pets" >
                   <option>Select</option>
                   <option>Cat</option>
@@ -251,6 +309,7 @@ class RenterApplication extends Component {
                 <Input
                   value={this.state.socialNumber}
                   onChange={this.handleInputChange}
+                  onBlur={this.consoleLogInput}
                   name="socialNumber"
                   type="password" />
               </Control>
@@ -264,8 +323,9 @@ class RenterApplication extends Component {
                 <Input
                   value={this.state.driverNumber}
                   onChange={this.handleInputChange}
+                  onBlur={this.consoleLogInput}
                   name="driverNumber"
-                  type="Number" />
+                  type="text" />
               </Control>
             </Field>
           </div>
@@ -278,6 +338,7 @@ class RenterApplication extends Component {
             <TextArea
               value={this.state.additionalNotes}
               onChange={this.handleInputChange}
+              onBlur={this.consoleLogInput}
               name="additionalNotes" />
           </Control>
         </Field>

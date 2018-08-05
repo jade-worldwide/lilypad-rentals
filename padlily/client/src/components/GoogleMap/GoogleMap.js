@@ -1,36 +1,12 @@
 import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react';
+import { fitBounds } from 'google-map-react/utils';
+
 import pad from './pad.svg';
 import Marker from '../Marker/Marker.js';
 import 'bulma/css/bulma.css';
 import "./GoogleMap.css";
-import API from "../../utils/API";
 
-
-// Import data here
-const TEST_DATA = [
-  {
-    latitude: 37.8716,
-    longitude: -122.2727,
-    text: 'Toogers HQ',
-    image: "None",
-    link: 'https://sfbay.craigslist.org/eby/apa/d/peaceful-amazing-viewmillion/6643700557.html#1'
-  },
-  {
-    latitude: 37.8616,
-    longitude: -122.2627,
-    text: 'Toogerland',
-    image: "None",
-    link: 'https://sfbay.craigslist.org/eby/apa/d/peaceful-amazing-viewmillion/6643700557.html#2'
-  },
-  {
-    latitude: 36.8616,
-    longitude: -122.2627,
-    text: 'Toogtown',
-    image: "None",
-    link: 'https://sfbay.craigslist.org/eby/apa/d/peaceful-amazing-viewmillion/6643700557.html#3'
-  },
-];
 export class GoogleMap extends Component {
   static defaultProps = {
     center: {
@@ -41,7 +17,7 @@ export class GoogleMap extends Component {
   };
 
   state = {
-    properties: []
+
   };
 
   markerGotClicked = (link) => {
@@ -59,44 +35,60 @@ export class GoogleMap extends Component {
     }
   }
 
-  // When the component mounts, load all properties and save them to this.state.properties
-  componentDidMount() {
-    this.loadProperties();
+  getSize() {
+    return {
+      width: 640, // Map width in pixels
+      height: 380, // Map height in pixels
+    };    
   }
 
-  // Loads all properties  and sets them to this.state.properties
-  loadProperties = () => {
-    API.getProperties()
-      .then(res =>
-        this.setState({ properties: res.data })
-      ).catch(err => console.log(err));
-  };
+  getBounds() {
+    return {
+      nw: {
+        lat: 50.01038826014866,
+        lng: -118.6525866875
+      },
+      se: {
+        lat: 32.698335045970396,
+        lng: -92.0217273125
+      }
+    };
+  }
 
   render() {
-    const { properties } = this.state
-    // console.log("Dummy Data: ", TEST_DATA)
-    // console.log("Real Data: ", propertyMarkers)
+    const properties = this.props.properties || [];
+    console.log(properties)
     const markers = properties.map((marker, index) => {
       return <Marker
         key={index}
+        image={pad} 
+        link={marker._id}
+        text={marker.title}
+        photo={marker.photos}
         lat={marker.latitude}
         lng={marker.longitude}
-        text={"Hello World"}
-        image={pad}
-      //image={datum.text} for actual version
-      // link={datum.link}
-      // onClick={() => this.markerGotClicked(datum.link)}
-      // isBoxVisible={datum.link === this.state.openMarker}
+      onClick={() => this.markerGotClicked(marker._id)}
+      isBoxVisible={marker._id === this.state.openMarker}
       />
     })
 
+    // Important! Always set the container height explicitly
+    const size = this.getSize();
+    const bounds = this.getBounds();
+    const {center, zoom} = fitBounds(bounds, size);
+
     return (
-      // Important! Always set the container height explicitly
+
       <div className="map-div">
         <GoogleMapReact
-          //   bootstrapURLKeys={{ key: /* YOUR KEY HERE */ }}
+            bootstrapURLKeys={{
+              key: 'AIzaSyDV-7_RPvHNoZ2-f-pM7XLdMMfYnVAMn5M',
+              language: 'en',
+              region: 'us', }}
           defaultCenter={this.props.center}
           defaultZoom={this.props.zoom}
+          center={center}
+          zoom={zoom}
         >
           {markers}
         </GoogleMapReact>

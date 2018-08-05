@@ -3,7 +3,6 @@ import 'bulma/css/bulma.css';
 import "./Marker.css";
 import Dispbox from '../MapPopUp/Display.js'
 
-
 class Marker extends Component {
 
     render() {
@@ -15,7 +14,7 @@ class Marker extends Component {
                     this.props.isBoxVisible ? (
                         <Dispbox 
                             text={this.props.text}
-                            image={this.props.image}
+                            photo={this.props.photos}
                             className="card"
                             link={this.props.link}
                         ></Dispbox>
