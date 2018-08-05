@@ -66,6 +66,10 @@ export default {
     console.log("In Axios route")
     return axios.post("/renter/application/create", applicationData)
   },
+  saveLike: function (propertyData) {
+    console.log("Saving Like")
+    return axios.post("/propertyLike", propertyData);
+  },
   loginUser: function(userData) {
     console.log('we are sssending a POST request to users/login')
     return axios.post("/api/users/login", userData);

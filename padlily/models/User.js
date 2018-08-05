@@ -31,6 +31,10 @@ const UserSchema = new Schema({
 	application: [{
 		type: Schema.Types.ObjectId,
 		ref: "Application"
+	}],
+	propertylike: [{
+		type: Schema.Types.ObjectId,
+		ref: "PropertyLike"
 	}]
 });
 

@@ -5,7 +5,7 @@ import { Container, Title, Box, Button, Subtitle, Notification,Delete } from 'bl
 import house from './house.jpg';
 import "./Property.css";
 import {CopyToClipboard} from 'react-copy-to-clipboard';
-
+import { connect } from 'react-redux';
 const mainImage = { backgroundImage: `url(${house})` }
 
 class Property extends Component {
@@ -24,7 +24,14 @@ class Property extends Component {
     }
 
     showLiked = () => {
+      const { user } = this.props;
+      API.saveLike(this.props.match.params.id)
+      .then(res => {
+        this.setState({ property: res.data})
+      })
+      .catch(err => console.log(err));
       this.setState({ liked: "fas fa-heart is-liked" })
+      console.log(this.props.match.params.id);
     }
   
     unlike = () => {
@@ -37,7 +44,6 @@ class Property extends Component {
         this.setState({shared: "copy-url"});
       }, 2000);
     }
-  
 
   render() {
     return (
@@ -162,4 +168,9 @@ class Property extends Component {
   }
 }
 
-export default Property;
+const mapStateToProps = ({ auth }) => ({
+  user: auth.user,
+  authError: auth.authError
+});
+
+export default connect(mapStateToProps)(Property)
