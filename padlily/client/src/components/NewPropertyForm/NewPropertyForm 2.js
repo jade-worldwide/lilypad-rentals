@@ -1,9 +1,12 @@
 import React, { Component } from "react";
 import { Field, Control, Input, Button, TextArea, Select, Label, Container } from 'bloomer';
+import { connect } from 'react-redux';
+import API from "../../utils/API";
+import axios from "axios";
+import Geocode from "react-geocode";
 import 'bulma/css/bulma.css';
 import "./NewPropertyForm.css";
 import ImageUploader from 'react-images-upload';
-
 
 // Cloudinary 
 let imageUrl;
@@ -218,6 +221,65 @@ handleFormSubmit = event => {
     <div className="columns">
       <div className="column">
         <Field>
+          <Label>Address</Label>
+          <Control>
+              <Input 
+              value={this.state.address}
+              onChange={this.handleGeoCoding}
+              onBlur={this.consoleLogInput}
+              name="address"
+              type="Text" 
+              placeholder='Address'   />
+          </Control>
+        </Field>
+      </div>
+      <div className="column">
+        <Field>
+          <Label>City</Label>
+          <Control>
+              <Input 
+              value={this.state.city}
+              onChange={this.handleGeoCoding}
+              onBlur={this.consoleLogInput}
+              name="city"
+              type="Text"
+              placeholder='City'   />
+          </Control>
+        </Field>
+      </div>
+      <div className="column">
+        <Field>
+          <Label>State</Label>
+          <Control>
+              <Input 
+              value={this.state.state}
+              onChange={this.handleInputChange}
+              onBlur={this.consoleLogInput}
+              name="state"
+              type="Text"
+              placeholder='State'   />
+          </Control>
+        </Field>
+      </div>
+      <div className="column">
+        <Field>
+          <Label>Phone Number</Label>
+          <Control>
+              <Input 
+              value={this.state.phoneNumber}
+              onChange={this.handleInputChange}
+              onKeyUp={this.formatPhoneNumber}
+              onBlur={this.consoleLogInput}
+              name="phoneNumber"
+              type="Text"
+              placeholder='Contact Number'   />
+          </Control>
+        </Field>
+      </div>
+    </div>
+    <div className="columns">
+      <div className="column">
+        <Field>
           <Label>Monthly Rent</Label>
           <Control>
               <Input 
@@ -226,7 +288,7 @@ handleFormSubmit = event => {
               onKeyUp={this.formatThousands}
               onBlur={this.consoleLogInput}
               name="price"
-              type="number" 
+              type="Text" 
               placeholder='Monthly Rent'   />
           </Control>
         </Field>
@@ -269,7 +331,7 @@ handleFormSubmit = event => {
               onKeyUp={this.formatThousands}
               onBlur={this.consoleLogInput}
               name="propertySize"
-              type="Number" 
+              type="Text" 
               placeholder='Square Feet'   />
           </Control>
         </Field>
@@ -293,7 +355,12 @@ handleFormSubmit = event => {
         <Field>
             <Label>Type</Label>
             <Control>
-                <Select>
+                <Select
+                value={this.state.propertyType}
+                onChange={this.handleInputChange}
+                onBlur={this.consoleLogInput}
+                name="propertyType"
+                >
                   <option>Select</option>
                     <option>Single Family</option>
                     <option>Apartment</option>
@@ -428,3 +495,9 @@ handleFormSubmit = event => {
   );
 }
 }
+const mapStateToProps = ({ auth }) => ({
+  user: auth.user
+});
+
+
+export default connect(mapStateToProps)(NewPropertyForm)

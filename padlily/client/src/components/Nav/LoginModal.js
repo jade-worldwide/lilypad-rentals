@@ -24,6 +24,7 @@ class LoginModal extends Component {
     const { email, password } = this.state;
     if (email && password) {
       this.props.login({ email, password })
+      this.props.close({ email, password })
     }
 
   };

@@ -20,7 +20,7 @@ Geocode.enableDebug();
 let price;
 let propertySize;
 
-export class NewPropertyForm extends Component {
+class NewPropertyForm extends Component {
 
   state = {
     file: "",
@@ -221,59 +221,58 @@ handleFormSubmit = event => {
     <div className="columns">
       <div className="column">
         <Field>
-          <Label>Monthly Rent</Label>
+          <Label>Address</Label>
           <Control>
               <Input 
-              value={this.state.price}
-              onChange={this.handleInputChange}
-              onKeyUp={this.formatThousands}
+              value={this.state.address}
+              onChange={this.handleGeoCoding}
               onBlur={this.consoleLogInput}
-              name="price"
-              type="number" 
-              placeholder='Monthly Rent'   />
+              name="address"
+              type="Text" 
+              placeholder='Address'   />
           </Control>
         </Field>
       </div>
       <div className="column">
         <Field>
-          <Label>Bedrooms</Label>
+          <Label>City</Label>
           <Control>
               <Input 
-              value={this.state.numOfBeds}
-              onChange={this.handleInputChange}
+              value={this.state.city}
+              onChange={this.handleGeoCoding}
               onBlur={this.consoleLogInput}
-              name="numOfBeds"
-              type="Number" 
-              placeholder='Bedrooms'   />
+              name="city"
+              type="Text"
+              placeholder='City'   />
           </Control>
         </Field>
       </div>
       <div className="column">
         <Field>
-          <Label>Bathrooms</Label>
+          <Label>State</Label>
           <Control>
               <Input 
-              value={this.state.numOfBaths}
+              value={this.state.state}
               onChange={this.handleInputChange}
               onBlur={this.consoleLogInput}
-              name="numOfBaths"
-              type="Number" 
-              placeholder='Bathrooms'   />
+              name="state"
+              type="Text"
+              placeholder='State'   />
           </Control>
         </Field>
       </div>
       <div className="column">
         <Field>
-          <Label>Square Feet</Label>
+          <Label>Phone Number</Label>
           <Control>
               <Input 
-              value={this.state.propertySize}
+              value={this.state.phoneNumber}
               onChange={this.handleInputChange}
-              onKeyUp={this.formatThousands}
+              onKeyUp={this.formatPhoneNumber}
               onBlur={this.consoleLogInput}
-              name="propertySize"
-              type="Number" 
-              placeholder='Square Feet'   />
+              name="phoneNumber"
+              type="Text"
+              placeholder='Contact Number'   />
           </Control>
         </Field>
       </div>
@@ -289,7 +288,7 @@ handleFormSubmit = event => {
               onKeyUp={this.formatThousands}
               onBlur={this.consoleLogInput}
               name="price"
-              type="number" 
+              type="Text" 
               placeholder='Monthly Rent'   />
           </Control>
         </Field>
@@ -332,7 +331,7 @@ handleFormSubmit = event => {
               onKeyUp={this.formatThousands}
               onBlur={this.consoleLogInput}
               name="propertySize"
-              type="Number" 
+              type="Text" 
               placeholder='Square Feet'   />
           </Control>
         </Field>
@@ -356,7 +355,12 @@ handleFormSubmit = event => {
         <Field>
             <Label>Type</Label>
             <Control>
-                <Select>
+                <Select
+                value={this.state.propertyType}
+                onChange={this.handleInputChange}
+                onBlur={this.consoleLogInput}
+                name="propertyType"
+                >
                   <option>Select</option>
                     <option>Single Family</option>
                     <option>Apartment</option>
@@ -491,3 +495,9 @@ handleFormSubmit = event => {
   );
 }
 }
+const mapStateToProps = ({ auth }) => ({
+  user: auth.user
+});
+
+
+export default connect(mapStateToProps)(NewPropertyForm)
