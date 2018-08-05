@@ -102,6 +102,28 @@ router.post("/renter/application/create/", async (req, res) => {
 
 });
 
+// Create a property
+router.post("/propertyLike", async (req, res) => {
+    console.log("In post router", req.body.user.email)
+    try {
+    if (req.body) {
+        console.log(req.body)
+    } else {
+        console.log("No request body")
+    }
+    const newApplication = new Application(req.body);
+    const saveApplication = await newApplication.save();
+
+    console.log('--new Prop', saveApplication._id);
+    const populateRenter = await User.update({email: req.body.user.email}, {$push: {propertylike: mongoose.Types.ObjectId(saveApplication._id)}})
+    console.log(populateRenter)
+    res.send({sucess: true});
+    } catch(err) {
+        console.log(err)
+        res.sendStatus(400);
+    }
+
+});
 
 
 module.exports = router;
