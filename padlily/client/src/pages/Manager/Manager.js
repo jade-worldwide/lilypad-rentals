@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import {/* NewPropertyForm,*/ FormPageOne, FormPageTwo, FormPageThree, FormPageFour } from "../../components/NewPropertyForm";
+import NewPropertyForm from "../../components/NewPropertyForm/NewPropertyForm";
 import { PropertyList, /*Filters*/ } from "../../components/PropertyList";
 import { Container, Button, Modal, ModalCard, ModalBackground, /*ModalCardFooter, ModalCardHeader,*/ Delete, ModalCardBody } from 'bloomer';
 import StepZilla from "react-stepzilla";
@@ -12,13 +12,6 @@ import { connect } from 'react-redux';
 // import { bindActionCreators } from 'redux'
 import { Link } from "react-router-dom";
 
-const steps =
-  [
-    { name: 'Step 1', component: <FormPageOne /> },
-    { name: 'Step 2', component: <FormPageTwo /> },
-    { name: 'Step 3', component: <FormPageThree /> },
-    { name: 'Step 4', component: <FormPageFour /> }
-  ]
 
 const modalBG = { backgroundImage: `url(${modal})` }
 
@@ -29,6 +22,7 @@ export class Manager extends Component {
     user: {},
     properties: [],
     propertyNum: [],
+    applicationNum: [],
     propertyId: '',
     title: "Peter Panda"
   };
@@ -54,7 +48,7 @@ export class Manager extends Component {
   loadUser = () => {
     API.getUser(this.props.match.params.id)
       .then(res => {
-        this.setState({ user: res.data, propertyNum: res.data.property.length, propertyId: res.data.property })
+        this.setState({ user: res.data, applicationNum: res.data.application.length, propertyNum: res.data.property.length, propertyId: res.data.property })
         let userProp = (res.data.property)
         for (let peterPanda of userProp) {
           console.log("Property ID: ", peterPanda)
@@ -95,6 +89,7 @@ export class Manager extends Component {
               <Link to={"/property/" + properties._id}>
                 <PropertyList
                   title={properties.title}
+                  applicationNum={this.state.applicationNum}
                 />
               </Link>
             ))}
@@ -110,11 +105,7 @@ export class Manager extends Component {
                   <Delete onClick={this.modalClose} />
 
                   <div className='step-progress'>
-                    <StepZilla
-                      steps={steps}
-                      showSteps={false}
-                      nextButtonCls="button is-medium is-primary"
-                      backButtonCls="button is-medium is-primary"
+                    <NewPropertyForm
                     />
                   </div>
 

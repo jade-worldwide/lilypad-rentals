@@ -8,8 +8,6 @@ import { Container, Title, /*Image,*/ Box, Button, Subtitle } from 'bloomer';
 import house from './house.jpg';
 import "./Property.css";
 
-const mainImage = { backgroundImage: `url(${house})` }
-
 class Property extends Component {
   // Setting our component's initial state
   state = {
@@ -44,7 +42,7 @@ class Property extends Component {
 
 
   render() {
-
+    const mainImage = { backgroundImage: `url(${this.state.property.photos})` }
     return (
       <div className="Property">
         <div className="main-image" style={ mainImage }>
