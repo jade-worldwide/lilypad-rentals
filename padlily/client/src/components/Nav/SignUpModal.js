@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { /*ModalCardBody,*/ Button, Field, Control, Input, Label, Select } from 'bloomer';
+import { ModalCardBody, Button, Field, Control, Input, Label, Select } from 'bloomer';
 import { FormErrors } from './FormErrors';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux'

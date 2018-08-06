@@ -94,9 +94,6 @@ class Nav extends Component {
                   <NavbarItem>
                     <Link to={"/manager/" + user._id}><p>Manager Dashboard</p></Link>
                   </NavbarItem>
-                  <NavbarItem href="">
-                    <Link to={"/managertest"}><p>Create a Property</p></Link>
-                  </NavbarItem>
                 </Fragment>
               </span>)}
 
@@ -140,7 +137,8 @@ class Nav extends Component {
                 <ModalCardTitle></ModalCardTitle>
                 <Delete onClick={this.modalClose} />
               </ModalCardHeader>
-              <LoginModal />
+              <LoginModal 
+              close={this.modalClose}/>
               <ModalCardFooter hasTextAlign="centered">
                 <p>Already have an account? <Link to={""}>Log In</Link></p>
               </ModalCardFooter>
