@@ -86,16 +86,13 @@ class Nav extends Component {
             <span>
               {user.role === 'Renter' ? (<span>
                 <NavbarItem>
-                  <Link to={"/renter"}><p>Renter</p></Link>
+                  <Link to={"/renter/" + user._id}><p>Renter</p></Link>
                 </NavbarItem>
               </span>
               ) : (<span>
                 <Fragment>
                   <NavbarItem>
                     <Link to={"/manager/" + user._id}><p>Manager Dashboard</p></Link>
-                  </NavbarItem>
-                  <NavbarItem href="">
-                    <Link to={"/managertest"}><p>Create a Property</p></Link>
                   </NavbarItem>
                 </Fragment>
               </span>)}
@@ -140,7 +137,8 @@ class Nav extends Component {
                 <ModalCardTitle></ModalCardTitle>
                 <Delete onClick={this.modalClose} />
               </ModalCardHeader>
-              <LoginModal />
+              <LoginModal 
+              close={this.modalClose}/>
               <ModalCardFooter hasTextAlign="centered">
                 <p>Already have an account? <Link to={""}>Log In</Link></p>
               </ModalCardFooter>

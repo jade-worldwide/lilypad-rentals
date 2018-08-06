@@ -7,7 +7,6 @@ import Geocode from "react-geocode";
 import 'bulma/css/bulma.css';
 import "./NewPropertyForm.css";
 import ImageUploader from 'react-images-upload';
-import Dropzone from 'react-dropzone'
 
 // Cloudinary 
 let imageUrl;
@@ -21,10 +20,10 @@ Geocode.enableDebug();
 let price;
 let propertySize;
 
-class NewPropertyForm extends Component {
+export class NewPropertyForm extends Component {
 
   state = {
-    files: [],
+    file: "",
     property: [],
     title: "",
     address: "",
@@ -155,36 +154,6 @@ handleImageUpload = event => {
 
     })
 };
-
-handleDrop = files => {
-    // Push all the axios request promise into a single array
-    const uploaders = files.map(file => {
-      // Initial FormData
-      const formData = new FormData();
-      formData.append("file", file);
-      formData.append("tags", `codeinfuse, medium, gist`);
-      formData.append("upload_preset", "nre9efzy"); // Replace the preset name with your own
-      formData.append("api_key", "766338464336544"); // Replace API key with your own Cloudinary key
-      formData.append("timestamp", (Date.now() / 1000) | 0);
-      
-      // Make an AJAX upload request using Axios (replace Cloudinary URL below with your own)
-      return axios.post("https://api.cloudinary.com/v1_1/dkuhmdf7w/upload", formData, {
-        headers: { "X-Requested-With": "XMLHttpRequest" },
-      }).then(response => {
-        const data = response.data;
-        const fileURL = data.secure_url // You should store this URL for future references in your app
-        console.log(data);
-        this.setState({
-            files
-          });
-      })
-    });
-  
-    // Once all the files are uploaded 
-    axios.all(uploaders).then(() => {
-      // ... perform after upload is successful operation
-    });
-  }
 
 consoleLogInput = event => {
     const { name, value } = event.target;
@@ -508,32 +477,18 @@ handleFormSubmit = event => {
             name="file"
             value={this.state.file}
             className="file-upload"
-            />
-      </Control>
-    </Field>
-    <Field>
-      <Label>Upload Images</Label>
-      <Control>
-          <Input
-            onChange={this.handleImageUpload}
-            type="file"
-            accept="image/png, image/jpeg"
-            name="file"
-            value={this.state.file}
-            className="file-upload"
-            />
+            onChange={this.handleFileChange}/>
       </Control>
     </Field>
 
-<Dropzone 
-    onDrop={this.handleDrop}
-    onChange={this.handleImageUpload} 
-    multiple 
-    accept="image/*" 
-
->
-    <p>Drop your files or click here to upload</p>
-</Dropzone>
+    <ImageUploader
+      withIcon={true}
+      buttonText='Choose images'
+      onChange={this.onDrop}
+      imgExtension={['.jpg', '.gif', '.png', '.gif']}
+      maxFileSize={5242880}
+      withPreview={true}
+      />
 
     <Button onClick={this.handleFormSubmit} isColor='primary' className=""><p>Submit</p></Button>
           </Container>
