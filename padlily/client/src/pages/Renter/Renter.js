@@ -1,10 +1,13 @@
 import React, { Component } from "react";
-import RenterApplication from "../../components/RenterApplication/RenterApplication";
+import  RenterApplication from "../../components/RenterApplication/RenterApplication";
 import { Container, Button, Modal, ModalCard, ModalCardTitle, ModalBackground, ModalCardFooter, ModalCardHeader, Delete, ModalCardBody } from "bloomer";
 import { ResultsList } from "../../components/ResultsList";
 import "./Renter.css";
 import modal from "./modal-bg.svg";
+
 import API from "../../utils/API";
+import { connect } from 'react-redux';
+import { Link } from "react-router-dom";
 
 const modalBG = { backgroundImage: `url(${modal})` }
 
@@ -35,14 +38,13 @@ class Renter extends Component {
 
   componentDidMount() {
     this.loadUser();
-    // this.loadProperties();
   }
 
   loadUser = () => {
     API.getUser(this.props.match.params.id)
       .then(res => {
-        this.setState({ user: res.data, propertyNum: res.data.property.length, propertyId: res.data.property })
-        let userProp = (res.data.property)
+        this.setState({ user: res.data, propertyNum: res.data.propertylike.length, propertyId: res.data.propertylike })
+        let userProp = (res.data.propertylike)
         for (let peterPanda of userProp) {
           console.log("Property ID: ", peterPanda)
           API.getProperty(peterPanda)
@@ -74,7 +76,19 @@ class Renter extends Component {
           </div>
 
           <h1 className="title has-text-centered">Liked Properties</h1>
-          <ResultsList />
+          <div>
+            {this.state.properties.map(properties => (
+              <Link to={"/property/" + properties._id}>
+                <ResultsList
+                  title={properties.title}
+                  price={properties.price}
+                  numOfBeds={properties.numOfBeds}
+                  propertySize={properties.propertySize}
+                  photos={properties.photos}
+                />
+              </Link>
+            ))}
+          </div>
 
         </Container>
 
@@ -97,4 +111,9 @@ class Renter extends Component {
   }
 }
 
-export default Renter;
+const mapStateToProps = ({ auth }) => ({
+  user: auth.user,
+  authError: auth.authError
+});
+
+export default connect(mapStateToProps)(Renter)

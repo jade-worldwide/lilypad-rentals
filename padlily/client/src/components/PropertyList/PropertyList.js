@@ -26,7 +26,7 @@ export const PropertyList = props => (
             </div>
           </td>
           <td>
-            <Button isColor='primary' className="is-small"><p>View 4</p></Button>
+            <Button isColor='primary' className="is-small"><p>View {props.applicationNum}</p></Button>
 
           </td>
           <td>

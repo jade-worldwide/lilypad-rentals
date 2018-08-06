@@ -12,6 +12,7 @@ import { connect } from 'react-redux';
 // import { bindActionCreators } from 'redux'
 import { Link } from "react-router-dom";
 
+
 const modalBG = { backgroundImage: `url(${modal})` }
 
 export class Manager extends Component {
@@ -21,6 +22,7 @@ export class Manager extends Component {
     user: {},
     properties: [],
     propertyNum: [],
+    applicationNum: [],
     propertyId: '',
     title: "Peter Panda"
   };
@@ -46,7 +48,7 @@ export class Manager extends Component {
   loadUser = () => {
     API.getUser(this.props.match.params.id)
       .then(res => {
-        this.setState({ user: res.data, propertyNum: res.data.property.length, propertyId: res.data.property })
+        this.setState({ user: res.data, applicationNum: res.data.application.length, propertyNum: res.data.property.length, propertyId: res.data.property })
         let userProp = (res.data.property)
         for (let peterPanda of userProp) {
           console.log("Property ID: ", peterPanda)
@@ -87,6 +89,7 @@ export class Manager extends Component {
               <Link to={"/property/" + properties._id}>
                 <PropertyList
                   title={properties.title}
+                  applicationNum={this.state.applicationNum}
                 />
               </Link>
             ))}
@@ -100,8 +103,11 @@ export class Manager extends Component {
 
                 <ModalCardBody>
                   <Delete onClick={this.modalClose} />
-                  <NewPropertyForm />
-                  
+
+                  <div className='step-progress'>
+                    <NewPropertyForm
+                    />
+                  </div>
 
                 </ModalCardBody>
 
