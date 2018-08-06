@@ -24,11 +24,9 @@ export const signup = ({ name, email, phonenumber, password, role }) => async di
                 payload: data.user
             })
         }
-        console.log('--success', data);
 
     } catch (error) {
         console.error(error);
-        console.log('Come on work damnit')
     }
 }
 
@@ -44,7 +42,6 @@ export const login = ({ email, password }) => async dispatch => {
             type: IS_AUTHENTICATED,
             payload: data.user
         });
-        console.log('--success', data.user.name);
     } catch (error) {
         dispatch({
             type: AUTHENTICATION_FAILED,
@@ -61,8 +58,9 @@ export const getAuthenticated = () => async dispatch => {
         if (data) {
             dispatch({
                 type: IS_AUTHENTICATED,
-                payload: data
+                payload: data.user
             });
+            console.log(data);
         } else {
             console.log('ssss', error)
         }

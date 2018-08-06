@@ -85,4 +85,6 @@ export default {
   getUser: function (id) {
     return axios.get("/api/users/manager/" + id);
   },
+  sendApplication: (data) => axios.put('/renter/application/request', data),
+  sendProductTaste: (data) => axios.put('/api/users/update', data) 
 };

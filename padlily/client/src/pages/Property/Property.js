@@ -1,6 +1,9 @@
 import React, { Component } from "react";
+import {connect} from 'react-redux';
+import { bindActionCreators } from 'redux';
 import LightBox from "../../components/LightBox";
 import API from "../../utils/API";
+import {sendApplication, productTaste} from '../../actions/propertyActions';
 import { Container, Title, /*Image,*/ Box, Button, Subtitle } from 'bloomer';
 import house from './house.jpg';
 import "./Property.css";
@@ -10,18 +13,38 @@ const mainImage = { backgroundImage: `url(${house})` }
 class Property extends Component {
   // Setting our component's initial state
   state = {
-    property: {}
+    property: {},
+    liked: null,
+    shared: "copy-url",
   };
 
-    // When the component mounts, load all properties and save them to this.state.properties
-    componentDidMount() {
-      API.getProperty(this.props.match.params.id)
-        .then(res => this.setState({ property: res.data }))
-        .catch(err => console.log(err));
-    }
+   // When the component mounts, load all properties and save them to this.state.properties
+   componentDidMount() {
+    API.getProperty(this.props.match.params.id)
+      .then(res => this.setState({ property: res.data }))
+      .catch(err => console.log(err));
+  }
+
+
+
+  toggleLikeProperty = () => {
+
+    const { productTaste, auth: { user: { _id } } } = this.props;
+    const { property: { _id: propertyId }, liked } = this.state;
+    this.setState({liked: !liked});
+    productTaste({userId: _id, propertyId, likeStatus:  !liked});
+  }
+  
+
+  onSendApplication() {
+    const { onSendApplication, auth: { user: { email } } } = this.props;
+    const {property: { _id }} = this.state;
+    onSendApplication({userEmail: email, propertyId: _id});
+  }
 
 
   render() {
+
     return (
       <div className="Property">
         <div className="main-image" style={ mainImage }>
@@ -31,7 +54,8 @@ class Property extends Component {
             </div>
             <div className="buttons-right">
               <Button isColor='white'><p><i className="far fa-share-square"></i>  Share</p></Button>
-              <Button isColor='white' className="like-button"><p><i className="far fa-heart"></i>  Like</p></Button>
+              <Button isColor='white' className="like-button" onClick={this.toggleLikeProperty}><p>
+                <i className={this.state.liked ? 'fas fa-heart is-liked' : 'far fa-heart'}></i> Liked</p></Button>
             </div>
           </Container>
         </div>
@@ -46,7 +70,7 @@ class Property extends Component {
               </div>
             </div>
             <div className="apply-button">
-              <Button isColor='primary'><p>Send Application</p></Button>
+              <Button isColor='primary' onClick={() => this.onSendApplication()}><p>Send Application</p></Button>
             </div>
           </div>
 
@@ -138,4 +162,13 @@ class Property extends Component {
   }
 }
 
-export default Property;
+const mapStateToProps = ({auth, property}) => ({
+  auth,
+  property
+})
+
+const mapDispatchToProps = (dispatch) => ({
+  onSendApplication:  bindActionCreators(sendApplication, dispatch),
+  productTaste: bindActionCreators(productTaste, dispatch)
+})
+export default connect(mapStateToProps, mapDispatchToProps)(Property);
