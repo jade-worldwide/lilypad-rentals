@@ -76,6 +76,29 @@ router.delete("/property/delete/:id", (req, res) => {
         .catch(err => res.status(422).json(err));
 });
 
+router.put("/renter/application/request", async (req, res) => {
+    try {
+    const {propertyId, applicationId, userEmail} = req.body;
+    console.log('--new Prop', propertyId, userEmail);
+    
+    const getUserApplication = await Application.findOne({emailAddress: userEmail});
+    console.log(getUserApplication, '--current')
+    const populateProperty = await Property.update({
+        _id: propertyId
+    }, 
+    {$push: {
+            application: mongoose.Types.ObjectId(getUserApplication._id)
+        }
+    })
+    console.log(populateProperty)
+    res.send({sucess: true});
+    } catch(err) {
+        console.log(err)
+        res.sendStatus(400);
+    }
+
+});
+
 
 // Start of Applications
 
@@ -99,7 +122,6 @@ router.post("/renter/application/create/", async (req, res) => {
         console.log(err)
         res.sendStatus(400);
     }
-
 });
 
 // Create a property

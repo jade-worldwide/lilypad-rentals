@@ -77,7 +77,11 @@ const PropertySchema = new Schema({
   date: {
     type: Date,
     default: Date.now
-  }
+  },
+  application: [{
+		type: Schema.Types.ObjectId,
+		ref: "Application"
+	}]
 });
 
 

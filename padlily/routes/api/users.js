@@ -112,7 +112,7 @@ router.post('/login', function(req, res, next) {
 
 router.get('/authenticated', (req, res) => {
 	if(req.user) {
-		res.send({success: true});
+		res.send({success: true, user: req.user});
 	} else {
 		res.send(null)
 	}
@@ -134,6 +134,31 @@ router.get("/manager/:id", (req, res) => {
             .catch(err => res.status(422).json(err));
     }
 });
+
+router.put('/update', async (req, res) => {
+	const {userId, propertyId, likeStatus} = req.body;
+	const getUser = await User.findById(userId);
+	console.log('asis', getUser.propertylike);
+	const getLikedProducts = getUser.propertylike;
+	console.log('--getting the like', likeStatus, getLikedProducts.indexOf(propertyId), getLikedProducts);
+
+	if(likeStatus && getLikedProducts.indexOf(propertyId) === -1) {
+		//add too array if it doesn't already exist
+		getLikedProducts.push(propertyId);
+		console.log('---pushed', getLikedProducts);
+		await User.findByIdAndUpdate(userId, {$set: {propertylike: getLikedProducts} })
+		res.send({success: true, user: getUser});
+		return;
+	} else if(!likeStatus && getLikedProducts.indexOf(propertyId) > -1) {
+		const getIndex = getLikedProducts.indexOf(propertyId);
+		getLikedProducts.splice(getIndex, 1);
+		console.log(getLikedProducts, '---unlike');
+		await User.findByIdAndUpdate(userId, {$set: {propertylike: getLikedProducts} })
+		res.send({success: true, user: getUser});
+		return;
+	}
+	//res.send({success: true, user: getUser})
+})
 
 
 module.exports = router;
