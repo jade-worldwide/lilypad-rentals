@@ -5,7 +5,7 @@ import "./RenterApplication.css";
 import { connect } from 'react-redux';
 import API from "../../utils/API";
 
-import { Z_STREAM_ERROR } from "zlib";
+// import { Z_STREAM_ERROR } from "zlib";
 
 let income;
 
@@ -42,55 +42,58 @@ class RenterApplication extends Component {
   };
 
   formatPhoneNumber = event => {
-        
-        let {name, value } = event.target
-        let numbers = value.replace(/\D/g, '')
-        let char = { 0: '(', 3: ') ', 6: '-' };
-        value = '';
 
-        for (var i = 0; i < numbers.length; i++) {
-            this.setState({[name]: value += (char[i] || '') + numbers[i]})
-        }
+    let { name, value } = event.target
+    let numbers = value.replace(/\D/g, '')
+    let char = { 0: '(', 3: ') ', 6: '-' };
+    value = '';
+
+    for (var i = 0; i < numbers.length; i++) {
+      this.setState({ [name]: value += (char[i] || '') + numbers[i] })
+    }
   }
 
   formatThousands = event => {
 
-      let {name, value} = event.target;
-      let x;
-      let x1;
-      let x2;
-      let number = value.replace(/,/g, "")
-      value = "";
-      number += '';
-      x = number.split('.');
-      x1 = x[0];
-      x2 = x.length > 1 ? '.' + x[1] : '';
+    let { name, value } = event.target;
+    let x;
+    let x1;
+    let x2;
+    let number = value.replace(/,/g, "")
+    value = "";
+    number += '';
+    x = number.split('.');
+    x1 = x[0];
+    x2 = x.length > 1 ? '.' + x[1] : '';
 
-      var rgx = /(\d+)(\d{3})/;
+    var rgx = /(\d+)(\d{3})/;
 
-      while (rgx.test(x1)) {
-          x1 = x1.replace(rgx, '$1' + ',' + '$2');
-      }
-      this.setState({[name]: value = x1 + x2})
+    while (rgx.test(x1)) {
+      x1 = x1.replace(rgx,
+        '$1' +
+        ',' +
+        '$2');
+    }
+    this.setState({ [name]: value = x1 + x2 })
 
-      // Unformat PropertySize & Price in before we push into database
-      income = this.state.income.replace( /,/g, "" )
+    // Unformat PropertySize & Price in before we push into database
+    income = this.state.income.replace(/,/g, "")
   }
-    consoleLogInput = event => {
+  consoleLogInput = event => {
     const { name, value } = event.target;
 
     console.log(`${name}: ${value}`)
 
-    }
+  }
   handleFormSubmit = event => {
     event.preventDefault();
     const { user } = this.props;
-    this.state.name = this.state.firstName + '' + this.state.lastName;
-    console.log(user)
-    if (this.state.name) {
+    const fullName = `${this.state.firstName} ${this.state.lastName}`;
+    console.log("Name =>", fullName)
+    if (fullName) {
       console.log("Submitting")
       API.saveApplication({
-        name: this.state.name,
+        name: fullName,
         emailAddress: this.state.emailAddress,
         phonenumber: this.state.phonenumber,
         currentAddress: this.state.currentAddress,
@@ -115,7 +118,7 @@ class RenterApplication extends Component {
   };
 
   render() {
-    const { user } = this.props;
+    // const { user } = this.props;
     return (
       <Container>
         <div className="columns">
@@ -139,8 +142,7 @@ class RenterApplication extends Component {
                   onChange={this.handleInputChange}
                   onBlur={this.consoleLogInput}
                   name="emailAddress"
-                  type="Text"
-                  type="Email" />
+                  type="Text" />
               </Control>
             </Field>
           </div>

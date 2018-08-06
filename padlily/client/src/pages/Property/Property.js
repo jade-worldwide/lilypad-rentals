@@ -5,7 +5,7 @@ import LightBox from "../../components/LightBox";
 import API from "../../utils/API";
 import {sendApplication, productTaste} from '../../actions/propertyActions';
 import { Container, Title, /*Image,*/ Box, Button, Subtitle } from 'bloomer';
-import house from './house.jpg';
+// import house from './house.jpg';
 import "./Property.css";
 
 class Property extends Component {

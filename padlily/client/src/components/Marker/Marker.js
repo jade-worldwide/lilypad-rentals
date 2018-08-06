@@ -9,7 +9,7 @@ class Marker extends Component {
         return (
             <div className="lily" onClick={this.props.onClick}>
                 {/* Replace src={lilypad} with whatever icon that you want */}
-                <img width="20px" src={this.props.image} /> 
+                <img width="20px" alt="" src={this.props.image} /> 
                 {
                     this.props.isBoxVisible ? (
                         <Dispbox 
