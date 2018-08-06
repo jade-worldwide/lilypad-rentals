@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import  RenterApplication from "../../components/RenterApplication/RenterApplication";
-import { Container, Button, Modal, ModalCard, ModalCardTitle, ModalBackground, ModalCardFooter, ModalCardHeader, Delete, ModalCardBody } from "bloomer";
+import { Container, Button, Modal, ModalCard, /*ModalCardTitle,*/ /*ModalBackground, ModalCardFooter, ModalCardHeader,*/ Delete, ModalCardBody } from "bloomer";
 import { ResultsList } from "../../components/ResultsList";
 import "./Renter.css";
 import modal from "./modal-bg.svg";
