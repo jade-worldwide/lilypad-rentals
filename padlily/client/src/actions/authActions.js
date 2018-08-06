@@ -57,14 +57,13 @@ export const login = ({ email, password }) => async dispatch => {
 export const getAuthenticated = () => async dispatch => {
     try {
         const { data, error } = await API.getAuthenticated();
-        console.log(data);
         if (data) {
             dispatch({
                 type: IS_AUTHENTICATED,
                 payload: data
             });
         } else {
-            console.log('ssss', error)
+            console.log(error)
         }
         // if(getUser) login
         //else logout

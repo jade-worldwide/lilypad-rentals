@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import NewPropertyForm from "../../components/NewPropertyForm/NewPropertyForm";
 import { PropertyList, /*Filters*/ } from "../../components/PropertyList";
 import { Container, Button, Modal, ModalCard, ModalBackground, /*ModalCardFooter, ModalCardHeader,*/ Delete, ModalCardBody } from 'bloomer';
-import StepZilla from "react-stepzilla";
+// import StepZilla from "react-stepzilla";
 import modal from "./modal-bg.svg";
 import "./Manager.css";
 // import { login } from '../../actions/authActions'

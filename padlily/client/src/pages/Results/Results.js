@@ -1,6 +1,6 @@
 import "./Results.css";
 import React, { Component } from "react";
-import { ResultsList, Filters } from "../../components/ResultsList";
+import { ResultsList} from "../../components/ResultsList";
 import { Field, Control, Select, Input, Button } from 'bloomer';
 import { GoogleMap } from "../../components/GoogleMap";
 import { Link, withRouter } from "react-router-dom";

@@ -58,8 +58,9 @@ export class LocationSearchInput extends React.Component {
 
     console.log("City: ", city)
     console.log("State: ", state)
-    // console.log('props', this, this.props)
-    window.location.href = "http://localhost:3000/results?city=" + city + "&state=" + state;
+    let site = window.location.href
+    console.log("Site ->", site)
+    window.location.href = site + "results?city=" + city + "&state=" + state;
 
   }
 

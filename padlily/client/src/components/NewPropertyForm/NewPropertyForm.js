@@ -6,7 +6,7 @@ import axios from "axios";
 import Geocode from "react-geocode";
 import 'bulma/css/bulma.css';
 import "./NewPropertyForm.css";
-import ImageUploader from 'react-images-upload';
+// import ImageUploader from 'react-images-upload';
 import Dropzone from 'react-dropzone'
 
 // Cloudinary 
@@ -172,7 +172,7 @@ handleDrop = files => {
         headers: { "X-Requested-With": "XMLHttpRequest" },
       }).then(response => {
         const data = response.data;
-        const fileURL = data.secure_url // You should store this URL for future references in your app
+        // const fileURL = data.secure_url // You should store this URL for future references in your app
         console.log(data);
         this.setState({
             files
@@ -233,7 +233,7 @@ handleFormSubmit = event => {
 
 
   render() {
-    const { user } = this.props;
+    // const { user } = this.props;
     return (
             <Container>
               <h1 className="title has-text-centered">New Property</h1>

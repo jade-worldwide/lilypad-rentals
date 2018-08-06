@@ -55,7 +55,7 @@ class Nav extends Component {
 
   render() {
     const { user } = this.props;
-    console.log(user);
+    console.log("In Nav =>", user);
     return (
       <Navbar className="navbar">
         <NavbarBrand>

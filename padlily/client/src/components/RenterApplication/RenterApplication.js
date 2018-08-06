@@ -5,7 +5,7 @@ import "./RenterApplication.css";
 import { connect } from 'react-redux';
 import API from "../../utils/API";
 
-import { Z_STREAM_ERROR } from "zlib";
+// import { Z_STREAM_ERROR } from "zlib";
 
 let income;
 
@@ -85,12 +85,13 @@ class RenterApplication extends Component {
   handleFormSubmit = event => {
     event.preventDefault();
     const { user } = this.props;
-    this.state.name = this.state.firstName + '' + this.state.lastName;
+    const fullName = `${this.state.firstName} ${this.state.lastName}`;
+    console.log("Name =>", fullName)
     console.log(user)
-    if (this.state.name) {
+    if (fullName) {
       console.log("Submitting")
       API.saveApplication({
-        name: this.state.name,
+        name: fullName,
         emailAddress: this.state.emailAddress,
         phonenumber: this.state.phonenumber,
         currentAddress: this.state.currentAddress,
@@ -115,7 +116,7 @@ class RenterApplication extends Component {
   };
 
   render() {
-    const { user } = this.props;
+    // const { user } = this.props;
     return (
       <Container>
         <div className="columns">
@@ -139,8 +140,7 @@ class RenterApplication extends Component {
                   onChange={this.handleInputChange}
                   onBlur={this.consoleLogInput}
                   name="emailAddress"
-                  type="Text"
-                  type="Email" />
+                  type="Text"/>
               </Control>
             </Field>
           </div>

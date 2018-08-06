@@ -2,16 +2,14 @@ import React, { Component } from "react";
 import LightBox from "../../components/LightBox";
 import API from "../../utils/API";
 import { Container, Title, Box, Button, Subtitle, Notification,Delete } from 'bloomer';
-import house from './house.jpg';
 import "./Property.css";
 import {CopyToClipboard} from 'react-copy-to-clipboard';
 import { connect } from 'react-redux';
-const mainImage = { backgroundImage: `url(${house})` }
 
 class Property extends Component {
   // Setting our component's initial state
   state = {
-    property: {},
+    property: [],
     liked: "far fa-heart",
     shared: "copy-url",
   };
@@ -24,7 +22,7 @@ class Property extends Component {
     }
 
     showLiked = () => {
-      const { user } = this.props;
+      // const { user } = this.props;
       API.saveLike(this.props.match.params.id)
       .then(res => {
         this.setState({ property: res.data})
@@ -46,12 +44,19 @@ class Property extends Component {
     }
 
   render() {
+    // const { user } = this.props;
+    
+    // let mainPic = this.state.property.photos
+    // console.log("Main Pic =>", mainPic)
+    const mainImage = { backgroundImage: `url(${this.state.property.photos})` }
     return (
       <div className="property">
         <div className="main-image" style={ mainImage }>
           <Container className="property-container image-buttons">
             <div className="buttons-left">
-              <LightBox />
+              <LightBox
+              property={this.state.property}
+              />
             </div>
             <div className="buttons-right">
             <CopyToClipboard text={window.location.href}>
@@ -68,7 +73,7 @@ class Property extends Component {
         <Container className="property-container">
           <div className="property-header">
             <div className="title-info">
-              <Title className="property-title">{this.state.property.title}</Title>
+              <span><Title className="property-title">{this.state.property.title}</Title></span>
               <div className="property-overview">
                 <span className="property-attribute"><p><i className="fas fa-dollar-sign"></i> {this.state.property.price} Month</p></span>
                 <span className="property-attribute"><p><i className="fas fa-bed"></i> {this.state.property.numOfBeds} Bedrooms</p></span>
