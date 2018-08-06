@@ -55,7 +55,6 @@ class Nav extends Component {
 
   render() {
     const { user } = this.props;
-    console.log(user);
     return (
       <Navbar className="navbar">
         <NavbarBrand>
