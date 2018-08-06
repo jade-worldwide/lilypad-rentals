@@ -6,6 +6,10 @@ import house from './house.jpg';
 import "./Property.css";
 import {CopyToClipboard} from 'react-copy-to-clipboard';
 import { connect } from 'react-redux';
+
+import { getAuthenticated } from '../../actions/authActions'
+import { bindActionCreators } from 'redux'
+
 const mainImage = { backgroundImage: `url(${house})` }
 
 class Property extends Component {
@@ -25,15 +29,16 @@ class Property extends Component {
 
     showLiked = () => {
       const { user } = this.props;
-      API.saveLike(this.props.match.params.id)
+      API.getProperty(this.props.match.params.id)
+      API.saveLike({user})
       .then(res => {
-        this.setState({ property: res.data})
+        console.log("You Did it")
       })
       .catch(err => console.log(err));
       this.setState({ liked: "fas fa-heart is-liked" })
       console.log(this.props.match.params.id);
     }
-  
+
     unlike = () => {
       this.setState({ liked: "far fa-heart" })
     }
@@ -46,6 +51,8 @@ class Property extends Component {
     }
 
   render() {
+    const { user } = this.props;
+
     return (
       <div className="property">
         <div className="main-image" style={ mainImage }>
@@ -169,8 +176,11 @@ class Property extends Component {
 }
 
 const mapStateToProps = ({ auth }) => ({
-  user: auth.user,
-  authError: auth.authError
+  user: auth.user
 });
 
-export default connect(mapStateToProps)(Property)
+const mapDispatchToProps = dispatch => ({
+  getAuthenticated: bindActionCreators(getAuthenticated, dispatch),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Property)

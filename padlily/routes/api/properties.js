@@ -111,11 +111,11 @@ router.post("/propertyLike", async (req, res) => {
     } else {
         console.log("No request body")
     }
-    const newApplication = new Application(req.body);
-    const saveApplication = await newApplication.save();
+    const newProperty = new PropertyLike(req.body);
+    const saveProperty = await newProperty.save();
 
-    console.log('--new Prop', saveApplication._id);
-    const populateRenter = await User.update({email: req.body.user.email}, {$push: {propertylike: mongoose.Types.ObjectId(saveApplication._id)}})
+    console.log('--new Prop', saveProperty._id);
+    const populateRenter = await User.update({email: req.body.user.email}, {$push: {propertylike: mongoose.Types.ObjectId(saveProperty._id)}})
     console.log(populateRenter)
     res.send({sucess: true});
     } catch(err) {
