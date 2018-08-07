@@ -70,3 +70,15 @@ td.list-like {
 .is-liked {
   color: #f44336;
 }
+
+.field {
+    width: 100%;
+}
+
+.slider-output {
+    display: flex;
+}
+
+.max {
+  margin-left: 10px;
+}
