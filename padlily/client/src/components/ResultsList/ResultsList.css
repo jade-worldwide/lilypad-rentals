@@ -30,9 +30,13 @@ td.list-image {
   justify-content: space-around;
   position: fixed;
   background-color: #ffffff;
-  z-index: -1;
+  z-index: 0;
   height: calc(100vh - 53px);
   border-right: 1px solid #f5f5f5;
+}
+
+.results-column {
+  z-index: 1;
 }
 
 .apply-filters {
@@ -42,4 +46,27 @@ td.list-image {
 .results-title {
   font-size: 1.2em;
   font-weight: 500;
+}
+
+.results-column {
+  z-index: 1;
+  background-color: #ffffff;
+}
+
+.results-row {
+  display: flex;
+  justify-content: space-between;
+
+}
+
+.results-info {
+  flex-grow: 2;
+}
+
+td.list-like {
+  align-self: center;
+}
+
+.is-liked {
+  color: #f44336;
 }

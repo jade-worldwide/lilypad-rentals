@@ -2,6 +2,7 @@ import React from "react";
 import { Table, /*Image, Subtitle,*/ Button } from 'bloomer';
 import 'bulma/css/bulma.css';
 import "./PropertyList.css";
+import { Link } from "react-router-dom";
 
 export const PropertyList = props => (
   <div className="property-list">
@@ -18,7 +19,7 @@ export const PropertyList = props => (
       <tbody>
         <tr>
           <td>
-            <p>{props.title}</p>
+          <Link to={"/property/" + props._id}><p>{props.title}</p></Link>
           </td>
           <td className="rented-column">
             <div class="field">

@@ -1,6 +1,6 @@
 import "./Results.css";
 import React, { Component } from "react";
-import { ResultsList, /*Filters*/ } from "../../components/ResultsList";
+import { ResultsList, Filters } from "../../components/ResultsList";
 import { Field, Control, Select, Input, Button } from 'bloomer';
 import { GoogleMap } from "../../components/GoogleMap";
 import { Link, withRouter } from "react-router-dom";
@@ -92,10 +92,11 @@ class Results extends Component {
 
     return (
       <div className="results">
+        <Filters handler = {this.handler} />
         <div className={this.state.show}>
           <div className="column results-column list-column">
             <div className="filter-header">
-              <Button isColor='primary' className="show-filters" onClick={this.filtersShow}><p>Filters</p></Button>
+              <Button isColor='primary' className="show-filters" onClick={this.state.show === "columns results-columns" ? this.filtersShow : this.filtersHide}><p>Filters</p></Button>
             </div>
             <div className="result-list">
               <Field>
