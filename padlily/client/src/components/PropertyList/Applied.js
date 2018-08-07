@@ -55,8 +55,8 @@ class Applied extends Component {
       .catch(err => console.log(err));
   }
   render() {
-    console.log("--application inside applied " + this.state.applications)
-    console.log("the user id yo " + this.state.user._id);
+    // console.log("--application inside applied " + this.state.applications)
+    // console.log("the user id yo " + this.state.user._id);
     return (
       <div className="property-list">
         {this.state.applications.map(application => (
