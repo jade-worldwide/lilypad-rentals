@@ -94,8 +94,9 @@ class SignUpModal extends Component {
         <div className="column">
           <h1 className="title user-title">Almost Home!</h1>
           <FormErrors formErrors={this.state.formErrors} />
+
           <h1 style={{ color: "red" }}>
-            {this.props.user ? this.props.user : ''}
+            {/* {this.props.user ? this.props.user : ''} */}
           </h1>
           <Field>
             <Control>

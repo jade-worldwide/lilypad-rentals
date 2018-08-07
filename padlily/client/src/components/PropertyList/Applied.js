@@ -3,152 +3,190 @@ import { Label, Input } from 'bloomer';
 import 'bulma/css/bulma.css';
 import "./PropertyList.css";
 import {
-    Accordion,
-    AccordionItem,
-    AccordionItemTitle,
-    AccordionItemBody,
+  Accordion,
+  AccordionItem,
+  AccordionItemTitle,
+  AccordionItemBody,
 } from 'react-accessible-accordion';
 import 'react-accessible-accordion/dist/fancy-example.css';
+import API from "../../utils/API";
+import { connect } from 'react-redux';
 
-
-export class Applied extends Component {
+class Applied extends Component {
   // Setting our component's initial state
+  state = {
+    modal: "",
+    user: {},
+    properties: [],
+    applications: [],
+    propertyNum: [],
+    applicationNum: [],
+    propertyId: '',
+    applicationId: ''
 
+  };
+  componentDidMount() {
+    this.loadUser();
+    // this.loadProperties();
+  }
 
+  loadUser = () => {
+    const { user } = this.props;
+    API.getUser(user._id)
+      .then(res => {
+        this.setState({ user: res.data, propertyNum: res.data.property.length, propertyId: res.data.property })
+        let userProp = (res.data.property)
+        for (let peterPanda of userProp) {
+          console.log("Property ID: ", peterPanda)
+          API.getProperty(peterPanda)
+            .then(res => {
+              this.setState({ properties: this.state.properties.concat(res.data), applicationNum: res.data.application.length, applicationId: res.data.application })
+              let userApp = (res.data.application)
+              for (let clydeFrog of userApp) {
+                console.log("Application ID: ", clydeFrog)
+                API.getApplication(clydeFrog)
+                  .then(res =>
+                    this.setState({ applications: this.state.applications.concat(res.data) })
+                  )
+              }
+            })
+        }
+      })
+      .catch(err => console.log(err));
+  }
   render() {
+    console.log("--application inside applied " + this.state.applications)
+    console.log("the user id yo " + this.state.user._id);
     return (
       <div className="property-list">
+        {this.state.applications.map(application => (
 
-                          <AccordionItem>
-                              <AccordionItemTitle>
-                                  <h3>Renter User Name</h3>
-                              </AccordionItemTitle>
-                              <AccordionItemBody>
+          <AccordionItem>
+            <AccordionItemTitle>
+              <h3>{application.firstName} {application.lastName}</h3>
+            </AccordionItemTitle>
+            <AccordionItemBody>
 
-                                    <div className="columns">
+              <div className="columns">
 
-                                      <div className="column">
-                                        <div>
-                                          <Label>First Name</Label>
-                                              <p>Andrew</p>
-                                        </div>
+                <div className="column">
+                  <div>
+                    <Label>First Name</Label>
+                    <p>{application.firstName}</p>
+                  </div>
 
-                                        <div>
-                                          <Label>Email</Label>
-                                              <p>andrew@gmail.com</p>
-                                        </div>
-                                      </div>
+                  <div>
+                    <Label>Email</Label>
+                    <p>{application.emailAddress}</p>
+                  </div>
+                </div>
 
-                                      <div className="column">
-                                        <div>
-                                          <Label>Last Name</Label>
-                                              <p>Hemans</p>
-                                        </div>
+                <div className="column">
+                  <div>
+                    <Label>Last Name</Label>
+                    <p>{application.lastName}</p>
+                  </div>
 
-                                          <div>
-                                            <Label>Phone Number</Label>
-                                                <p>209-867-5309</p>
-                                          </div>
+                  <div>
+                    <Label>Phone Number</Label>
+                    <p>{application.phoneNumber}</p>
+                  </div>
 
-                                      </div>
+                </div>
 
-                                    </div>
+              </div>
 
-                                    <div>
-                                      <Label>Current Address</Label>
-                                          <p>400 Elm Street Stockton CA 95205</p>
-                                    </div>
+              <div>
+                <Label>Current Address</Label>
+                <p>{application.currentAddress}</p>
+              </div>
+              <div className="columns">
+                <div className="column">
 
+                  <div>
+                    <Label>Reference Name</Label>
+                    <p>{application.referenceName1}</p>
+                  </div>
 
+                  <div>
+                    <Label>Reference Name</Label>
+                    <p>{application.referenceName2}</p>
+                  </div>
 
-                                    <div className="columns">
-                                      <div className="column">
+                </div>
 
-                                        <div>
-                                          <Label>Reference Name</Label>
-                                              <p>Michael Scott</p>
-                                        </div>
+                <div className="column">
+                  <div>
+                    <Label>Reference Phone Number</Label>
+                    <p>{application.referencePhoneNumber1}</p>
+                  </div>
 
-                                        <div>
-                                          <Label>Reference Name</Label>
-                                              <p>Tobias Funke</p>
-                                        </div>
+                  <div>
+                    <Label>Reference Phone Number</Label>
+                    <p>{application.referencePhoneNumber2}</p>
+                  </div>
 
-                                      </div>
+                </div>
+              </div>
 
-                                      <div className="column">
-                                        <div>
-                                          <Label>Reference Phone Number</Label>
-                                              <p>209-867-5309</p>
-                                        </div>
+              <div className="columns">
+                <div className="column">
 
-                                        <div>
-                                          <Label>Reference Phone Number</Label>
-                                              <p>209-555-3241</p>
-                                        </div>
+                  <div>
+                    <Label>Place of Employment</Label>
+                    <p>{application.currentEmployment}</p>
+                  </div>
+                </div>
 
-                                      </div>
-                                    </div>
+                <div className="column">
 
-                                    <div className="columns">
-                                      <div className="column">
+                  <div>
+                    <Label>Workplace Phone Number</Label>
+                    <p>{application.employmentPhoneNumber}</p>
+                  </div>
 
-                                      <div>
-                                        <Label>Place of Employment</Label>
-                                            <p>Vandelay Indusdtries</p>
-                                      </div>
-                                      </div>
+                </div>
 
-                                      <div className="column">
+                <div className="column">
+                  <Label>Annual Salary</Label>
+                  <p>{application.income}</p>
+                  <div>
 
-                                        <div>
-                                          <Label>Workplace Phone Number</Label>
-                                              <p>414-555-9786</p>
-                                        </div>
+                  </div>
 
-                                      </div>
+                </div>
 
-                                      <div className="column">
-                                        <Label>Annual Salary</Label>
-                                            <p>$120,000</p>
-                                      <div>
+              </div>
 
-                                      </div>
+              <div className="columns">
+                <div className="column">
 
-                                      </div>
+                  <Label>Pets</Label>
+                  <p>{application.pets}</p>
+                </div>
 
-                                    </div>
+                <div className="column">
 
-                                    <div className="columns">
-                                      <div className="column">
+                  <Label>Social Security Number</Label>
 
-                                            <Label>Pets</Label>
-                                            <p>Dog and Cat</p>
-                                      </div>
+                  <p>{application.socialNumber}</p>
+                </div>
 
-                                      <div className="column">
+                <div className="column">
 
-                                          <Label>Social Security Number</Label>
-                                              
-                                              <p>209-33-5555</p>
-                                      </div>
+                  <Label>Driver License</Label>
+                  <p>{application.driverNumber}</p>
+                </div>
 
-                                      <div className="column">
+              </div>
 
-                                          <Label>Driver License</Label>
-                                              <p>D4298478</p>
-                                      </div>
-
-                                    </div>
-
-                                    <div>
-                                      <Label>Additional Notes</Label>
-                                      <p>Sunny and bright, 2 bedroom 1 bath Apartment in a great Berkeley 6-plex - Enjoy this cozy 2 Bedroom, 1 Bath Unit in Great 6-plex in Berkeley. Apartment is fully carpeted and newly painted. Kitchen has linoleum flooring, counter top and wood cabinets. Bathroom has linoleum flooring, vanity. This complex is centrally located in Berkeley just a short walk to Ashby BART, Sports Basement and San Pablo Park!!</p>
-                                    </div>
-
-
-                              </AccordionItemBody>
-                          </AccordionItem>
+              <div>
+                <Label>Additional Notes</Label>
+                <p>{application.additionalNotes}</p>
+              </div>
+            </AccordionItemBody>
+          </AccordionItem>
+        ))}
 
       </div>
 
@@ -156,3 +194,10 @@ export class Applied extends Component {
     );
   }
 }
+
+const mapStateToProps = ({ auth }) => ({
+  user: auth.user,
+  authError: auth.authError
+});
+
+export default connect(mapStateToProps)(Applied)

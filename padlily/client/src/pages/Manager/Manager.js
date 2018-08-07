@@ -49,32 +49,20 @@ export class Manager extends Component {
   loadUser = () => {
     API.getUser(this.props.match.params.id)
       .then(res => {
-        this.setState({ user: res.data, propertyNum: res.data.property.length, propertyId: res.data.property })
+        this.setState({ user: res.data, propertyNum: res.data.property.length })
         let userProp = (res.data.property)
+        console.log("userProp=>")
         for (let peterPanda of userProp) {
           console.log("Property ID: ", peterPanda)
           API.getProperty(peterPanda)
-            .then(res =>{
+            .then(res => {
               this.setState({ properties: this.state.properties.concat(res.data), applicationNum: res.data.application.length, applicationId: res.data.application })
-              console.log("Application ID " + res.data.application)
             })
         }
-        let userApp = (res.data.application)
-        for (let clydeFrog of userApp) {
-          console.log("Application ID2: ", clydeFrog)
-        API.getApplication(clydeFrog)
-        .then(res =>
-          this.setState({ applications: this.state.applications.concat(res.data) })
-        )
-      }
-      })
-
-      .catch(err => console.log(err));
+      }).catch(err => console.log(err));
   }
 
   render() {
-    console.log("--property " + this.state.properties)
-    console.log("--application " + this.state.applications)
     return (
       <div className="manager">
         <Container className="manager-container">
@@ -97,11 +85,11 @@ export class Manager extends Component {
           <h1 className="title has-text-centered">My Properties</h1>
           <div>
             {this.state.properties.map(properties => (
-                <PropertyList
-                  title={properties.title}
-                  applicationNum={this.state.applicationNum}
-                  _id={properties._id}
-                />
+              <PropertyList
+                title={properties.title}
+                applicationNum={this.state.applicationNum}
+                _id={properties._id}
+              />
             ))}
           </div>
 

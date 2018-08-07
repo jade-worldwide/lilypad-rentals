@@ -4,7 +4,11 @@ let Schema = mongoose.Schema;
 
 let ApplicationSchema = new Schema({
 
-  name: {
+  firstName: {
+    type: String,
+    required: true
+  },  
+  lastName: {
     type: String,
     required: true
   },

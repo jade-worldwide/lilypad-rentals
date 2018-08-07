@@ -3,7 +3,6 @@ import { Navbar, NavbarBrand, NavbarItem, NavbarEnd, Modal, ModalCard, ModalCard
 import { Link } from "react-router-dom";
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux'
-import StepZilla from "react-stepzilla";
 import 'bulma/css/bulma.css';
 import "./Nav.css";
 import pad from "./pad.png";
@@ -14,12 +13,6 @@ import { MemberType } from "./MemberType";
 import { getAuthenticated, logout } from '../../actions/authActions'
 
 // const padLogo = { image: `url(${pad})` }
-const steps =
-  [
-    { name: 'Step 1', component: <MemberType /> },
-    { name: 'Step 2', component: <SignUpModal /> }
-  ]
-
 const modalBG = { backgroundImage: `url(${modal})` }
 
 class Nav extends Component {
@@ -114,12 +107,7 @@ class Nav extends Component {
                 <Delete onClick={this.modalClose} />
 
                 <div className='step-progress'>
-                  <StepZilla
-                    steps={steps}
-                    showSteps={false}
-                    nextButtonCls="button is-medium is-primary"
-                    backButtonCls="button is-medium is-primary"
-                  />
+                  <SignUpModal />
                 </div>
 
               </ModalCardBody>
