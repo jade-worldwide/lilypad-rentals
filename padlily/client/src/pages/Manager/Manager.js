@@ -20,10 +20,12 @@ export class Manager extends Component {
     modal: "",
     user: {},
     properties: [],
+    applications: [],
     propertyNum: [],
     applicationNum: [],
     propertyId: '',
-    title: "Peter Panda"
+    applicationId: ''
+
   };
 
   modalOpen = () => {
@@ -52,17 +54,27 @@ export class Manager extends Component {
         for (let peterPanda of userProp) {
           console.log("Property ID: ", peterPanda)
           API.getProperty(peterPanda)
-            .then(res =>
-              this.setState({ properties: this.state.properties.concat(res.data), applicationNum: res.data.application.length, })
-            )
+            .then(res =>{
+              this.setState({ properties: this.state.properties.concat(res.data), applicationNum: res.data.application.length, applicationId: res.data.application })
+              console.log("Application ID " + res.data.application)
+            })
         }
+        let userApp = (res.data.application)
+        for (let clydeFrog of userApp) {
+          console.log("Application ID2: ", clydeFrog)
+        API.getApplication(clydeFrog)
+        .then(res =>
+          this.setState({ applications: this.state.applications.concat(res.data) })
+        )
+      }
       })
 
       .catch(err => console.log(err));
   }
 
   render() {
-    console.log(this.state.properties)
+    console.log("--property " + this.state.properties)
+    console.log("--application " + this.state.applications)
     return (
       <div className="manager">
         <Container className="manager-container">
@@ -113,7 +125,6 @@ export class Manager extends Component {
               </ModalCard>
             </Modal>
           </div>
-
 
         </Container>
       </div>

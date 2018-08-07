@@ -16,14 +16,14 @@ export default {
     const dbQuery = {}
 
     if (query) {
-      if(query.city === '' || query.state === ''){
+      if (query.city === '' || query.state === '') {
         delete query.city
         delete query.state
       }
       if (query.pets === "Any") {
         delete query.pets
 
-      } 
+      }
       Object.assign(dbQuery, {
         city: query.city,
         state: query.state,
@@ -45,8 +45,8 @@ export default {
         },
         pets: query.pets
       })
-    } 
- 
+    }
+
     console.log('dbQuery ->', dbQuery)
     console.log('query ->', query)
     return axios.post(urlPath, { dbQuery })
@@ -55,6 +55,10 @@ export default {
   // Gets the Property with the given id
   getProperty: function (id) {
     return axios.get("/property/" + id);
+  },
+  // Gets the Application with the given id
+  getApplication: function (id) {
+    return axios.get("/application/" + id);
   },
   // Deletes the Property with the given id
   deleteProperty: function (id) {
@@ -66,7 +70,7 @@ export default {
     return axios.post("/manager/property/create", propertyData)
   },
   // Saves a Applications to the database
-  saveApplication: function(applicationData) {
+  saveApplication: function (applicationData) {
     console.log("In Axios route")
     return axios.post("/renter/application/create", applicationData)
   },
@@ -74,7 +78,7 @@ export default {
     console.log("Saving Like")
     return axios.post("/propertyLike", propertyData);
   },
-  loginUser: function(userData) {
+  loginUser: function (userData) {
     console.log('we are sssending a POST request to users/login')
     return axios.post("/api/users/login", userData);
   },
@@ -94,5 +98,5 @@ export default {
     return axios.get("/api/users/manager/" + id);
   },
   sendApplication: (data) => axios.put('/renter/application/request', data),
-  sendProductTaste: (data) => axios.put('/api/users/update', data) 
+  sendProductTaste: (data) => axios.put('/api/users/update', data)
 };

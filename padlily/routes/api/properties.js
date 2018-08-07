@@ -147,6 +147,17 @@ router.post("/propertyLike", async (req, res) => {
 
 });
 
+// View one property
+router.get("/application/:id", (req, res) => {
+    if (req.params.id === "undefined") {
+        console.log("No property ID detected")
+    } else {
+        Application
+            .findById(req.params.id)
+            .then(dbModel => res.json(dbModel))
+            .catch(err => res.status(422).json(err));
+    }
+});
 
 
 module.exports = router;
