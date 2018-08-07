@@ -1,6 +1,6 @@
 import "./Results.css";
 import React, { Component } from "react";
-import { ResultsList, /*Filters*/ } from "../../components/ResultsList";
+import { ResultsList, Filters } from "../../components/ResultsList";
 import { Field, Control, Select, Input, Button } from 'bloomer';
 import { GoogleMap } from "../../components/GoogleMap";
 import { Link, withRouter } from "react-router-dom";
@@ -16,6 +16,8 @@ const defaultForm = {
   maxSqFeet: 100000000,
   minBeds: 0,
   maxBeds: 10,
+  minBaths: 0,
+  maxBaths: 10,
   pets: "Any"
 }
 
@@ -92,10 +94,11 @@ class Results extends Component {
 
     return (
       <div className="results">
+        <Filters handler = {this.handler} />
         <div className={this.state.show}>
           <div className="column results-column list-column">
             <div className="filter-header">
-              <Button isColor='primary' className="show-filters" onClick={this.filtersShow}><p>Filters</p></Button>
+              <Button isColor='primary' className="show-filters" onClick={this.state.show === "columns results-columns" ? this.filtersShow : this.filtersHide}><p>Filters</p></Button>
             </div>
             <div className="result-list">
               <Field>
@@ -104,6 +107,17 @@ class Results extends Component {
                     onChange={this.handleInputChange}
                     value={form.maxPrice}
                     name="maxPrice"
+                    type="number"
+                    placeholder='Maximum Price'
+                    isSize="medium" />
+                </Control>
+              </Field>
+              <Field>
+                <Control>
+                  <Input
+                    onChange={this.handleInputChange}
+                    value={form.minPrice}
+                    name="minPrice"
                     type="number"
                     placeholder='Maximum Price'
                     isSize="medium" />
@@ -127,6 +141,28 @@ class Results extends Component {
                     onChange={this.handleInputChange}
                     value={form.minBeds}
                     name="minBeds"
+                    type="number"
+                    placeholder='Minimum Bedroom'
+                    isSize="medium" />
+                </Control>
+              </Field>
+              <Field>
+                <Control>
+                  <Input
+                    onChange={this.handleInputChange}
+                    value={form.maxBaths}
+                    name="maxBaths"
+                    type="number"
+                    placeholder='Maximum Bathroom'
+                    isSize="medium" />
+                </Control>
+              </Field>
+              <Field>
+                <Control>
+                  <Input
+                    onChange={this.handleInputChange}
+                    value={form.minBaths}
+                    name="minBaths"
                     type="number"
                     placeholder='Minimum Bathroom'
                     isSize="medium" />

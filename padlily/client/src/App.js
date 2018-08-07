@@ -19,6 +19,7 @@ const App = () => (
         <Route exact path="/renter/:id" component={Renter} />
         <Route exact path="/manager/:id" component={Manager} />
         <Route exact path="/results/:id" component={Manager} />
+        <Route exact path="/application/:id" component={Manager} />
         <Route exact path="/property" component={Property} />
         <Route exact path="/property/:id" component={Property} />
         <Route exact path="/results" component={Results} />
