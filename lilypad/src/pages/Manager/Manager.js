@@ -21,8 +21,7 @@ class Manager extends Component {
 
   modalClose = () => {
     this.setState({
-      modal: "",
-      login: "",
+      modal: ""
      })
   }
 
