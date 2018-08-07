@@ -1,6 +1,9 @@
 import React, { Component } from "react";
-import { Table, Image, Subtitle, Button } from 'bloomer';
+import { Table, Image, Subtitle, Button, Field, Label, Control, Checkbox } from 'bloomer';
 import 'bulma/css/bulma.css';
+import { Slider, Switch, Tooltip } from 'antd';
+import 'antd/lib/slider/style/index.css';
+import 'antd/lib/tooltip/style/index.css';
 import "./ResultsList.css";
 
 export class ResultsList extends Component {
@@ -22,24 +25,23 @@ export class ResultsList extends Component {
 
           <div className="results-list">
 
+                <Table>
+                  <tbody>
+                      <tr className="results-row">
+                          <td className="list-image"><Image isSize="96x96" src="https://via.placeholder.com/96x96" /></td>
+                          <td className="results-info">
+                          <p className="results-title">Sunny lakeside cottage with beautiful garden.</p>
+                          <p className="results-subtitle">$2000 - 2 Bedrooms - 925sqft</p>
+                          </td>
+                          <td className="list-like">
+                            <Button isColor='white' className="like-button" onClick={this.state.liked === "far fa-heart" ? this.showLiked : this.unlike}><p><i className={this.state.liked}></i></p></Button>
+                          </td>
+                      </tr>
+                  </tbody>
+                </Table>
 
+              </div>
 
-            <Table>
-              <tbody>
-                  <tr className="results-row">
-                      <td className="list-image"><Image isSize="96x96" src="https://via.placeholder.com/96x96" /></td>
-                      <td className="results-info">
-                      <p className="results-title">Sunny lakeside cottage with beautiful garden.</p>
-                      <p className="results-subtitle">$2000 - 2 Bedrooms - 925sqft</p>
-                      </td>
-                      <td className="list-like">
-                        <Button isColor='white' className="like-button" onClick={this.state.liked === "far fa-heart" ? this.showLiked : this.unlike}><p><i className={this.state.liked}></i></p></Button>
-                      </td>
-                  </tr>
-              </tbody>
-            </Table>
-
-          </div>
 
         );
       }
