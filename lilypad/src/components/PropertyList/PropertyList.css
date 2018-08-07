@@ -19,3 +19,7 @@ td.rented-column {
     flex-direction: column;
     align-items: center;
 }
+
+.accordion__body {
+  background-color: #ffffff;
+}
