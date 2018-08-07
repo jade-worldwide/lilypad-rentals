@@ -39,6 +39,10 @@ export default {
           $gte: query.minBeds,
           $lte: query.maxBeds
         },
+        numOfBaths: {
+          $gte: query.minBaths,
+          $lte: query.maxBaths
+        },
         pets: query.pets
       })
     } 

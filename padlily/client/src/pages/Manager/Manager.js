@@ -47,13 +47,13 @@ export class Manager extends Component {
   loadUser = () => {
     API.getUser(this.props.match.params.id)
       .then(res => {
-        this.setState({ user: res.data, applicationNum: res.data.application.length, propertyNum: res.data.property.length, propertyId: res.data.property })
+        this.setState({ user: res.data, propertyNum: res.data.property.length, propertyId: res.data.property })
         let userProp = (res.data.property)
         for (let peterPanda of userProp) {
           console.log("Property ID: ", peterPanda)
           API.getProperty(peterPanda)
             .then(res =>
-              this.setState({ properties: this.state.properties.concat(res.data) })
+              this.setState({ properties: this.state.properties.concat(res.data), applicationNum: res.data.application.length, })
             )
         }
       })

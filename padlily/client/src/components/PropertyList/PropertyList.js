@@ -1,11 +1,46 @@
-import React from "react";
-import { Table, /*Image, Subtitle,*/ Button } from 'bloomer';
+import React, { Component } from "react";
+import { Table, Image, Subtitle, Button, Modal, ModalCard, ModalBackground, ModalCardBody, Delete, Container, Label, Input } from 'bloomer';
 import 'bulma/css/bulma.css';
 import "./PropertyList.css";
+import modal from "./modal-bg.svg";
+import {
+    Accordion,
+    AccordionItem,
+    AccordionItemTitle,
+    AccordionItemBody,
+} from 'react-accessible-accordion';
+import { Applied } from "./Applied";
+import 'react-accessible-accordion/dist/fancy-example.css';
 import { Link } from "react-router-dom";
+const modalBG = { backgroundImage: `url(${modal})` }
 
-export const PropertyList = props => (
-  <div className="property-list">
+export class PropertyList extends Component {
+  // Setting our component's initial state
+  
+  constructor(props) {
+    super(props)
+  this.state = {
+    modal: "",
+  };
+
+}
+
+  modalOpen = () => {
+    this.setState({ modal: "is-active" })
+  }
+
+
+
+  modalClose = () => {
+    this.setState({
+      modal: ""
+     })
+  }
+
+
+  render() {
+    return (
+      <div className="property-list">
     <Table>
       <thead>
         <tr>
@@ -19,7 +54,7 @@ export const PropertyList = props => (
       <tbody>
         <tr>
           <td>
-          <Link to={"/property/" + props._id}><p>{props.title}</p></Link>
+          <Link to={"/property/" + this.props._id}><p>{this.props.title}</p></Link>
           </td>
           <td className="rented-column">
             <div class="field">
@@ -27,7 +62,7 @@ export const PropertyList = props => (
             </div>
           </td>
           <td>
-            <Button isColor='primary' className="is-small"><p>View {props.applicationNum}</p></Button>
+          <Button isColor='primary' className="is-small" onClick={this.modalOpen}><p>View {this.props.applicationNum}</p></Button>
 
           </td>
           <td>
@@ -38,7 +73,35 @@ export const PropertyList = props => (
 
       </tbody>
     </Table>
-  </div>
+
+        <div className="application-modal">
+          <Modal className={this.state.modal}>
+
+            <ModalBackground />
+            <ModalCard style={ modalBG } >
+
+                <ModalCardBody>
+                    <Delete onClick={this.modalClose} />
+
+                      <Container>
+
+                        <Accordion>
+                          <Applied />
+                          <Applied />
+                          <Applied />
+                        </Accordion>
+
+                      </Container>
+
+              </ModalCardBody>
 
 
-);
+          </ModalCard>
+          </Modal>
+        </div>
+      </div>
+
+
+    );
+  }
+}

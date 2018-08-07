@@ -16,6 +16,8 @@ const defaultForm = {
   maxSqFeet: 100000000,
   minBeds: 0,
   maxBeds: 10,
+  minBaths: 0,
+  maxBaths: 10,
   pets: "Any"
 }
 
@@ -114,6 +116,17 @@ class Results extends Component {
                 <Control>
                   <Input
                     onChange={this.handleInputChange}
+                    value={form.minPrice}
+                    name="minPrice"
+                    type="number"
+                    placeholder='Maximum Price'
+                    isSize="medium" />
+                </Control>
+              </Field>
+              <Field>
+                <Control>
+                  <Input
+                    onChange={this.handleInputChange}
                     value={form.maxBeds}
                     name="maxBeds"
                     type="number"
@@ -128,6 +141,28 @@ class Results extends Component {
                     onChange={this.handleInputChange}
                     value={form.minBeds}
                     name="minBeds"
+                    type="number"
+                    placeholder='Minimum Bedroom'
+                    isSize="medium" />
+                </Control>
+              </Field>
+              <Field>
+                <Control>
+                  <Input
+                    onChange={this.handleInputChange}
+                    value={form.maxBaths}
+                    name="maxBaths"
+                    type="number"
+                    placeholder='Maximum Bathroom'
+                    isSize="medium" />
+                </Control>
+              </Field>
+              <Field>
+                <Control>
+                  <Input
+                    onChange={this.handleInputChange}
+                    value={form.minBaths}
+                    name="minBaths"
                     type="number"
                     placeholder='Minimum Bathroom'
                     isSize="medium" />
