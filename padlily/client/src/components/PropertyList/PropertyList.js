@@ -9,7 +9,7 @@ import {
     AccordionItemTitle,
     AccordionItemBody,
 } from 'react-accessible-accordion';
-import { Applied } from "./Applied";
+import Applied from "./Applied";
 import 'react-accessible-accordion/dist/fancy-example.css';
 import { Link } from "react-router-dom";
 const modalBG = { backgroundImage: `url(${modal})` }
@@ -63,7 +63,6 @@ export class PropertyList extends Component {
           </td>
           <td>
           <Button isColor='primary' className="is-small" onClick={this.modalOpen}><p>View {this.props.applicationNum}</p></Button>
-
           </td>
           <td>
             <Button className="is-small delete-button"><p><i className="far fa-trash-alt"></i></p></Button>

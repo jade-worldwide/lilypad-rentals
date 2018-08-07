@@ -17,7 +17,7 @@ class RenterApplication extends Component {
     firstName: '',
     lastName: '',
     emailAddress: '',
-    phonenumber: '',
+    phoneNumber: '',
     currentAddress: '',
     referenceName1: '',
     referencePhoneNumber1: '',
@@ -88,14 +88,17 @@ class RenterApplication extends Component {
   handleFormSubmit = event => {
     event.preventDefault();
     const { user } = this.props;
-    const fullName = `${this.state.firstName} ${this.state.lastName}`;
-    console.log("Name =>", fullName)
-    if (fullName) {
+    if (this.state.firstName && this.state.lastName && this.state.emailAddress && this.state.phoneNumber
+      && this.state.currentAddress && this.state.referenceName1 && this.state.referencePhoneNumber1
+      && this.state.referenceName2 && this.state.referencePhoneNumber2 && this.state.currentEmployment
+      && this.state.employmentPhoneNumber && this.state.income && this.state.pets && this.state.socialNumber
+      && this.state.driverNumber && this.state.additionalNotes) {
       console.log("Submitting")
       API.saveApplication({
-        name: fullName,
+        firstName: this.state.firstName,
+        lastName: this.state.lastName,
         emailAddress: this.state.emailAddress,
-        phonenumber: this.state.phonenumber,
+        phoneNumber: this.state.phoneNumber,
         currentAddress: this.state.currentAddress,
         referenceName1: this.state.referenceName1,
         referencePhoneNumber1: this.state.referencePhoneNumber1,
@@ -110,7 +113,7 @@ class RenterApplication extends Component {
         additionalNotes: this.state.additionalNotes,
         user
       })
-        .then(res => console.log("submitted", this.state.currentAddress))
+        .then(res => console.log("submitted"))
         .catch(err => console.log(err));
     } else {
       console.log("Not Submitting")
@@ -118,235 +121,251 @@ class RenterApplication extends Component {
   };
 
   render() {
-    // const { user } = this.props;
-    return (
-      <Container>
-        <div className="columns">
-          <div className="column">
-            <Field>
-              <Control>
-                <Label>First Name</Label>
-                <Input
-                  value={this.state.firstName}
-                  onChange={this.handleInputChange}
-                  onBlur={this.consoleLogInput}
-                  name="firstName"
-                  type="Text" />
-              </Control>
-            </Field>
-            <Field>
-              <Control>
-                <Label>Email</Label>
-                <Input
-                  value={this.state.emailAddress}
-                  onChange={this.handleInputChange}
-                  onBlur={this.consoleLogInput}
-                  name="emailAddress"
-                  type="Text" />
-              </Control>
-            </Field>
+       // const { user } = this.props;
+       return (
+        <Container>
+          <div className="columns">
+            <div className="column">
+              <Field>
+                <Control>
+                  <Label>First Name</Label>
+                  <Input
+                    tabIndex="1"
+                    value={this.state.firstName}
+                    onChange={this.handleInputChange}
+                    onBlur={this.consoleLogInput}
+                    name="firstName"
+                    type="Text" />
+                </Control>
+              </Field>
+              <Field>
+                <Control>
+                  <Label>Email</Label>
+                  <Input
+                  tabIndex="3"
+                    value={this.state.emailAddress}
+                    onChange={this.handleInputChange}
+                    onBlur={this.consoleLogInput}
+                    name="emailAddress"
+                    type="Text" />
+                </Control>
+              </Field>
+            </div>
+            <div className="column">
+              <Field>
+                <Control>
+                  <Label>Last Name</Label>
+                  <Input
+                    tabIndex="2"
+                    value={this.state.lastName}
+                    onChange={this.handleInputChange}
+                    onBlur={this.consoleLogInput}
+                    name="lastName"
+                    type="Text" />
+                </Control>
+              </Field>
+              <Field>
+                <Control>
+                  <Label>Phone Number</Label>
+                  <Input
+                  tabIndex="4"
+                    value={this.state.phoneNumber}
+                    onChange={this.handleInputChange}
+                    onKeyUp={this.formatPhoneNumber}
+                    onBlur={this.consoleLogInput}
+                    name="phoneNumber"
+                    type="Tel" />
+                </Control>
+              </Field>
+            </div>
           </div>
-          <div className="column">
-            <Field>
-              <Control>
-                <Label>Last Name</Label>
-                <Input
-                  value={this.state.lastName}
-                  onChange={this.handleInputChange}
-                  onBlur={this.consoleLogInput}
-                  name="lastName"
-                  type="Text" />
-              </Control>
-            </Field>
-            <Field>
-              <Control>
-                <Label>Phone Number</Label>
-                <Input
-                  value={this.state.phonenumber}
-                  onChange={this.handleInputChange}
-                  onKeyUp={this.formatPhoneNumber}
-                  onBlur={this.consoleLogInput}
-                  name="phonenumber"
-                  type="Tel" />
-              </Control>
-            </Field>
+          <Field>
+            <Control>
+              <Label>Current Address</Label>
+              <Input
+              tabIndex="5"
+                value={this.state.currentAddress}
+                onChange={this.handleInputChange}
+                onBlur={this.consoleLogInput}
+                name="currentAddress"
+                type="Tel" />
+            </Control>
+          </Field>
+  
+          <div className="columns">
+            <div className="column">
+              <Field>
+                <Control>
+                  <Label>Reference Name</Label>
+                  <Input
+                  tabIndex="6"
+                    value={this.state.referenceName1}
+                    onChange={this.handleInputChange}
+                    name="referenceName1"
+                    type="Text" />
+                </Control>
+              </Field>
+              <Field>
+                <Control>
+                  <Label>Reference Name</Label>
+                  <Input
+                  tabIndex="8"
+                    value={this.state.referenceName2}
+                    onChange={this.handleInputChange}
+                    onBlur={this.consoleLogInput}
+                    name="referenceName2"
+                    type="Text" />
+                </Control>
+              </Field>
+            </div>
+  
+            <div className="column">
+              <Field>
+                <Control>
+                  <Label>Reference Phone Number</Label>
+                  <Input
+                  tabIndex="7"
+                    value={this.state.referencePhoneNumber1}
+                    onChange={this.handleInputChange}
+                    onKeyUp={this.formatPhoneNumber}
+                    onBlur={this.consoleLogInput}
+                    name="referencePhoneNumber1"
+                    type="Tel" />
+                </Control>
+              </Field>
+              <Field>
+                <Control>
+                  <Label>Reference Phone Number</Label>
+                  <Input
+                  tabIndex="9"
+                    value={this.state.referencePhoneNumber2}
+                    onChange={this.handleInputChange}
+                    onKeyUp={this.formatPhoneNumber}
+                    onBlur={this.consoleLogInput}
+                    name="referencePhoneNumber2"
+                    type="Tel" />
+                </Control>
+              </Field>
+            </div>
           </div>
-        </div>
-        <Field>
-          <Control>
-            <Label>Current Address</Label>
-            <Input
-              value={this.state.currentAddress}
-              onChange={this.handleInputChange}
-              onBlur={this.consoleLogInput}
-              name="currentAddress"
-              type="Tel" />
-          </Control>
-        </Field>
-
-        <div className="columns">
-          <div className="column">
-            <Field>
-              <Control>
-                <Label>Reference Name</Label>
-                <Input
-                  value={this.state.referenceName1}
-                  onChange={this.handleInputChange}
-                  name="referenceName1"
-                  type="Text" />
-              </Control>
-            </Field>
-            <Field>
-              <Control>
-                <Label>Reference Name</Label>
-                <Input
-                  value={this.state.referenceName2}
-                  onChange={this.handleInputChange}
-                  onBlur={this.consoleLogInput}
-                  name="referenceName2"
-                  type="Text" />
-              </Control>
-            </Field>
+  
+          <div className="columns">
+            <div className="column">
+              <Field>
+                <Control>
+                  <Label>Place of Employment</Label>
+                  <Input
+                  tabIndex="10"
+                    value={this.state.currentEmployment}
+                    onChange={this.handleInputChange}
+                    onBlur={this.consoleLogInput}
+                    name="currentEmployment"
+                    type="Text" />
+                </Control>
+              </Field>
+            </div>
+  
+            <div className="column">
+              <Field>
+                <Control>
+                  <Label>Workplace Phone Number</Label>
+                  <Input
+                  tabIndex="11"
+                    value={this.state.employmentPhoneNumber}
+                    onChange={this.handleInputChange}
+                    onKeyUp={this.formatPhoneNumber}
+                    onBlur={this.consoleLogInput}
+                    name="employmentPhoneNumber"
+                    type="text" />
+                </Control>
+              </Field>
+            </div>
+  
+            <div className="column">
+              <Field>
+                <Control>
+                  <Label>Annual Salary</Label>
+                  <Input
+                  tabIndex="12"
+                    value={this.state.income}
+                    onChange={this.handleInputChange}
+                    onKeyUp={this.formatThousands}
+                    onBlur={this.consoleLogInput}
+                    name="income"
+                    type="text" />
+                </Control>
+              </Field>
+            </div>
+  
           </div>
-
-          <div className="column">
-            <Field>
-              <Control>
-                <Label>Reference Phone Number</Label>
-                <Input
-                  value={this.state.referencePhoneNumber1}
-                  onChange={this.handleInputChange}
-                  onKeyUp={this.formatPhoneNumber}
-                  onBlur={this.consoleLogInput}
-                  name="referencePhoneNumber1"
-                  type="Tel" />
-              </Control>
-            </Field>
-            <Field>
-              <Control>
-                <Label>Reference Phone Number</Label>
-                <Input
-                  value={this.state.referencePhoneNumber2}
-                  onChange={this.handleInputChange}
-                  onKeyUp={this.formatPhoneNumber}
-                  onBlur={this.consoleLogInput}
-                  name="referencePhoneNumber2"
-                  type="Tel" />
-              </Control>
-            </Field>
+  
+          <div className="columns">
+            <div className="column">
+              <Field>
+                <Label>Pets</Label>
+                <Control>
+                  <Select
+                  tabIndex="13"
+                    value={this.state.pets}
+                    onChange={this.handleInputChange}
+                    onBlur={this.consoleLogInput}
+                    name="pets" >
+                    <option>Select</option>
+                    <option>Cat</option>
+                    <option>Dog</option>
+                    <option>Cat or Dog</option>
+                    <option>None</option>
+                  </Select>
+                </Control>
+              </Field>
+            </div>
+  
+            <div className="column">
+              <Field>
+                <Control>
+                  <Label>Social Security Number</Label>
+                  <Input
+                  tabIndex="14"
+                    value={this.state.socialNumber}
+                    onChange={this.handleInputChange}
+                    onBlur={this.consoleLogInput}
+                    name="socialNumber"
+                    type="password" />
+                </Control>
+              </Field>
+            </div>
+  
+            <div className="column">
+              <Field>
+                <Control>
+                  <Label>Driver License</Label>
+                  <Input
+                  tabIndex="15"
+                    value={this.state.driverNumber}
+                    onChange={this.handleInputChange}
+                    onBlur={this.consoleLogInput}
+                    name="driverNumber"
+                    type="text" />
+                </Control>
+              </Field>
+            </div>
+  
           </div>
-        </div>
-
-        <div className="columns">
-          <div className="column">
-            <Field>
-              <Control>
-                <Label>Place of Employment</Label>
-                <Input
-                  value={this.state.currentEmployment}
-                  onChange={this.handleInputChange}
-                  onBlur={this.consoleLogInput}
-                  name="currentEmployment"
-                  type="Text" />
-              </Control>
-            </Field>
-          </div>
-
-          <div className="column">
-            <Field>
-              <Control>
-                <Label>Workplace Phone Number</Label>
-                <Input
-                  value={this.state.employmentPhoneNumber}
-                  onChange={this.handleInputChange}
-                  onKeyUp={this.formatPhoneNumber}
-                  onBlur={this.consoleLogInput}
-                  name="employmentPhoneNumber"
-                  type="text" />
-              </Control>
-            </Field>
-          </div>
-
-          <div className="column">
-            <Field>
-              <Control>
-                <Label>Annual Salary</Label>
-                <Input
-                  value={this.state.income}
-                  onChange={this.handleInputChange}
-                  onKeyUp={this.formatThousands}
-                  onBlur={this.consoleLogInput}
-                  name="income"
-                  type="text" />
-              </Control>
-            </Field>
-          </div>
-
-        </div>
-
-        <div className="columns">
-          <div className="column">
-            <Field>
-              <Label>Pets</Label>
-              <Control>
-                <Select
-                  value={this.state.pets}
-                  onChange={this.handleInputChange}
-                  onBlur={this.consoleLogInput}
-                  name="pets" >
-                  <option>Select</option>
-                  <option>Cat</option>
-                  <option>Dog</option>
-                  <option>Cat or Dog</option>
-                  <option>None</option>
-                </Select>
-              </Control>
-            </Field>
-          </div>
-
-          <div className="column">
-            <Field>
-              <Control>
-                <Label>Social Security Number</Label>
-                <Input
-                  value={this.state.socialNumber}
-                  onChange={this.handleInputChange}
-                  onBlur={this.consoleLogInput}
-                  name="socialNumber"
-                  type="password" />
-              </Control>
-            </Field>
-          </div>
-
-          <div className="column">
-            <Field>
-              <Control>
-                <Label>Driver License</Label>
-                <Input
-                  value={this.state.driverNumber}
-                  onChange={this.handleInputChange}
-                  onBlur={this.consoleLogInput}
-                  name="driverNumber"
-                  type="text" />
-              </Control>
-            </Field>
-          </div>
-
-        </div>
-
-        <Field>
-          <Control>
-            <Label>Additional Notes</Label>
-            <TextArea
-              value={this.state.additionalNotes}
-              onChange={this.handleInputChange}
-              onBlur={this.consoleLogInput}
-              name="additionalNotes" />
-          </Control>
-        </Field>
-
-
-        <Button onClick={this.handleFormSubmit} isColor='primary' className=""><p>Save</p></Button>
+  
+          <Field>
+            <Control>
+              <Label>Additional Notes</Label>
+              <TextArea
+              tabIndex="16"
+                value={this.state.additionalNotes}
+                onChange={this.handleInputChange}
+                onBlur={this.consoleLogInput}
+                name="additionalNotes" />
+            </Control>
+          </Field>
+  
+  
+          <Button tabIndex="17" onClick={this.handleFormSubmit} isColor='primary' className=""><p>Save</p></Button>
       </Container>
     );
   }
