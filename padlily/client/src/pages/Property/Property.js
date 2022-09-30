@@ -5,14 +5,17 @@ import LightBox from "../../components/LightBox";
 import API from "../../utils/API";
 import {sendApplication, productTaste} from '../../actions/propertyActions';
 import { Container, Title, /*Image,*/ Box, Button, Subtitle } from 'bloomer';
-// import house from './house.jpg';
+import house from './house.jpg';
 import "./Property.css";
 
+const mainImage = { backgroundImage: `url(${house})` }
 class Property extends Component {
   // Setting our component's initial state
   state = {
-    property: {},
+    property: [],
+    user: [],
     liked: null,
+    userLikes: [],
     shared: "copy-url",
   };
 
@@ -21,9 +24,30 @@ class Property extends Component {
     API.getProperty(this.props.match.params.id)
       .then(res => this.setState({ property: res.data }))
       .catch(err => console.log(err));
+      this.loadUser();
   }
 
+  loadUser = () =>{
+    const { productTaste, auth: { user: { _id } } } = this.props;
+    productTaste({userId: _id});
+    let currentUser = _id
+    console.log("User Id =>", currentUser)
+    API.getUser(currentUser)
+    .then(res => {
+      let userInfo = []
+      userInfo = userInfo.concat(res.data)
+      console.log("userInfo =>", userInfo)
+      const properyLikesArray = userInfo.map(x => x.propertylike);
 
+      const likedProperties = properyLikesArray[0]
+      const propertyId = this.props.match.params.id
+
+      if(likedProperties.indexOf(propertyId) !== -1){
+        this.setState({liked : true})
+      }
+    })
+
+  }
 
   toggleLikeProperty = () => {
 
@@ -32,7 +56,7 @@ class Property extends Component {
     this.setState({liked: !liked});
     productTaste({userId: _id, propertyId, likeStatus:  !liked});
   }
-  
+
 
   onSendApplication() {
     const { onSendApplication, auth: { user: { email } } } = this.props;
@@ -42,7 +66,7 @@ class Property extends Component {
 
 
   render() {
-    const mainImage = { backgroundImage: `url(${this.state.property.photos})` }
+    // console.log("User =>", this.state.user)
     return (
       <div className="Property">
         <div className="main-image" style={ mainImage }>
